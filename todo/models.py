@@ -1,17 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
-
-
-# class User(AbstractUser):
-#     """
-#     Абстрактный класс Пользователя
-#     """
-#     phone = models.CharField(max_length=12, verbose_name='Телефон')
-#     points = models.IntegerField(verbose_name='Количество баллов')
-#     role = models.CharField(max_length=20, verbose_name='Роль')
-#     rating = models.IntegerField(verbose_name='Рейтинг')
-#     code = models.IntegerField(verbose_name='Код')
+from django.contrib.auth.models import User
 
 
 class Status(models.Model):
@@ -33,6 +22,6 @@ class Task(models.Model):
     cost = models.IntegerField(verbose_name='Стоимость')
     location = models.CharField(max_length=100, verbose_name='Местонахождение')
     photo = models.BinaryField(verbose_name='Фото')
-    # user = models.ForeignKey('User', on_delete=models.DO_NOTHING)
-    # status = models.ForeignKey('Status', on_delete=models.DO_NOTHING)
-    # id_executor = models.ForeignKey('User', on_delete=models.DO_NOTHING)
+    status = models.ForeignKey('Status', on_delete=models.DO_NOTHING, default='2', verbose_name='Статус')
+    creator_user = models.OneToOneField(User, on_delete=models.DO_NOTHING, verbose_name='Создатель')
+    # executor_user = models.OneToOneField(User, on_delete=models.DO_NOTHING, verbose_name='Исполнитель')
