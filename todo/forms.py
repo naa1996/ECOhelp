@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 
 
 class UReg(UserCreationForm):
+    """
+    Форма регистрации
+    """
     username = forms.CharField(label='Логин')
     first_name = forms.CharField(label='Имя')
     last_name = forms.CharField(label='Фамилия')
