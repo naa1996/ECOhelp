@@ -15,6 +15,12 @@ def index(request):
     })
 
 
+def index1(request):
+    return render(request, 'index1.html', {
+        'title': '123123',
+    })
+
+
 def createUser(request):
     #регистрация
     if request.method == 'POST':

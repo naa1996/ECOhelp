@@ -9,5 +9,6 @@ urlpatterns = [
     path('reg/createUser', views.createUser, name='createUser'),
     # path('reg/UReg', views.UReg, name='UReg'),
     # роут для отображения страницы
-    path('', views.index),
+    path('', views.index, name='index'),
+    path('index1', views.index1, name='index1'),
 ]
