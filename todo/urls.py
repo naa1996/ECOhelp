@@ -10,5 +10,5 @@ urlpatterns = [
     # path('reg/UReg', views.UReg, name='UReg'),
     # роут для отображения страницы
     path('', views.index, name='index'),
-    path('index1', views.index1, name='index1'),
+    # path('index1', views.index1, name='index1'),
 ]

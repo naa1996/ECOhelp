@@ -1,5 +1,5 @@
 {% extends 'template.html' %}
-{% load bootstrap4 %}
+{#{% load bootstrap4 %}#}
 
 
 {% block content %}
@@ -38,15 +38,15 @@
 {#                <button type="submit" class="main_button">Создать аккаунт</button>#}
 {#            </form>#}
 {#        </div>#}
-        <div class="regform mb-3">
-            <form method="post" class= "form-control" action="createUser" value="">
-                {% csrf_token %}
-                {% bootstrap_form create_user layout='horizontal'%}
-                {% buttons %}
-                <input class="main_button" type="submit" value="Отправить">
-                {% endbuttons %}
-            </form>
-        </div>
+{#        <div class="regform mb-3">#}
+{#            <form method="post" class= "form-control" action="createUser" value="">#}
+{#                {% csrf_token %}#}
+{#                {% bootstrap_form create_user layout='horizontal'%}#}
+{#                {% buttons %}#}
+{#                <input class="main_button" type="submit" value="Отправить">#}
+{#                {% endbuttons %}#}
+{#            </form>#}
+{#        </div>#}
         <div class="auth_link">
             Уже есть аккаунт?
             <a href="#" style="text-decoration: none;">
