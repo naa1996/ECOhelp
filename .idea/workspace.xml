@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="667c8c90-ea92-4694-841f-cb93ac7bdb37" name="Default Changelist" comment="" />
+    <list default="true" id="667c8c90-ea92-4694-841f-cb93ac7bdb37" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ecohelp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ecohelp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,14 +49,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nahra_000\PycharmProjects\ecohelp" />
     </key>
   </component>
-  <component name="RunManager" selected="Django Server.asdasd1">
+  <component name="RunManager" selected="Django Server.ecohelp">
     <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
       <module name="ecohelp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -104,6 +110,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="ecohelp.settings" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\nahra_000\AppData\Local\Programs\Python\Python38\python.exe" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -152,6 +159,12 @@
       <workItem from="1634587934238" duration="200000" />
       <workItem from="1634588280105" duration="34000" />
       <workItem from="1634588703417" duration="620000" />
+      <workItem from="1634590097969" duration="3843000" />
+      <workItem from="1634620782422" duration="1818000" />
+      <workItem from="1634622895286" duration="71000" />
+      <workItem from="1634659561138" duration="810000" />
+      <workItem from="1634660555355" duration="637000" />
+      <workItem from="1634661591676" duration="146000" />
     </task>
     <task id="LOCAL-00001" summary="1. Изменения">
       <created>1634581282087</created>
@@ -174,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634584458142</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="111">
+      <created>1634590507459</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1634590507460</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,6 +245,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1. Изменения" />
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="111" />
+    <option name="LAST_COMMIT_MESSAGE" value="111" />
   </component>
 </project>

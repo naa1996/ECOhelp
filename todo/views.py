@@ -6,7 +6,7 @@ from .forms import UReg
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-# from .models import UserProfile
+# from .models import UserProfileinvalid Python interpreter selected for the project
 
 
 def index(request):
