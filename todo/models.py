@@ -23,5 +23,5 @@ class Task(models.Model):
     location = models.CharField(max_length=100, verbose_name='Местонахождение')
     photo = models.BinaryField(verbose_name='Фото')
     status = models.ForeignKey('Status', on_delete=models.DO_NOTHING, default='2', verbose_name='Статус')
-    creator_user = models.OneToOneField(User, on_delete=models.DO_NOTHING, verbose_name='Создатель')
+    creator_user = models.OneToOneField(User, on_delete=models.DO_NOTHING, verbose_name='Создател')
     # executor_user = models.OneToOneField(User, on_delete=models.DO_NOTHING, verbose_name='Исполнитель')

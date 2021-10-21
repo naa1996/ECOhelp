@@ -5,11 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="667c8c90-ea92-4694-841f-cb93ac7bdb37" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ecohelp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ecohelp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecohelp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecohelp/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/reg.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/reg.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/migrations/0002_auto_20211006_1235.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/userprofile/views.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Rbook2" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -163,8 +176,11 @@
       <workItem from="1634620782422" duration="1818000" />
       <workItem from="1634622895286" duration="71000" />
       <workItem from="1634659561138" duration="810000" />
-      <workItem from="1634660555355" duration="637000" />
-      <workItem from="1634661591676" duration="146000" />
+      <workItem from="1634660555355" duration="8110000" />
+      <workItem from="1634670752542" duration="3501000" />
+      <workItem from="1634675086536" duration="852000" />
+      <workItem from="1634675975975" duration="246000" />
+      <workItem from="1634843471971" duration="1527000" />
     </task>
     <task id="LOCAL-00001" summary="1. Изменения">
       <created>1634581282087</created>

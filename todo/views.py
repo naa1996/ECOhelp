@@ -1,23 +1,36 @@
 from django.shortcuts import render
-from . import models, forms
+from . import forms
 from django.shortcuts import redirect
-from .models import User
 from .forms import UReg
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-# from .models import UserProfileinvalid Python interpreter selected for the project
 
 
 def index(request):
+    #отображение главной страницы
     return render(request, 'index.html', {
         'title': 'Главная страница',
     })
 
 
-def index1(request):
-    return render(request, 'index1.html', {
-        'title': '123123',
+def auth(request):
+    #отображение страницы авторизации
+    return render(request, 'auth.html', {
+        'title': 'Авторизация',
+    })
+
+
+def recovery_pass(request):
+    #отображение страницы авторизации
+    return render(request, 'recovery_pass.html', {
+        'title': 'Восстановление',
+    })
+
+
+def user_profile(request):
+    #отображение страницы авторизации
+    return render(request, 'user_profile.html', {
+        'title': 'Профиль',
     })
 
 
@@ -83,7 +96,7 @@ def createUser(request):
 
 
 def reg(request):
-    #отображение страницы регистрации
+    # отображение страницы регистрации
     user_form = UReg()
     return render(request, 'reg.html', {
         'title': 'Регистрация',

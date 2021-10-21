@@ -1,0 +1,20 @@
+{% extends 'template.html' %}
+
+{% block content %}
+    <div class="reg text-center">
+        <div class="mb-3 welcome">
+            Восстановление пароля
+        </div>
+        <div class="mb-3 reginfo">
+            Введите свой e-mail для отправки кода восстановления
+        </div>
+        <div class="regform mb-3">
+            <form>
+                <div class="mb-3">
+                    <input type="email" id="email" placeholder="Email">
+                </div>
+                <button type="submit" class="main_button">Отправить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
