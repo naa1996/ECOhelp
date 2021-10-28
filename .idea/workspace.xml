@@ -5,24 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="667c8c90-ea92-4694-841f-cb93ac7bdb37" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2021_0_46_[Default_Changelist]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2021_0_46__Default_Changelist_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecohelp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ecohelp/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/reg.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/reg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/auth.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/recovery_pass.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/reg.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/migrations/0002_auto_20211006_1235.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/userprofile/views.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +136,26 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Unittests for test.MyTestCase.test" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="ecohelp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test.MyTestCase.test&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for test.MyTestCase.test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -180,7 +195,15 @@
       <workItem from="1634670752542" duration="3501000" />
       <workItem from="1634675086536" duration="852000" />
       <workItem from="1634675975975" duration="246000" />
-      <workItem from="1634843471971" duration="1527000" />
+      <workItem from="1634843471971" duration="2512000" />
+      <workItem from="1635242473588" duration="1626000" />
+      <workItem from="1635244121104" duration="2211000" />
+      <workItem from="1635251035818" duration="2255000" />
+      <workItem from="1635261156675" duration="10970000" />
+      <workItem from="1635272273721" duration="15807000" />
+      <workItem from="1635288347653" duration="1120000" />
+      <workItem from="1635317365223" duration="792000" />
+      <workItem from="1635438129024" duration="5441000" />
     </task>
     <task id="LOCAL-00001" summary="1. Изменения">
       <created>1634581282087</created>
@@ -210,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634590507460</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции">
+      <created>1634845053325</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1634845053325</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +292,10 @@
     <MESSAGE value="1. Изменения" />
     <MESSAGE value="1" />
     <MESSAGE value="111" />
-    <option name="LAST_COMMIT_MESSAGE" value="111" />
+    <MESSAGE value="1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ecohelp$Unittests_for_test_MyTestCase_test.coverage" NAME="Unittests for test.MyTestCase.test Coverage Results" MODIFIED="1635261229584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
 </project>

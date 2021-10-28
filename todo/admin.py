@@ -7,6 +7,3 @@ from django.contrib.auth.models import User
 
 admin.site.register(Status)
 admin.site.register(Task)
-# admin.site.register(User, UserAdmin)
-
-

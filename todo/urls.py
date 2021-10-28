@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.views import LoginView
 from django.urls import path
 from . import views
 
@@ -9,7 +10,9 @@ urlpatterns = [
     path(r'createUser', views.createUser, name='createUser'),
     # path('reg/UReg', views.UReg, name='UReg'),
     # роут для отображения страницы - Авторизация
-    path(r'accounts/login/$', views.auth, name='auth'),
+    path('auth/', views.auth, name='auth'),
+    # роут для авторизации
+    path(r'^accounts/login/', views.loginn, name='login'),
     # роут для отображения страницы - Восстановление пароля
     path('recovery', views.recovery_pass, name='recovery_pass'),
     # роут для отображения страницы - Профиль

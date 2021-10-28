@@ -3,7 +3,9 @@ from . import forms
 from django.shortcuts import redirect
 from .forms import UReg
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from .models import User
+from django.db.models import Q
 
 
 def index(request):
@@ -11,6 +13,29 @@ def index(request):
     return render(request, 'index.html', {
         'title': 'Главная страница',
     })
+
+
+def loginn(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    m = User.objects.filter(email=email).exists()
+    if m:
+        n = User.objects.get(email=email).username
+        user = authenticate(username=n, password=password)
+        if user is not None:
+            # print("Правильно")
+            messages.error(request, 'Правильно', extra_tags='safe')
+            login(request, user)
+            return redirect(auth)
+        else:
+            # print("Неверный пароль")
+            print("Неверный пароль")
+            messages.error(request, 'Неверный пароль', extra_tags='safe')
+            return redirect(auth)
+    else:
+        # print("Неверная почта")
+        messages.error(request, 'Неверная почта', extra_tags='safe')
+        return redirect(auth)
 
 
 def auth(request):
@@ -21,7 +46,7 @@ def auth(request):
 
 
 def recovery_pass(request):
-    #отображение страницы авторизации
+    #отображение страницы восстановления
     return render(request, 'recovery_pass.html', {
         'title': 'Восстановление',
     })
@@ -71,7 +96,7 @@ def createUser(request):
                                 return redirect('reg')
                             else:
                                 # print(user_reg_form.errors)
-                                messages.error(request, 'Не удалось завести пользователя', extra_tags='safe')
+                                messages.error(request, 'Не удалось зарегистрировать пользователя', extra_tags='safe')
                                 # return HttpResponse(user_reg_form.errors)
                                 return redirect('reg')
                         else:
