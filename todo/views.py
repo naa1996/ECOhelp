@@ -16,6 +16,7 @@ def index(request):
 
 
 def loginn(request):
+    #авторизация
     email = request.POST['email']
     password = request.POST['password']
     m = User.objects.filter(email=email).exists()
@@ -24,7 +25,7 @@ def loginn(request):
         user = authenticate(username=n, password=password)
         if user is not None:
             # print("Правильно")
-            messages.error(request, 'Правильно', extra_tags='safe')
+            # messages.error(request, 'Правильно', extra_tags='safe')
             login(request, user)
             return redirect(auth)
         else:
@@ -43,6 +44,21 @@ def auth(request):
     return render(request, 'auth.html', {
         'title': 'Авторизация',
     })
+
+
+def recovery_password(request):
+    #восстановление пароля
+    emails = request.POST['emailP']
+    print(emails)
+    m = User.objects.filter(email=emails).exists()
+    if m:
+        print(m)
+
+        messages.error(request, 'Почта верна', extra_tags='safe1')
+        return redirect(recovery_pass)
+    else:
+        messages.error(request, 'Неверная почта', extra_tags='safe1')
+        return redirect(recovery_pass)
 
 
 def recovery_pass(request):

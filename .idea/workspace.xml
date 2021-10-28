@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="667c8c90-ea92-4694-841f-cb93ac7bdb37" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2021_0_46_[Default_Changelist]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_10_2021_0_46__Default_Changelist_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/auth.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/auth.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/recovery_pass.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/reg.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/recovery_pass.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/recovery_pass.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/views.py" afterDir="false" />
     </list>
@@ -203,7 +195,7 @@
       <workItem from="1635272273721" duration="15807000" />
       <workItem from="1635288347653" duration="1120000" />
       <workItem from="1635317365223" duration="792000" />
-      <workItem from="1635438129024" duration="5441000" />
+      <workItem from="1635438129024" duration="8239000" />
     </task>
     <task id="LOCAL-00001" summary="1. Изменения">
       <created>1634581282087</created>
@@ -240,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1634845053325</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Авторизация">
+      <created>1635444885379</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1635444885379</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +292,8 @@
     <MESSAGE value="1" />
     <MESSAGE value="111" />
     <MESSAGE value="1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции" />
+    <MESSAGE value="Авторизация" />
+    <option name="LAST_COMMIT_MESSAGE" value="Авторизация" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ecohelp$Unittests_for_test_MyTestCase_test.coverage" NAME="Unittests for test.MyTestCase.test Coverage Results" MODIFIED="1635261229584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />

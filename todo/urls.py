@@ -13,6 +13,8 @@ urlpatterns = [
     path('auth/', views.auth, name='auth'),
     # роут для авторизации
     path(r'^accounts/login/', views.loginn, name='login'),
+    # роут восстановления пароля
+    path('recovery_password', views.recovery_password, name='recovery_password'),
     # роут для отображения страницы - Восстановление пароля
     path('recovery', views.recovery_pass, name='recovery_pass'),
     # роут для отображения страницы - Профиль

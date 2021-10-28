@@ -9,12 +9,21 @@
             Введите свой e-mail для отправки кода восстановления
         </div>
         <div class="regform mb-3">
-            <form>
+            <form method="post" action="{% url 'recovery_password' %}">
+                {% csrf_token %}
                 <div class="mb-3">
-                    <input type="email" id="email" placeholder="Email">
+                    <input type="email" name="emailP" id="email" placeholder="Email">
                 </div>
                 <button type="submit" class="main_button">Отправить</button>
+                <input type="hidden" name="next" value="{{ next }}" />
             </form>
+        </div>
+        <div class="row" style="justify-content: center">
+            {% for massage in messages %}
+                <ul class="{{ massage.tags }}">
+                    {% if 'safe1' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+                </ul>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
