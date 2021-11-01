@@ -27,11 +27,11 @@ def loginn(request):
             # print("Правильно")
             # messages.error(request, 'Правильно', extra_tags='safe')
             login(request, user)
-            # u = User.objects.filter(userprofile__points=0).all()
-            # s = User.objects.filter(userprofile__code="0000").all()
-            # v = User.objects.filter(userprofile__role="user").all()
-            # a = User.objects.filter(userprofile__rating=0000).all()
-            # vv = User.objects.filter(userprofile__role="admin").all()
+            u = User.objects.filter(userprofile__points=0).all()
+            s = User.objects.filter(userprofile__code="0000").all()
+            v = User.objects.filter(userprofile__role="user").all()
+            a = User.objects.filter(userprofile__rating=0000).all()
+            vv = User.objects.filter(userprofile__role="admin").all()
             # print(u)
             # print(s)
             # print(v)
@@ -78,8 +78,15 @@ def recovery_pass(request):
     })
 
 
+def user_setting(request):
+    #отображение страницы личной информации ползователя
+    return render(request, 'user_setting.html', {
+        'title': 'Личная информация'
+    })
+
+
 def user_profile(request):
-    #отображение страницы авторизации
+    #отображение страницы профиля
     return render(request, 'user_profile.html', {
         'title': 'Профиль',
     })

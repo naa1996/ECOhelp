@@ -3,15 +3,9 @@
 /* ------------- */
 /* Template page */
 /* ------------- */
-
-body {
-    margin: 0;
+section {
+    padding: 0 calc(50% - 187.5px);
 }
-
-.main {
-    margin: 22px;
-}
-
 .vector {
     position: static;
     width: 128px;
@@ -99,3 +93,91 @@ input {
 /* Register page */
 /* ------------- */
 
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* Auth page */
+/* ------------- */
+
+
+.forgot_pass_link {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+
+/* ------------- */
+/* Auth page */
+/* ------------- */
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* User Profile page */
+/* ------------- */
+
+
+.profile_info {
+    background: #FFFFFF;
+    border: 1px solid rgba(20, 20, 20, 0.38);
+    box-sizing: border-box;
+    border-radius: 999px;
+}
+
+/* ------------- */
+/* User Profile page */
+/* ------------- */
+
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* User Setting page */
+/* ------------- */
+
+
+
+.set_button {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    width: 101px;
+    height: 34px;
+    opacity: 0.8;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #FFFFFF;
+    border: 1px rgba(0, 0, 0, 0.83);
+
+    border-radius: 10px;
+}
+.labelL {
+    white-space: nowrap;
+    margin-left: 25px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px
+}
+.input-xlarge {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    opacity: 0.8;
+}

@@ -1,0 +1,45 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Профиль{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="profile">
+            <div class="profile_icon">
+                <img src="{% static 'img/Avatar.png' %}" alt="Avatar">
+            </div>
+        </div>
+    </div>
+   <div class="regform mb-3">
+            <form >
+                <label class="labelL">Адрес электронной почты</label>
+                <div class="mb-3 text-center">
+                    <input type="text" value="alexey@gmail.com" class="input-xlarge">
+                </div>
+                <label class="labelL">Номер телефона</label>
+                <div class="mb-3 text-center">
+                    <input type="text" value="+79221236565" class="input-xlarge">
+                </div>
+                <label class="labelL">Имя</label>
+                <div class="mb-3 text-center" >
+                    <input type="text" value="Михаил" class="input-xlarge">
+                </div>
+                <label class="labelL">Фамилия</label>
+                <div class="mb-3 text-center">
+                    <input type="text" value="Алексеев" class="input-xlarge">
+                </div>
+                <label class="labelL">Пароль</label>
+                <div class="mb-3 text-center">
+        	         <input type="password" value="12345" class="input-xlarge">
+                </div>
+                <label class="labelL">Подтвердите пароль</label>
+                <div class="mb-3 text-center">
+        	         <input type="password" value="12345" class="input-xlarge">
+                </div>
+                <div class="text-center">
+                <button type="submit" class="set_button">Применить</button>
+                </div>
+            </form>
+        </div>
+{% endblock %}

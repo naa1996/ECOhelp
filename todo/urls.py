@@ -17,6 +17,8 @@ urlpatterns = [
     path('recovery_password', views.recovery_password, name='recovery_password'),
     # роут для отображения страницы - Восстановление пароля
     path('recovery', views.recovery_pass, name='recovery_pass'),
+    # роут для отображения страницы - Информация о пользователе
+    path('user_setting', views.user_setting, name='user_setting'),
     # роут для отображения страницы - Профиль
     path('profile', views.user_profile, name='user_profile'),
     # роут для отображения страницы - Главная

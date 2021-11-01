@@ -1,6 +1,4 @@
 {% extends 'template.html' %}
-{#load bootstrap4#}
-
 
 {% block content %}
     <div class="reg text-center">
@@ -8,28 +6,21 @@
             Добро пожаловать
         </div>
         <div class="mb-3 reginfo">
-            Введите свои данные для регистрации!
+            Введите свои данные для регистрации
         </div>
         <div class="regform mb-3">
-            <form method="post" action="createUser" value="">
-                {% csrf_token %}
+            <form >
                 <div class="mb-3">
-                    <input type="text" name="username" id="username" placeholder="Имя пользователя">
+                    <input type="text" id="name" placeholder="Имя">
                 </div>
                 <div class="mb-3">
-                    <input type="text" name="first_name" id="first_name" placeholder="Имя">
+                    <input type="text" id="lastname" placeholder="Фамилия">
                 </div>
                 <div class="mb-3">
-                    <input type="text" name="last_name" id="lastname" placeholder="Фамилия">
+                    <input type="email" id="email" placeholder="Email">
                 </div>
                 <div class="mb-3">
-                    <input type="email" name="email" id="email" placeholder="Email">
-                </div>
-                <div class="mb-3">
-                    <input type="password" name="password1" id="password" placeholder="Пароль">
-                </div>
-                <div class="mb-3">
-                    <input type="password" name="password2" id="password" placeholder="Повтор пароля">
+                    <input type="password" id="password" placeholder="Пароль">
                 </div>
                 <div class="useful_links mb-3">
                     <a class="useful_link mb-2" href="#">Политика конфиденциальности</a>
@@ -38,27 +29,11 @@
                 <button type="submit" class="main_button">Создать аккаунт</button>
             </form>
         </div>
-{#        <div class="regform mb-3">#}
-{#            <form method="post" class= "form-control" action="createUser" value="">#}
-{#                {% csrf_token %}#}
-{#                {% bootstrap_form create_user layout='horizontal'%}#}
-{#                {% buttons %}#}
-{#                <input class="main_button" type="submit" value="Отправить">#}
-{#                {% endbuttons %}#}
-{#            </form>#}
-{#        </div>#}
         <div class="auth_link">
             Уже есть аккаунт?
-            <a href="#" style="text-decoration: none;">
+            <a href="{% url 'auth' %}" style="text-decoration: none;">
                 Войти
             </a>
-        </div>
-        <div class="row">
-            {% for massage in messages %}
-                <ul class="{{ massage.tags }}">
-                    {% if 'safe' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
-                </ul>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}
