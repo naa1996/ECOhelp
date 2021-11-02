@@ -1,0 +1,579 @@
+Index: templates/reg.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% extends 'template.html' %}\r\n{#load bootstrap4#}\r\n\r\n\r\n{% block content %}\r\n    <div class=\"reg text-center\">\r\n        <div class=\"mb-3 welcome\">\r\n            Добро пожаловать\r\n        </div>\r\n        <div class=\"mb-3 reginfo\">\r\n            Введите свои данные для регистрации!\r\n        </div>\r\n        <div class=\"regform mb-3\">\r\n            <form method=\"post\" action=\"createUser\" value=\"\">\r\n                {% csrf_token %}\r\n                <div class=\"mb-3\">\r\n                    <input type=\"text\" name=\"username\" id=\"username\" placeholder=\"Имя пользователя\">\r\n                </div>\r\n                <div class=\"mb-3\">\r\n                    <input type=\"text\" name=\"first_name\" id=\"first_name\" placeholder=\"Имя\">\r\n                </div>\r\n                <div class=\"mb-3\">\r\n                    <input type=\"text\" name=\"last_name\" id=\"lastname\" placeholder=\"Фамилия\">\r\n                </div>\r\n                <div class=\"mb-3\">\r\n                    <input type=\"email\" name=\"email\" id=\"email\" placeholder=\"Email\">\r\n                </div>\r\n                <div class=\"mb-3\">\r\n                    <input type=\"password\" name=\"password1\" id=\"password\" placeholder=\"Пароль\">\r\n                </div>\r\n                <div class=\"mb-3\">\r\n                    <input type=\"password\" name=\"password2\" id=\"password\" placeholder=\"Повтор пароля\">\r\n                </div>\r\n                <div class=\"useful_links mb-3\">\r\n                    <a class=\"useful_link mb-2\" href=\"#\">Политика конфиденциальности</a>\r\n                    <a class=\"useful_link\" href=\"#\">Условия использования</a>\r\n                </div>\r\n                <button type=\"submit\" class=\"main_button\">Создать аккаунт</button>\r\n            </form>\r\n        </div>\r\n{#        <div class=\"regform mb-3\">#}\r\n{#            <form method=\"post\" class= \"form-control\" action=\"createUser\" value=\"\">#}\r\n{#                {% csrf_token %}#}\r\n{#                {% bootstrap_form create_user layout='horizontal'%}#}\r\n{#                {% buttons %}#}\r\n{#                <input class=\"main_button\" type=\"submit\" value=\"Отправить\">#}\r\n{#                {% endbuttons %}#}\r\n{#            </form>#}\r\n{#        </div>#}\r\n        <div class=\"auth_link\">\r\n            Уже есть аккаунт?\r\n            <a href=\"#\" style=\"text-decoration: none;\">\r\n                Войти\r\n            </a>\r\n        </div>\r\n        <div class=\"row\">\r\n            {% for massage in messages %}\r\n                <ul class=\"{{ massage.tags }}\">\r\n                    {% if 'safe' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}\r\n                </ul>\r\n            {% endfor %}\r\n        </div>\r\n    </div>\r\n{% endblock %}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/reg.html b/templates/reg.html
+--- a/templates/reg.html	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/templates/reg.html	(date 1635880406310)
+@@ -1,6 +1,4 @@
+ {% extends 'template.html' %}
+-{#load bootstrap4#}
+-
+ 
+ {% block content %}
+     <div class="reg text-center">
+@@ -8,7 +6,7 @@
+             Добро пожаловать
+         </div>
+         <div class="mb-3 reginfo">
+-            Введите свои данные для регистрации!
++            Введите свои данные для регистрации
+         </div>
+         <div class="regform mb-3">
+             <form method="post" action="createUser" value="">
+@@ -20,7 +18,7 @@
+                     <input type="text" name="first_name" id="first_name" placeholder="Имя">
+                 </div>
+                 <div class="mb-3">
+-                    <input type="text" name="last_name" id="lastname" placeholder="Фамилия">
++                    <input type="text" name="last_name" id="last_name" placeholder="Фамилия">
+                 </div>
+                 <div class="mb-3">
+                     <input type="email" name="email" id="email" placeholder="Email">
+@@ -38,18 +36,10 @@
+                 <button type="submit" class="main_button">Создать аккаунт</button>
+             </form>
+         </div>
+-{#        <div class="regform mb-3">#}
+-{#            <form method="post" class= "form-control" action="createUser" value="">#}
+-{#                {% csrf_token %}#}
+-{#                {% bootstrap_form create_user layout='horizontal'%}#}
+-{#                {% buttons %}#}
+-{#                <input class="main_button" type="submit" value="Отправить">#}
+-{#                {% endbuttons %}#}
+-{#            </form>#}
+-{#        </div>#}
++
+         <div class="auth_link">
+             Уже есть аккаунт?
+-            <a href="#" style="text-decoration: none;">
++            <a href="{% url 'auth' %}" style="text-decoration: none;">
+                 Войти
+             </a>
+         </div>
+Index: todo/urls.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.contrib import admin\r\nfrom django.contrib.auth.views import LoginView\r\nfrom django.urls import path\r\nfrom . import views\r\n\r\nurlpatterns = [\r\n    # роут для отображения страницы - Регистрация\r\n    path('reg', views.reg, name='reg'),\r\n    #роут регистрации пользователя\r\n    path(r'createUser', views.createUser, name='createUser'),\r\n    # path('reg/UReg', views.UReg, name='UReg'),\r\n    # роут для отображения страницы - Авторизация\r\n    path('auth/', views.auth, name='auth'),\r\n    # роут для авторизации\r\n    path(r'^accounts/login/', views.loginn, name='login'),\r\n    # роут восстановления пароля\r\n    path('recovery_password', views.recovery_password, name='recovery_password'),\r\n    # роут для отображения страницы - Восстановление пароля\r\n    path('recovery', views.recovery_pass, name='recovery_pass'),\r\n    # роут для отображения страницы - Профиль\r\n    path('profile', views.user_profile, name='user_profile'),\r\n    # роут для отображения страницы - Главная\r\n    path('', views.index, name='index'),\r\n    # path('index1', views.index1, name='index1'),\r\n]\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/todo/urls.py b/todo/urls.py
+--- a/todo/urls.py	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/todo/urls.py	(date 1635797641744)
+@@ -17,6 +17,11 @@
+     path('recovery_password', views.recovery_password, name='recovery_password'),
+     # роут для отображения страницы - Восстановление пароля
+     path('recovery', views.recovery_pass, name='recovery_pass'),
++    # роут для отображения страницы - Информация о пользователе
++    path('user_setting', views.user_setting, name='user_setting'),
++    # роут для изменения данных о пользователе
++    path('user_form', views.user_form, name='user_form'),
++    # path('user_email', views.user_email, name='user_email'),
+     # роут для отображения страницы - Профиль
+     path('profile', views.user_profile, name='user_profile'),
+     # роут для отображения страницы - Главная
+Index: todo/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.shortcuts import render\r\nfrom . import forms\r\nfrom django.shortcuts import redirect\r\nfrom .forms import UReg\r\nfrom django.contrib import messages\r\nfrom django.contrib.auth import authenticate, login\r\nfrom .models import User\r\nfrom django.db.models import Q\r\n\r\n\r\ndef index(request):\r\n    #отображение главной страницы\r\n    return render(request, 'index.html', {\r\n        'title': 'Главная страница',\r\n    })\r\n\r\n\r\ndef loginn(request):\r\n    #авторизация\r\n    email = request.POST['email']\r\n    password = request.POST['password']\r\n    m = User.objects.filter(email=email).exists()\r\n    if m:\r\n        n = User.objects.get(email=email).username\r\n        user = authenticate(username=n, password=password)\r\n        if user is not None:\r\n            # print(\"Правильно\")\r\n            # messages.error(request, 'Правильно', extra_tags='safe')\r\n            login(request, user)\r\n            # u = User.objects.filter(userprofile__points=0).all()\r\n            # s = User.objects.filter(userprofile__code=\"0000\").all()\r\n            # v = User.objects.filter(userprofile__role=\"user\").all()\r\n            # a = User.objects.filter(userprofile__rating=0000).all()\r\n            # vv = User.objects.filter(userprofile__role=\"admin\").all()\r\n            # print(u)\r\n            # print(s)\r\n            # print(v)\r\n            # print(a)\r\n            # print(vv)\r\n            return redirect(auth)\r\n        else:\r\n            # print(\"Неверный пароль\")\r\n            print(\"Неверный пароль\")\r\n            messages.error(request, 'Неверный пароль', extra_tags='safe')\r\n            return redirect(auth)\r\n    else:\r\n        # print(\"Неверная почта\")\r\n        messages.error(request, 'Неверная почта', extra_tags='safe')\r\n        return redirect(auth)\r\n\r\n\r\ndef auth(request):\r\n    #отображение страницы авторизации\r\n    return render(request, 'auth.html', {\r\n        'title': 'Авторизация',\r\n    })\r\n\r\n\r\ndef recovery_password(request):\r\n    #восстановление пароля\r\n    emails = request.POST['emailP']\r\n    print(emails)\r\n    m = User.objects.filter(email=emails).exists()\r\n    if m:\r\n        print(m)\r\n\r\n        messages.error(request, 'Почта верна', extra_tags='safe1')\r\n        return redirect(recovery_pass)\r\n    else:\r\n        messages.error(request, 'Неверная почта', extra_tags='safe1')\r\n        return redirect(recovery_pass)\r\n\r\n\r\ndef recovery_pass(request):\r\n    #отображение страницы восстановления\r\n    return render(request, 'recovery_pass.html', {\r\n        'title': 'Восстановление',\r\n    })\r\n\r\n\r\ndef user_profile(request):\r\n    #отображение страницы авторизации\r\n    return render(request, 'user_profile.html', {\r\n        'title': 'Профиль',\r\n    })\r\n\r\n\r\ndef createUser(request):\r\n    #регистрация\r\n    if request.method == 'POST':\r\n        print(request.POST)\r\n        user_reg_form = forms.UReg(request.POST)\r\n        password2 = request.POST['password2']\r\n        password1 = request.POST['password1']\r\n        username1 = request.POST['username']\r\n        first_name1 = request.POST['first_name']\r\n        last_name1 = request.POST['last_name']\r\n        email1 = request.POST['email']\r\n        # print(username1)\r\n        # print(first_name1)\r\n        # print(last_name1)\r\n        # print(email1)\r\n        # print(password1)\r\n        # print(password2)\r\n        f = User.objects.filter(username=username1)\r\n        ff = User.objects.filter(email=email1)\r\n        # new_user = ''\r\n        if not f:\r\n            if not ff:\r\n                if password1 == password2:\r\n                    # print(models.User._meta._get_fields())\r\n                    if not password1.isdigit():\r\n                        if len(password1) >= 8:\r\n                            if user_reg_form.is_valid():\r\n                                # print('3')\r\n                                new_user = user_reg_form.save(commit=False)\r\n                                # print('3')\r\n                                new_user.set_password(user_reg_form.cleaned_data['password1'])\r\n                                # print('3')\r\n                                new_user.save()\r\n                                messages.error(request, 'Успешно зарегестрирован', extra_tags='safe')\r\n                                return redirect('reg')\r\n                            else:\r\n                                # print(user_reg_form.errors)\r\n                                messages.error(request, 'Не удалось зарегистрировать пользователя', extra_tags='safe')\r\n                                # return HttpResponse(user_reg_form.errors)\r\n                                return redirect('reg')\r\n                        else:\r\n                            messages.error(request, 'Пароль слишком короткий', extra_tags='safe')\r\n                            return redirect('reg')\r\n                    else:\r\n                        messages.error(request, 'Пароль слишком легкий - содержит только цифры', extra_tags='safe')\r\n                        return redirect('reg')\r\n\r\n                else:\r\n                    messages.error(request, 'Не заристрирован. Пароли не совпадают', extra_tags='safe')\r\n                    return redirect('reg')\r\n            else:\r\n                messages.error(request, 'Не заристрирован. Пользователь с такой почтой уже существует', extra_tags='safe')\r\n                return redirect('reg')\r\n        else:\r\n            messages.error(request, 'Не заристрирован. Пользователь с таким логином уже существует', extra_tags='safe')\r\n            return redirect('reg')\r\n    # else:\r\n    #     messages.error(request, 'Не отправлен', extra_tags='safe')\r\n    #     return redirect('reg')\r\n\r\n\r\ndef reg(request):\r\n    # отображение страницы регистрации\r\n    user_form = UReg()\r\n    return render(request, 'reg.html', {\r\n        'title': 'Регистрация',\r\n        'create_user': user_form,\r\n    })\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/todo/views.py b/todo/views.py
+--- a/todo/views.py	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/todo/views.py	(date 1635878933242)
+@@ -4,7 +4,7 @@
+ from .forms import UReg
+ from django.contrib import messages
+ from django.contrib.auth import authenticate, login
+-from .models import User
++from .models import User, UserProfile
+ from django.db.models import Q
+ 
+ 
+@@ -27,20 +27,23 @@
+             # print("Правильно")
+             # messages.error(request, 'Правильно', extra_tags='safe')
+             login(request, user)
+-            # u = User.objects.filter(userprofile__points=0).all()
+-            # s = User.objects.filter(userprofile__code="0000").all()
+-            # v = User.objects.filter(userprofile__role="user").all()
+-            # a = User.objects.filter(userprofile__rating=0000).all()
+-            # vv = User.objects.filter(userprofile__role="admin").all()
+-            # print(u)
+-            # print(s)
+-            # print(v)
+-            # print(a)
+-            # print(vv)
++            u = User.objects.filter(userprofile__points=0).all()
++            s = User.objects.filter(userprofile__code="0000").all()
++            v = User.objects.filter(userprofile__role="user").all()
++            a = User.objects.filter(userprofile__rating=0000).all()
++            vv = User.objects.filter(userprofile__role="admin").all()
++            # ss = User.objects.filter(userprofile__).all()
++            qq = User.objects
++            vv = User._meta.fields
++            print(u)
++            print(s)
++            print(v)
++            print(a)
++            # print(ss)
++            print(vv)
+             return redirect(auth)
+         else:
+             # print("Неверный пароль")
+-            print("Неверный пароль")
+             messages.error(request, 'Неверный пароль', extra_tags='safe')
+             return redirect(auth)
+     else:
+@@ -78,8 +81,85 @@
+     })
+ 
+ 
++def user_form(request):
++    #отображение информации/изменение
++    # w = User.objects.get(id= int(request.POST['id_post']))
++    # emails = request.POST['emailPR']
++    # phone = request.POST['phonePR']
++    # first_name = request.POST['first_namePR']
++    # last_name = request.POST['last_name']
++    # password = request.POST['passwordPR']
++    # password2 = request.POST['password2PR']
++    # id_post = request.POST['id_post']
++    # print(id_post)
++    # print(emails, phone, first_name, last_name, password, password2)
++    # print(last_name)
++    # ss = User.objects.filter(id = int(request.POST['id_post']))
++    # id = request.POST['id_post']
++    # print(id)
++    if request.method == "POST":
++        form = forms.UserProfile(request.POST)
++        if request.POST['password'] == request.POST['password2']:
++            print(User._meta._get_fields())
++            print(request.POST['phone'])
++            ss = User.objects.filter(id = int(request.POST['id_post']))
++            vv = UserProfile._meta.fields
++            print(vv)
++            if ss:
++                # if form.is_valid():
++                    User.objects.filter(id = int(request.POST['id_post'])).update(
++                    # User.objects.update(
++                        email=request.POST['email'],
++                        # phone=request.POST['phone'],
++                        first_name=request.POST['first_name'],
++                        last_name=request.POST['last_name'],
++                        password=request.POST['password'],
++                    )
++                    sp = UserProfile.objects.filter(user = int(request.user.id))
++                    if sp:
++                        UserProfile.objects.filter(user = int(request.user.id)).update(
++                        # UserProfile.objects.filter(user = int(request.user.id)).update(
++                                phone=request.POST['phone'],
++                            )
++                        vv = User.objects.filter(userprofile__user =" ").all()
++                        print(vv)
++
++                        messages.error(request, 'Информация успешно обновлена/изменена', extra_tags='safePR')
++                    # s2s = User.objects.filter(userprofile__phone='').all()
++                    # print(s2s)
++                        return redirect('user_form')
++                    else:
++                        print('нет')
++                        messages.error(request, 'НЕТ', extra_tags='safePR')
++                        s2s = User.objects.filter(userprofile__phone='').all()
++                        s2r = User.objects.filter(userprofile__code='0000').all()
++                        print(s2s)
++                        print(s2r)
++                        return redirect('user_form')
++                # else:
++                #     messages.error(request, 'Не удалось обновить информацию', extra_tags='safePR')
++                #     return redirect('user_form')
++            else:
++                messages.error(request, 'Не удалось', extra_tags='safePR')
++                return redirect('user_form')
++        else:
++            messages.error(request, 'Пароли не совпали', extra_tags='safePR')
++            return redirect('user_form')
++
++    return redirect(user_setting)
++
++
++def user_setting(request):
++    #отображение страницы личной информации ползователя
++        form = forms.UserProfile
++        return render(request, 'user_setting.html', {
++            'title': 'Личная информация',
++            'user_form': form,
++        })
++
++
+ def user_profile(request):
+-    #отображение страницы авторизации
++    #отображение страницы профиля
+     return render(request, 'user_profile.html', {
+         'title': 'Профиль',
+     })
+@@ -152,4 +232,4 @@
+     return render(request, 'reg.html', {
+         'title': 'Регистрация',
+         'create_user': user_form,
+-    })
++    })
+\ No newline at end of file
+Index: todo/forms.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django import forms\r\nfrom . import models\r\nfrom django.contrib.auth.forms import UserCreationForm\r\nfrom django.contrib.auth.models import User\r\n\r\n\r\nclass UReg(UserCreationForm):\r\n    \"\"\"\r\n    Форма регистрации\r\n    \"\"\"\r\n    username = forms.CharField(label='Логин')\r\n    first_name = forms.CharField(label='Имя')\r\n    last_name = forms.CharField(label='Фамилия')\r\n    email = forms.EmailField(label='Почта')\r\n    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)\r\n    password2 = forms.CharField(label='Повторный пароль', widget=forms.PasswordInput)\r\n\r\n    class Meta:\r\n        model = User\r\n        fields = ('username', 'first_name', 'last_name', 'email')\r\n\r\n\r\ndef clean_password(self):\r\n    cd = self.cleaned_data\r\n    if cd['password'] != cd['password']:\r\n        raise forms.ValidationError('Пароли не совпадают')\r\n    return cd['password']
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/todo/forms.py b/todo/forms.py
+--- a/todo/forms.py	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/todo/forms.py	(date 1635801100477)
+@@ -24,4 +24,20 @@
+     cd = self.cleaned_data
+     if cd['password'] != cd['password']:
+         raise forms.ValidationError('Пароли не совпадают')
+-    return cd['password']
+\ No newline at end of file
++    return cd['password']
++
++
++class UserProfile(forms.Form):
++    """
++    Форма редактирования профиля
++    """
++    email = forms.EmailField(label='Почта')
++    phone = forms.CharField(label='Номер телефона')
++    first_name = forms.CharField(label='Имя')
++    last_name = forms.CharField(label='Фамилия')
++    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)
++    password2 = forms.CharField(label='Повторный пароль', widget=forms.PasswordInput)
++
++
++class Meta:
++    model = User
+\ No newline at end of file
+Index: templates/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>{{ title }}</title>\r\n</head>\r\n<body>\r\nssdj11рt\r\n<a class=\"a\" href={% url 'reg' %}>Регистрация</a>\r\n<a class=\"a\" href={% url 'auth' %}>Авторизация</a>\r\n{#<a class=\"a\" href={% url 'login' %}>Авторизация</a>#}\r\n<a class=\"a\" href={% url 'recovery_pass' %}>Востановление</a>\r\n<a class=\"a\" href={% url 'user_profile' %}>Профиль</a>\r\n\r\n<div class=\"begin\" style=\"justify-content: center\">\r\n    <div class=\"col\">\r\n        {% if request.user.is_authenticated %}\r\n            {% if request.user.is_superuser %}\r\n                <h2>Привет, админ</h2>\r\n            {% else %}\r\n                <h2>Привет, {{ request.user.username }} </h2>\r\n            {% endif %}\r\n        {% else %}\r\n            <h2>Добро пожаловать!</h2>\r\n        {% endif %}\r\n    </div>\r\n</div>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/index.html b/templates/index.html
+--- a/templates/index.html	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/templates/index.html	(date 1635770847536)
+@@ -5,12 +5,12 @@
+     <title>{{ title }}</title>
+ </head>
+ <body>
+-ssdj11рt
+ <a class="a" href={% url 'reg' %}>Регистрация</a>
+ <a class="a" href={% url 'auth' %}>Авторизация</a>
+-{#<a class="a" href={% url 'login' %}>Авторизация</a>#}
+ <a class="a" href={% url 'recovery_pass' %}>Востановление</a>
+ <a class="a" href={% url 'user_profile' %}>Профиль</a>
++<a class="a" href={% url 'user_setting' %}>Настройки Профиля</a>
++
+ 
+ <div class="begin" style="justify-content: center">
+     <div class="col">
+Index: templates/template.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{% load static %}\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <title>{{ title }}</title>\r\n    <link rel=\"stylesheet\" href=\"{% static 'css/style.css' %}\" type=\"text/css\">\r\n    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\r\n</head>\r\n<body>\r\n<div class=\"main\">\r\n    <nav class=\"topbar\">\r\n        <div>\r\n            <a href=\"javascript:history.back()\" class=\"vector\">\r\n                <svg width=\"28\" height=\"28\" viewBox=\"0 0 28 28\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                    <path d=\"M16.9263 21.88C17.1363 21.88 17.3346 21.7984 17.4863 21.635C17.7663 21.32 17.743 20.8417 17.4396 20.5617L10.009 13.8647L17.4863 7.38969C17.8013 7.10969 17.813 6.63136 17.533 6.31636C17.253 6.01302 16.7747 5.98969 16.4597 6.26969L8.41065 13.258C8.04899 13.5847 8.04899 14.1447 8.41065 14.4714L16.413 21.6817C16.5646 21.8217 16.7396 21.88 16.9263 21.88Z\"\r\n                          fill=\"#64B5F6\"/>\r\n                </svg>\r\n            </a>\r\n        </div>\r\n        <div>\r\n            <a href=\"#\">\r\n                <svg width=\"28\" height=\"28\" viewBox=\"0 0 28 28\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n                    <path d=\"M14 8.57497C14.4832 8.57497 14.875 8.96672 14.875 9.44997C14.875 9.93322 14.4832 10.325 14 10.325C13.5168 10.325 13.125 9.93322 13.125 9.44997C13.125 8.96672 13.5168 8.57497 14 8.57497Z\"\r\n                          fill=\"#64B5F6\"/>\r\n                    <path d=\"M14 11.9044C14.4188 11.9044 14.7583 12.2439 14.7583 12.6627V17.15C14.7583 17.5688 15.0978 17.9083 15.5166 17.9083L15.575 17.9083C15.9938 17.9083 16.3333 18.2479 16.3333 18.6667C16.3333 19.0855 15.9938 19.425 15.575 19.425L15.5166 19.425C14.2602 19.425 13.2417 18.4064 13.2417 17.15V12.6627C13.2417 12.2439 13.5812 11.9044 14 11.9044Z\"\r\n                          fill=\"#64B5F6\"/>\r\n                    <path fill-rule=\"evenodd\" clip-rule=\"evenodd\"\r\n                          d=\"M14 3.5C8.20101 3.5 3.5 8.20101 3.5 14C3.5 19.799 8.20101 24.5 14 24.5C19.799 24.5 24.5 19.799 24.5 14C24.5 8.20101 19.799 3.5 14 3.5ZM5.01667 14C5.01667 9.03864 9.03864 5.01667 14 5.01667C18.9614 5.01667 22.9833 9.03864 22.9833 14C22.9833 18.9614 18.9614 22.9833 14 22.9833C9.03864 22.9833 5.01667 18.9614 5.01667 14Z\"\r\n                          fill=\"#64B5F6\"/>\r\n                </svg>\r\n            </a>\r\n        </div>\r\n    </nav>\r\n    {% block content %}\r\n\r\n    {% endblock %}\r\n</div>\r\n<footer class=\"footer\"></footer>\r\n</body>\r\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/templates/template.html b/templates/template.html
+--- a/templates/template.html	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/templates/template.html	(date 1635776959281)
+@@ -3,39 +3,46 @@
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+-    <title>{{ title }}</title>
++    <title>Title</title>
+     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+ </head>
+ <body>
++<section>
+ <div class="main">
+     <nav class="topbar">
+-        <div>
+-            <a href="javascript:history.back()" class="vector">
+-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+-                    <path d="M16.9263 21.88C17.1363 21.88 17.3346 21.7984 17.4863 21.635C17.7663 21.32 17.743 20.8417 17.4396 20.5617L10.009 13.8647L17.4863 7.38969C17.8013 7.10969 17.813 6.63136 17.533 6.31636C17.253 6.01302 16.7747 5.98969 16.4597 6.26969L8.41065 13.258C8.04899 13.5847 8.04899 14.1447 8.41065 14.4714L16.413 21.6817C16.5646 21.8217 16.7396 21.88 16.9263 21.88Z"
+-                          fill="#64B5F6"/>
+-                </svg>
+-            </a>
+-        </div>
+-        <div>
+-            <a href="#">
+-                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+-                    <path d="M14 8.57497C14.4832 8.57497 14.875 8.96672 14.875 9.44997C14.875 9.93322 14.4832 10.325 14 10.325C13.5168 10.325 13.125 9.93322 13.125 9.44997C13.125 8.96672 13.5168 8.57497 14 8.57497Z"
+-                          fill="#64B5F6"/>
+-                    <path d="M14 11.9044C14.4188 11.9044 14.7583 12.2439 14.7583 12.6627V17.15C14.7583 17.5688 15.0978 17.9083 15.5166 17.9083L15.575 17.9083C15.9938 17.9083 16.3333 18.2479 16.3333 18.6667C16.3333 19.0855 15.9938 19.425 15.575 19.425L15.5166 19.425C14.2602 19.425 13.2417 18.4064 13.2417 17.15V12.6627C13.2417 12.2439 13.5812 11.9044 14 11.9044Z"
+-                          fill="#64B5F6"/>
+-                    <path fill-rule="evenodd" clip-rule="evenodd"
+-                          d="M14 3.5C8.20101 3.5 3.5 8.20101 3.5 14C3.5 19.799 8.20101 24.5 14 24.5C19.799 24.5 24.5 19.799 24.5 14C24.5 8.20101 19.799 3.5 14 3.5ZM5.01667 14C5.01667 9.03864 9.03864 5.01667 14 5.01667C18.9614 5.01667 22.9833 9.03864 22.9833 14C22.9833 18.9614 18.9614 22.9833 14 22.9833C9.03864 22.9833 5.01667 18.9614 5.01667 14Z"
+-                          fill="#64B5F6"/>
+-                </svg>
+-            </a>
+-        </div>
++            <div>
++                <a href="javascript:history.back()" class="vector">
++                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
++                        <path d="M16.9263 21.88C17.1363 21.88 17.3346 21.7984 17.4863 21.635C17.7663 21.32 17.743 20.8417 17.4396 20.5617L10.009 13.8647L17.4863 7.38969C17.8013 7.10969 17.813 6.63136 17.533 6.31636C17.253 6.01302 16.7747 5.98969 16.4597 6.26969L8.41065 13.258C8.04899 13.5847 8.04899 14.1447 8.41065 14.4714L16.413 21.6817C16.5646 21.8217 16.7396 21.88 16.9263 21.88Z"
++                              fill="#64B5F6"/>
++                    </svg>
++                </a>
++            </div>
++            <div class="page_title">
++                <p class="page_name">
++                    {% block page_name %}{% endblock %}
++                </p>
++            </div>
++            <div>
++                <a href="#">
++                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
++                        <path d="M14 8.57497C14.4832 8.57497 14.875 8.96672 14.875 9.44997C14.875 9.93322 14.4832 10.325 14 10.325C13.5168 10.325 13.125 9.93322 13.125 9.44997C13.125 8.96672 13.5168 8.57497 14 8.57497Z"
++                              fill="#64B5F6"/>
++                        <path d="M14 11.9044C14.4188 11.9044 14.7583 12.2439 14.7583 12.6627V17.15C14.7583 17.5688 15.0978 17.9083 15.5166 17.9083L15.575 17.9083C15.9938 17.9083 16.3333 18.2479 16.3333 18.6667C16.3333 19.0855 15.9938 19.425 15.575 19.425L15.5166 19.425C14.2602 19.425 13.2417 18.4064 13.2417 17.15V12.6627C13.2417 12.2439 13.5812 11.9044 14 11.9044Z"
++                              fill="#64B5F6"/>
++                        <path fill-rule="evenodd" clip-rule="evenodd"
++                              d="M14 3.5C8.20101 3.5 3.5 8.20101 3.5 14C3.5 19.799 8.20101 24.5 14 24.5C19.799 24.5 24.5 19.799 24.5 14C24.5 8.20101 19.799 3.5 14 3.5ZM5.01667 14C5.01667 9.03864 9.03864 5.01667 14 5.01667C18.9614 5.01667 22.9833 9.03864 22.9833 14C22.9833 18.9614 18.9614 22.9833 14 22.9833C9.03864 22.9833 5.01667 18.9614 5.01667 14Z"
++                              fill="#64B5F6"/>
++                    </svg>
++                </a>
++            </div>
+     </nav>
+     {% block content %}
+ 
+     {% endblock %}
+ </div>
+ <footer class="footer"></footer>
++</section>
+ </body>
+ </html>
+\ No newline at end of file
+Index: static/css/style.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Roboto&display=swap');\r\n\r\n/* ------------- */\r\n/* Template page */\r\n/* ------------- */\r\n\r\nbody {\r\n    margin: 0;\r\n}\r\n\r\n.main {\r\n    margin: 22px;\r\n}\r\n\r\n.vector {\r\n    position: static;\r\n    width: 128px;\r\n    height: 28px;\r\n    left: 0px;\r\n    top: calc(50% - 28px / 2);\r\n}\r\n\r\n.topbar {\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n\r\n.footer {\r\n    position: absolute;\r\n    left: 0;\r\n    bottom: 0;\r\n    width: 100%;\r\n    height: 80px;\r\n    background: #81C3F7;\r\n}\r\n\r\n\r\n/* ------------- */\r\n/* Template page */\r\n/* ------------- */\r\n\r\n\r\n/* -------------------------------------------------- */\r\n/* -------------------------------------------------- */\r\n/* -------------------------------------------------- */\r\n\r\n\r\n/* ------------- */\r\n/* Register page */\r\n/* ------------- */\r\n\r\n.welcome {\r\n    font-family: 'Inter';\r\n    font-weight: 500;\r\n}\r\n\r\n.reginfo {\r\n    font-family: 'Inter';\r\n    font-size: 16px;\r\n    color: rgba(0, 0, 0, 0.5);\r\n}\r\n\r\ninput {\r\n    border: none;\r\n    border-bottom: 1px solid #333333;\r\n    width: 331px;\r\n}\r\n\r\n.useful_links {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.useful_link {\r\n    font-family: 'Roboto';\r\n    font-size: 10px;\r\n    text-decoration: none;\r\n}\r\n\r\n.main_button {\r\n    font-family: 'Inter';\r\n    border: none;\r\n    width: 331px;\r\n    height: 62px;\r\n\r\n    background: #FFFFFF;\r\n    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);\r\n    border-radius: 5px;\r\n}\r\n\r\n.auth_link {\r\n    font-family: 'Inter';\r\n    font-weight: 400;\r\n    color: rgba(60, 60, 67, 0.6);\r\n}\r\n\r\n\r\n/* ------------- */\r\n/* Register page */\r\n/* ------------- */\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/static/css/style.css b/static/css/style.css
+--- a/static/css/style.css	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/static/css/style.css	(date 1635782698578)
+@@ -3,15 +3,9 @@
+ /* ------------- */
+ /* Template page */
+ /* ------------- */
+-
+-body {
+-    margin: 0;
++section {
++    padding: 0 calc(50% - 187.5px);
+ }
+-
+-.main {
+-    margin: 22px;
+-}
+-
+ .vector {
+     position: static;
+     width: 128px;
+@@ -99,3 +93,91 @@
+ /* Register page */
+ /* ------------- */
+ 
++
++/* -------------------------------------------------- */
++/* -------------------------------------------------- */
++/* -------------------------------------------------- */
++
++
++/* ------------- */
++/* Auth page */
++/* ------------- */
++
++
++.forgot_pass_link {
++    font-family: Inter;
++    font-weight: 400;
++    font-size: 12px;
++    text-decoration: none;
++}
++
++
++/* ------------- */
++/* Auth page */
++/* ------------- */
++
++
++/* -------------------------------------------------- */
++/* -------------------------------------------------- */
++/* -------------------------------------------------- */
++
++
++/* ------------- */
++/* User Profile page */
++/* ------------- */
++
++
++.profile_info {
++    background: #FFFFFF;
++    border: 1px solid rgba(20, 20, 20, 0.38);
++    box-sizing: border-box;
++    border-radius: 999px;
++}
++
++/* ------------- */
++/* User Profile page */
++/* ------------- */
++
++
++
++/* -------------------------------------------------- */
++/* -------------------------------------------------- */
++/* -------------------------------------------------- */
++
++
++/* ------------- */
++/* User Setting page */
++/* ------------- */
++
++
++
++.set_button {
++    font-family: 'Inter';
++    font-style: normal;
++    font-weight: normal;
++    font-size: 12px;
++    line-height: 16px;
++    width: 101px;
++    height: 34px;
++    opacity: 0.8;
++    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
++    background: #FFFFFF;
++    border: 1px rgba(0, 0, 0, 0.83);
++
++    border-radius: 10px;
++}
++.labelL {
++    white-space: nowrap;
++    margin-left: 25px;
++    font-family: Inter;
++    font-style: normal;
++    font-weight: normal;
++    font-size: 12px;
++    line-height: 16px
++}
++.input-xlarge {
++    font-family: 'Inter';
++    font-style: normal;
++    font-weight: normal;
++    opacity: 0.8;
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"667c8c90-ea92-4694-841f-cb93ac7bdb37\" name=\"Default Changelist\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/db.sqlite3\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/db.sqlite3\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/todo/admin.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/todo/admin.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/todo/models.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/todo/models.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/todo/views.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/todo/views.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"DjangoConsoleOptions\" custom-start-script=\"import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)\">\r\n    <option name=\"myCustomStartScript\" value=\"import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Unit Test\" />\r\n        <option value=\"HTML File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1zOg0IJvq38SlauAUuTizB7Qk3E\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"DefaultHtmlFileTemplate\" value=\"HTML File\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../Rbook2\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\nahra_000\\PycharmProjects\\ecohelp\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Django Server.ecohelp\">\r\n    <configuration default=\"true\" type=\"Python.DjangoServer\" factoryName=\"Django server\">\r\n      <module name=\"ecohelp\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"C:\\Users\\nahra_000\\AppData\\Local\\Programs\\Python\\Python38\\python.exe\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"launchJavascriptDebuger\" value=\"false\" />\r\n      <option name=\"port\" value=\"8000\" />\r\n      <option name=\"host\" value=\"\" />\r\n      <option name=\"additionalOptions\" value=\"\" />\r\n      <option name=\"browserUrl\" value=\"\" />\r\n      <option name=\"runTestServer\" value=\"false\" />\r\n      <option name=\"runNoReload\" value=\"false\" />\r\n      <option name=\"useCustomRunCommand\" value=\"false\" />\r\n      <option name=\"customRunCommand\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"asdasd1\" type=\"Python.DjangoServer\" factoryName=\"Django server\">\r\n      <module name=\"ecohelp\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n        <env name=\"DJANGO_SETTINGS_MODULE\" value=\"ecohelp.settings\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"C:\\Users\\nahra_000\\PycharmProjects\\djangoProject\\venv\\Scripts\\python.exe\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"launchJavascriptDebuger\" value=\"false\" />\r\n      <option name=\"port\" value=\"8000\" />\r\n      <option name=\"host\" value=\"\" />\r\n      <option name=\"additionalOptions\" value=\"\" />\r\n      <option name=\"browserUrl\" value=\"http://127.0.0.1:8000/\" />\r\n      <option name=\"runTestServer\" value=\"false\" />\r\n      <option name=\"runNoReload\" value=\"false\" />\r\n      <option name=\"useCustomRunCommand\" value=\"false\" />\r\n      <option name=\"customRunCommand\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"ecohelp\" type=\"Python.DjangoServer\" factoryName=\"Django server\">\r\n      <module name=\"ecohelp\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n        <env name=\"DJANGO_SETTINGS_MODULE\" value=\"ecohelp.settings\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"C:\\Users\\nahra_000\\AppData\\Local\\Programs\\Python\\Python38\\python.exe\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"launchJavascriptDebuger\" value=\"false\" />\r\n      <option name=\"port\" value=\"8000\" />\r\n      <option name=\"host\" value=\"\" />\r\n      <option name=\"additionalOptions\" value=\"\" />\r\n      <option name=\"browserUrl\" value=\"\" />\r\n      <option name=\"runTestServer\" value=\"false\" />\r\n      <option name=\"runNoReload\" value=\"false\" />\r\n      <option name=\"useCustomRunCommand\" value=\"false\" />\r\n      <option name=\"customRunCommand\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Unittests for test.MyTestCase.test\" type=\"tests\" factoryName=\"Unittests\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ecohelp\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/tests\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_target\" value=\"&quot;test.MyTestCase.test&quot;\" />\r\n      <option name=\"_new_targetType\" value=\"&quot;PYTHON&quot;\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python tests.Unittests for test.MyTestCase.test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration>C:\\Users\\nahra_000\\AppData\\Roaming\\Subversion</configuration>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"667c8c90-ea92-4694-841f-cb93ac7bdb37\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1634024323851</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1634024323851</updated>\r\n      <workItem from=\"1634024325313\" duration=\"1687000\" />\r\n      <workItem from=\"1634026270340\" duration=\"123000\" />\r\n      <workItem from=\"1634026411750\" duration=\"98000\" />\r\n      <workItem from=\"1634026527170\" duration=\"1355000\" />\r\n      <workItem from=\"1634027901931\" duration=\"649000\" />\r\n      <workItem from=\"1634028587973\" duration=\"1819000\" />\r\n      <workItem from=\"1634189130075\" duration=\"413000\" />\r\n      <workItem from=\"1634224249309\" duration=\"44000\" />\r\n      <workItem from=\"1634412395898\" duration=\"333000\" />\r\n      <workItem from=\"1634413143390\" duration=\"888000\" />\r\n      <workItem from=\"1634414246048\" duration=\"34000\" />\r\n      <workItem from=\"1634414326775\" duration=\"1215000\" />\r\n      <workItem from=\"1634417094635\" duration=\"721000\" />\r\n      <workItem from=\"1634580180453\" duration=\"2274000\" />\r\n      <workItem from=\"1634582498895\" duration=\"4114000\" />\r\n      <workItem from=\"1634586803429\" duration=\"981000\" />\r\n      <workItem from=\"1634587934238\" duration=\"200000\" />\r\n      <workItem from=\"1634588280105\" duration=\"34000\" />\r\n      <workItem from=\"1634588703417\" duration=\"620000\" />\r\n      <workItem from=\"1634590097969\" duration=\"3843000\" />\r\n      <workItem from=\"1634620782422\" duration=\"1818000\" />\r\n      <workItem from=\"1634622895286\" duration=\"71000\" />\r\n      <workItem from=\"1634659561138\" duration=\"810000\" />\r\n      <workItem from=\"1634660555355\" duration=\"8110000\" />\r\n      <workItem from=\"1634670752542\" duration=\"3501000\" />\r\n      <workItem from=\"1634675086536\" duration=\"852000\" />\r\n      <workItem from=\"1634675975975\" duration=\"246000\" />\r\n      <workItem from=\"1634843471971\" duration=\"2512000\" />\r\n      <workItem from=\"1635242473588\" duration=\"1626000\" />\r\n      <workItem from=\"1635244121104\" duration=\"2211000\" />\r\n      <workItem from=\"1635251035818\" duration=\"2255000\" />\r\n      <workItem from=\"1635261156675\" duration=\"10970000\" />\r\n      <workItem from=\"1635272273721\" duration=\"15807000\" />\r\n      <workItem from=\"1635288347653\" duration=\"1120000\" />\r\n      <workItem from=\"1635317365223\" duration=\"792000\" />\r\n      <workItem from=\"1635438129024\" duration=\"8239000\" />\r\n      <workItem from=\"1635447358683\" duration=\"1760000\" />\r\n      <workItem from=\"1635449149026\" duration=\"5553000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"1. Изменения\">\r\n      <created>1634581282087</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1634581282087</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"1. Изменения\">\r\n      <created>1634581491804</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1634581491804</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"1\">\r\n      <created>1634584458142</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1634584458142</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"111\">\r\n      <created>1634590507459</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1634590507460</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции\">\r\n      <created>1634845053325</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1634845053325</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Авторизация\">\r\n      <created>1635444885379</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1635444885379</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Добавлена недописанная функция восстановления пароля пользовтаеля\">\r\n      <created>1635447400843</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1635447400843</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"1\">\r\n          <value>\r\n            <State>\r\n              <option name=\"SHOW_ONLY_AFFECTED_CHANGES\" value=\"true\" />\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"HEAD\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                  <entry key=\"structure\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"dir:C:/Users/nahra_000/PycharmProjects/ecohelp/todo\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"OPEN_GENERIC_TABS\">\r\n      <map>\r\n        <entry key=\"1\" value=\"TOOL_WINDOW\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"1. Изменения\" />\r\n    <MESSAGE value=\"1\" />\r\n    <MESSAGE value=\"111\" />\r\n    <MESSAGE value=\"1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции\" />\r\n    <MESSAGE value=\"Авторизация\" />\r\n    <MESSAGE value=\"Добавлена недописанная функция восстановления пароля пользовтаеля\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Добавлена недописанная функция восстановления пароля пользовтаеля\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/ecohelp$Unittests_for_test_MyTestCase_test.coverage\" NAME=\"Unittests for test.MyTestCase.test Coverage Results\" MODIFIED=\"1635261229584\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/tests\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d1ef3c01b3ec2f48fe11a0270fe1813953cf2c7a)
++++ b/.idea/workspace.xml	(date 1635881761942)
+@@ -7,8 +7,13 @@
+     <list default="true" id="667c8c90-ea92-4694-841f-cb93ac7bdb37" name="Default Changelist" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/todo/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/admin.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/todo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/models.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/templates/index1.html" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/templates/reg.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/reg.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/templates/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/template.html" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/todo/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/forms.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/todo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/urls.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/todo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/todo/views.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -29,6 +34,7 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++    <option name="RESET_MODE" value="MIXED" />
+   </component>
+   <component name="GitSEFilterConfiguration">
+     <file-type-list>
+@@ -48,7 +54,7 @@
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Rbook2" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+   </component>
+   <component name="RecentsManager">
+@@ -197,7 +203,12 @@
+       <workItem from="1635317365223" duration="792000" />
+       <workItem from="1635438129024" duration="8239000" />
+       <workItem from="1635447358683" duration="1760000" />
+-      <workItem from="1635449149026" duration="5553000" />
++      <workItem from="1635449149026" duration="5944000" />
++      <workItem from="1635455345000" duration="179000" />
++      <workItem from="1635586796596" duration="2320000" />
++      <workItem from="1635784392989" duration="19746000" />
++      <workItem from="1635861593028" duration="7694000" />
++      <workItem from="1635879522736" duration="2217000" />
+     </task>
+     <task id="LOCAL-00001" summary="1. Изменения">
+       <created>1634581282087</created>
+@@ -248,7 +259,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1635447400843</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="1. Добавлены дополнительные поля к таблице User:&#10;Телефон; Количество баллов; Роль; Рейтинг; Код">
++      <created>1635455087528</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1635455087528</updated>
++    </task>
++    <task id="LOCAL-00009" summary="1. Добавлена html-страница данные пользователя (user-setting)&#10;2. Добавлена функция отображения страницы&#10;3. Проработаны стили отображения элементов на html-страницах">
++      <created>1635785504287</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1635785504287</updated>
++    </task>
++    <option name="localTasksCounter" value="10" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -303,7 +328,9 @@
+     <MESSAGE value="1. Регистрация&#10;2. Авторизация не работает&#10;3. Просто страница Профиль&#10;4. Страница Восстановление без функции" />
+     <MESSAGE value="Авторизация" />
+     <MESSAGE value="Добавлена недописанная функция восстановления пароля пользовтаеля" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена недописанная функция восстановления пароля пользовтаеля" />
++    <MESSAGE value="1. Добавлены дополнительные поля к таблице User:&#10;Телефон; Количество баллов; Роль; Рейтинг; Код" />
++    <MESSAGE value="1. Добавлена html-страница данные пользователя (user-setting)&#10;2. Добавлена функция отображения страницы&#10;3. Проработаны стили отображения элементов на html-страницах" />
++    <option name="LAST_COMMIT_MESSAGE" value="1. Добавлена html-страница данные пользователя (user-setting)&#10;2. Добавлена функция отображения страницы&#10;3. Проработаны стили отображения элементов на html-страницах" />
+   </component>
+   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+     <SUITE FILE_PATH="coverage/ecohelp$Unittests_for_test_MyTestCase_test.coverage" NAME="Unittests for test.MyTestCase.test Coverage Results" MODIFIED="1635261229584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+diff --git a/templates/index1.html b/templates/index1.html
+deleted file mode 100644

@@ -25,3 +25,19 @@ def clean_password(self):
     if cd['password'] != cd['password']:
         raise forms.ValidationError('Пароли не совпадают')
     return cd['password']
+
+
+class UserProfile(forms.Form):
+    """
+    Форма редактирования профиля
+    """
+    email = forms.EmailField(label='Почта')
+    phone = forms.CharField(label='Номер телефона')
+    first_name = forms.CharField(label='Имя')
+    last_name = forms.CharField(label='Фамилия')
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Повторный пароль', widget=forms.PasswordInput)
+
+
+class Meta:
+    model = User

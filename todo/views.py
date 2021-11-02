@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from .forms import UReg
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from .models import User
+from .models import User, UserProfile
 from django.db.models import Q
 
 
@@ -27,20 +27,23 @@ def loginn(request):
             # print("Правильно")
             # messages.error(request, 'Правильно', extra_tags='safe')
             login(request, user)
-            # u = User.objects.filter(userprofile__points=0).all()
-            # s = User.objects.filter(userprofile__code="0000").all()
-            # v = User.objects.filter(userprofile__role="user").all()
-            # a = User.objects.filter(userprofile__rating=0000).all()
-            # vv = User.objects.filter(userprofile__role="admin").all()
-            # print(u)
-            # print(s)
-            # print(v)
-            # print(a)
-            # print(vv)
+            u = User.objects.filter(userprofile__points=0).all()
+            s = User.objects.filter(userprofile__code="0000").all()
+            v = User.objects.filter(userprofile__role="user").all()
+            a = User.objects.filter(userprofile__rating=0000).all()
+            vv = User.objects.filter(userprofile__role="admin").all()
+            # ss = User.objects.filter(userprofile__).all()
+            qq = User.objects
+            vv = User._meta.fields
+            print(u)
+            print(s)
+            print(v)
+            print(a)
+            # print(ss)
+            print(vv)
             return redirect(auth)
         else:
             # print("Неверный пароль")
-            print("Неверный пароль")
             messages.error(request, 'Неверный пароль', extra_tags='safe')
             return redirect(auth)
     else:
@@ -78,8 +81,85 @@ def recovery_pass(request):
     })
 
 
+def user_form(request):
+    #отображение информации/изменение
+    # w = User.objects.get(id= int(request.POST['id_post']))
+    # emails = request.POST['emailPR']
+    # phone = request.POST['phonePR']
+    # first_name = request.POST['first_namePR']
+    # last_name = request.POST['last_name']
+    # password = request.POST['passwordPR']
+    # password2 = request.POST['password2PR']
+    # id_post = request.POST['id_post']
+    # print(id_post)
+    # print(emails, phone, first_name, last_name, password, password2)
+    # print(last_name)
+    # ss = User.objects.filter(id = int(request.POST['id_post']))
+    # id = request.POST['id_post']
+    # print(id)
+    if request.method == "POST":
+        form = forms.UserProfile(request.POST)
+        if request.POST['password'] == request.POST['password2']:
+            print(User._meta._get_fields())
+            print(request.POST['phone'])
+            ss = User.objects.filter(id = int(request.POST['id_post']))
+            vv = UserProfile._meta.fields
+            print(vv)
+            if ss:
+                # if form.is_valid():
+                User.objects.filter(id = int(request.POST['id_post'])).update(
+                    # User.objects.update(
+                    email=request.POST['email'],
+                    # phone=request.POST['phone'],
+                    first_name=request.POST['first_name'],
+                    last_name=request.POST['last_name'],
+                    password=request.POST['password'],
+                )
+                # sp = UserProfile.objects.filter(user = int(request.user.id))
+                # if sp:
+                #     UserProfile.objects.filter(user = int(request.user.id)).update(
+                #         # UserProfile.objects.filter(user = int(request.user.id)).update(
+                #         phone=request.POST['phone'],
+                #     )
+                #     vv = User.objects.filter(userprofile__user = " ").all()
+                #     print(vv)
+
+                messages.error(request, 'Информация успешно обновлена/изменена', extra_tags='safePR')
+                    # s2s = User.objects.filter(userprofile__phone='').all()
+                    # print(s2s)
+                return redirect('user_form')
+                # else:
+                #     print('нет')
+                #     messages.error(request, 'НЕТ', extra_tags='safePR')
+                #     s2s = User.objects.filter(userprofile__phone='').all()
+                #     s2r = User.objects.filter(userprofile__code='0000').all()
+                #     print(s2s)
+                #     print(s2r)
+                #     return redirect('user_form')
+            # else:
+            #     messages.error(request, 'Не удалось обновить информацию', extra_tags='safePR')
+            #     return redirect('user_form')
+            else:
+                messages.error(request, 'Не удалось', extra_tags='safePR')
+                return redirect('user_form')
+        else:
+            messages.error(request, 'Пароли не совпали', extra_tags='safePR')
+            return redirect('user_form')
+
+    return redirect(user_setting)
+
+
+def user_setting(request):
+    #отображение страницы личной информации ползователя
+    form = forms.UserProfile
+    return render(request, 'user_setting.html', {
+        'title': 'Личная информация',
+        'user_form': form,
+    })
+
+
 def user_profile(request):
-    #отображение страницы авторизации
+    #отображение страницы профиля
     return render(request, 'user_profile.html', {
         'title': 'Профиль',
     })

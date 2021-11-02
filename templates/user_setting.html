@@ -1,0 +1,68 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Профиль{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="profile">
+            <div class="profile_icon">
+                <img src="{% static 'img/Avatar.png' %}" alt="Avatar">
+            </div>
+        </div>
+    </div>
+    <div class="regform mb-3">
+        {% if request.user.is_authenticated %}
+            {{request.userprofile.code }}
+            {{request.user.id }}
+        {% else %}
+            {{request.user.id }}
+        {% endif %}
+        <form method="post" action="{% url 'user_form' %}">
+            {% csrf_token %}
+            <label class="labelL">Адрес электронной почты</label>
+            <div class="mb-3 text-center">
+                {#                    <input type="text" value="alexey@gmail.com" class="input-xlarge">#}
+                <input type="email" name="email" id="email" value="{{request.user.email }}" class="input-xlarge">
+                {#                    u = User.objects.filter(userprofile__points=0).all()#}
+            </div>
+            <label class="labelL">Номер телефона</label>
+            <div class="mb-3 text-center">
+                {#                    <input type="text" value="+79221236565" class="input-xlarge">#}
+                <input type="text" name="phone" id="phone" value="{{request.userprofile.phone }}" class="input-xlarge">
+            </div>
+            <label class="labelL">Имя</label>
+            <div class="mb-3 text-center" >
+                {#                    <input type="text" value="Михаил" class="input-xlarge">#}
+                <input type="text" name="first_name" id="first_name" value="{{request.user.first_name }}" class="input-xlarge">
+            </div>
+            <label class="labelL">Фамилия</label>
+            <div class="mb-3 text-center">
+                {#                    <input type="text" value="Алексеев" class="input-xlarge">#}
+                <input type="text" name="last_name" id="last_name" value="{{request.user.last_name }}" class="input-xlarge">
+            </div>
+            <label class="labelL">Пароль</label>
+            <div class="mb-3 text-center">
+                {#        	         <input type="password" value="12345" class="input-xlarge">#}
+                <input type="password" name="password" id="password" value="{{request.user.password }}" class="input-xlarge">
+            </div>
+            <label class="labelL">Подтвердите пароль</label>
+            <div class="mb-3 text-center">
+                {#        	         <input type="password" value="12345" class="input-xlarge">#}
+                <input type="password" name="password2" id="password2" value="{{request.user.password }}" class="input-xlarge">
+            </div>
+            <div class="text-center">
+                <input type="`text`" name="id_post" id="id_post" value="{{ user.id }}" disable hidden>
+                <button type="submit" class="set_button">Применить</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </form>
+    </div>
+    <div class="row" style="justify-content: center">
+        {% for massage in messages %}
+            <ul class="{{ massage.tags }}">
+                {% if 'safePR' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+            </ul>
+        {% endfor %}
+    </div>
+{% endblock %}
