@@ -54,6 +54,7 @@ def loginn(request):
                 )
                 return redirect(user_profile)
             else:
+                request.session['id_user'] = id_user
                 print('Уже существует')
                 return redirect(user_profile)
             # return redirect(create_profile)

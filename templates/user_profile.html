@@ -31,7 +31,6 @@
             <ul></ul>
             {% for points in user_profile_points %}
                 <p>Баланс: {{ points.points}} бонусов</p>
-                <p>j</p>
             {% endfor %}
         </div>
         {% if request.user.is_superuser %}
@@ -103,9 +102,9 @@
             </div>
         {% endif %}
 
-        <div class="mytask">
-            <p>Мои отклики</p>
-        </div>
+{#        <div class="mytask">#}
+{#            <p>Мои отклики</p>#}
+{#        </div>#}
     </div>
 {#    <div class="responses">#}
 {#            <div class="response">#}
