@@ -3,15 +3,20 @@
 /* ------------- */
 /* Template page */
 /* ------------- */
-
-body {
-    margin: 0;
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Inter';
+   }
+.cont {
+    height: 500px;
 }
-
-.main {
-    margin: 22px;
+input {
+    outline: none;
 }
-
+section {
+    padding: 0 calc(50% - 165.5px);
+}
 .vector {
     position: static;
     width: 128px;
@@ -26,18 +31,27 @@ body {
 }
 
 .footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
     width: 100%;
     height: 80px;
     background: #81C3F7;
 }
+.navigat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.maptasks{
 
+}
+.userpage{
+    margin-left: 35px;
+    margin-right: 35px;
+}
 
-/* ------------- */
-/* Template page */
-/* ------------- */
 
 
 /* -------------------------------------------------- */
@@ -82,7 +96,6 @@ input {
     border: none;
     width: 331px;
     height: 62px;
-
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -95,7 +108,525 @@ input {
 }
 
 
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
 /* ------------- */
-/* Register page */
+/* Auth page */
 /* ------------- */
+
+
+.forgot_pass_link {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* User Profile page */
+/* ------------- */
+
+.profile{
+    display: flex;
+    justify-content: center;
+
+}
+.profile_info {
+    padding: 5px;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.p-info {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    width: 215px;
+    height: 80px;
+    background: #FFFFFF;
+    border: 1px solid rgba(20, 20, 20, 0.38);
+    box-sizing: border-box;
+    border-radius: 999px;
+    display: flex;
+    flex-direction: row;
+}
+.profile_info__editbtn {
+    padding-right: 15px;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    opacity: 0.5;
+}
+.profile_info__name{
+    font-family: Inter;
+    font-size: 16px;
+    color: #000000;
+}
+.profile_info__mail{
+    font-family: Inter;
+    font-size: 14px;
+}
+.achievement p{
+    margin-top: 15px;
+    font-size: 18px;
+    color: #000000;
+}
+.achievements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.achiev{
+    background: #81C3F7;
+    border-radius: 40px;
+    font-size: 16px;
+    height: 50px;
+
+    padding: 0px 15px 0 15px;
+    color: #000000;
+}
+.coints p{
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+.mytask p {
+    margin-top: 0;
+    font-size: 18px;
+    color: #000000;
+
+}
+.responses {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+.response_title{
+    padding-left: 15px;
+    padding-top: 10px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+.response_content{
+    padding-left: 15px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.005em;
+    color: #263238;
+    opacity: 0.8;
+    margin-bottom: 2px;
+}
+.response_progress{
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* User Setting page */
+/* ------------- */
+
+
+
+.set_button {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    width: 101px;
+    height: 34px;
+    opacity: 0.8;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #FFFFFF;
+    border: 1px rgba(0, 0, 0, 0.83);
+    border-radius: 10px;
+}
+.labelL {
+    white-space: nowrap;
+    margin-left: 25px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px
+}
+.input-xlarge {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* task page */
+/* ------------- */
+
+
+.task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #81C3F7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    height: 500px;
+}
+.desc_task {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 20px;
+    /* or 129% */
+    letter-spacing: -0.165px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+}
+.task_buttons {
+    display: flex;
+}
+.name_task {
+    color:white;
+    font-size: 18px;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.task_buttons button
+{
+    margin-bottom: 10px;
+    margin-top: 0px;
+    width: 101px;
+    height: 34px;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: -0.165px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px rgba(0, 0, 0, 0.83);
+}
+.task_btn1 {
+    margin-right: 45px;
+}
+.task_btn2 {
+    margin-left: 45px;
+}
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* tasks page */
+/* ------------- */
+
+
+.tasks {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 15px 15px;
+    grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . ."
+    ". . .";
+    height: 500px;
+}
+.tasks div{
+    background: #81C3F7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+.tasks img{
+    width: 85px;
+    height: 95px;
+    padding: 20px 10px 5px 10px;
+}
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* task_accept page */
+/* ------------- */
+
+.task_accept{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+.task_name {
+    display: flex;
+    flex-direction: row;
+}
+
+.name_task_accept
+{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    text-align: left;
+    align-self: center;
+    font-size: 18px;
+}
+.bottle {
+    background: #81C3F7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 10px;
+}
+.task_photo {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.task_accept button{
+    margin-top: auto;
+}
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* user_task_list page */
+/* ------------- */
+
+.contutlp{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+.user_tasks_list {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+}
+.user_task_list {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+#t1.user_task_list{
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin-top: 0px;
+}
+.name_tasklist{
+    font-size: 16px;
+    margin: 10px 10px 0px 10px;
+    text-align: left;
+}
+.desc_tasklist {
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 10px 10px 10px 10px;
+    text-align: left;
+}
+.timer_task {
+    font-size: 12px;
+    opacity: 0.55;
+    margin: 0px 10px 10px 10px;
+    text-align: left;
+}
+.user_tasks_list a,.user_tasks_list a:active,.user_tasks_list a:hover{
+    text-decoration: none;
+    color: #666;
+}
+.create_task{
+    margin-top: auto;
+    opacity: 0.5;
+}
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* user_task_accept page */
+/* ------------- */
+
+
+.user_task_accept{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+.user_taskinfo{
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+.cost_usertask{
+    text-align: left;
+    margin: 0px 10px 10px 10px;
+}
+.costs {
+    text-align: left;
+    margin: 0px 10px 10px 10px;
+}
+.costs p{
+    width: 60px;
+    border: 1px solid #000000;
+    border-radius: 60px;
+    margin: 0px;
+    text-align: center;
+
+
+}
+.locate_usertask {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 10px 10px 10px;
+}
+.locate_usertask a,.locate_usertask a:active,.locate_usertask a:hover{
+    margin: 0 0 0 5px;
+    text-decoration: none;
+    color: #263238;
+}
+.photos_usertask {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 10px 10px 10px;
+    justify-content: flex-start;
+}
+.photos_usertask img{
+    padding-right: 10px;
+}
+.main_btn{
+    margin-top: auto;
+}
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* user_create task page */
+/* ------------- */
+
+
+.user_create_task
+{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+.user_create_task button
+{
+    margin-top: auto;
+}
+.user_create_task label{
+    font-size: 16px;
+    font-family: 'Inter';
+}
+.user_create_task{
+    font-size: 14px;
+    font-family: 'Inter';
+}
+.locate_usert {
+    display: flex;
+    flex-direction: row;
+}
+.change_costs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.form_radio_btn {
+}
+.form_radio_btn input[type=radio] {
+    display: none;
+}
+.form_radio_btn label {
+    width: 55px;
+    border: 1px solid #000000;
+    border-radius: 60px;
+    margin: 0px;
+    text-align: center;
+	user-select: none;
+}
+
+/* Checked */
+.form_radio_btn input[type=radio]:checked + label {
+	background: rgba(0, 0, 0, 0.15);
+}
+
+/* Hover */
+.form_radio_btn label:hover {
+	color: #666;
+}
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* user_task_photo page */
+/* ------------- */
+
+
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* -------------------------------------------------- */
+
+
+/* ------------- */
+/* user_task_complete page */
+/* ------------- */
+
+
+.compl_button
+{
+    margin-left: auto;
+    margin-right: auto;
+    border: none;
+    width: 331px;
+    height: 55px;
+    background: #81C3F7;
+    border-radius: 40px;
+}
 

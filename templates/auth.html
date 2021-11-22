@@ -22,6 +22,7 @@
                 <div>
                     <a class="forgot_pass_link" href='{% url 'recovery_pass' %}'>Забыли пароль?</a>
                 </div>
+                <input type="`text`" name="idd" id="idd" value="{{ user.id }}" disable hidden>
                 <button type="submit" class="main_button">Войти</button>
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>

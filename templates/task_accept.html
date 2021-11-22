@@ -1,0 +1,44 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Список заданий{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="task_accept">
+            <div class="task_name">
+                <ul></ul>
+                {% for todo in task_accept %}
+                    <tr></tr>
+                    <p><img src="{{ todo.photo }}"></p>
+                    <p>{{ todo.name }}</p>
+                {% endfor %}
+{#                <div class="bottle"><img width="52px" height="63px" src="{% static 'img/task1.png' %}" alt="Bottle"></div>#}
+{#                <p class="name_task_accept">Утилизировать пластиковую бутылку</p>#}
+            </div>
+            <form method="post" action="task_accept_user" value="">
+                {% csrf_token %}
+                <div class="task_photo">
+                    <img src="{% static 'img/ic_round-add-a-photo.png' %}" alt="Bottle">
+                    <input type="file" name="foto" id="foto" placeholder="">
+                </div>
+                <div class="text-center">
+                    <input type="`text`" name="status" id="status" value="{{ 3 }}" disable hidden>
+                    <button type="submit" class="main_button">Отправить</button>
+                    <input type="hidden" name="next" value="{{ next }}" />
+
+                </div>
+            </form>
+
+            </div>
+
+            <div class="row" style="justify-content: center">
+                {% for massage in messages %}
+                    <ul class="{{ massage.tags }}">
+                        {% if 'safeTA' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

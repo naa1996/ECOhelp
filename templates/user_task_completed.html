@@ -1,0 +1,24 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Мои отклики{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="response">
+            <p class="response_title">
+                Помогите разобрать гору мусора :(
+            </p>
+            <p class="response_content">
+                На улице Чехова образовалась свалка, предлагаю собраться 20.09.21 в 19:00 там и разобрать это.
+            </p>
+            <div class="response_progress">
+                <svg class="response_progress_icon" width="25" height="25" viewBox="0 0 30 24" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.66666 12L11.6667 22L28.3333 2" stroke="#81C3F7" stroke-width="3.33333"
+                              stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+{% endblock %}

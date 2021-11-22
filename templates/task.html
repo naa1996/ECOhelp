@@ -1,0 +1,36 @@
+﻿{% extends 'template.html' %}
+
+{% block page_name %}Задания{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="task">
+{#                <form method="post" action="{% url 'task_table' %}">#}
+{#                {% csrf_token %}#}
+{#                </form>#}
+{#            {% endfor %}#}
+            <ul></ul>
+            {% for todo in task %}
+                <tr></tr>
+                <h6>{{ todo.name }}</h6>
+{#                <p>{{ todo.photo }}</p>#}
+                <img src="{{ todo.photo }}">
+                <p>{{ todo.desc }}</p>
+                <p>Стоимость: {{ todo.cost }} баллов</p>
+                <p>Местонахождение: {{ todo.location }}</p>
+{#                {{ todo.status }}#}
+{#                {{ todo.creator_user }}#}
+            {% endfor %}
+
+{#            <p class="name_task">Утилизировать пластиковую бутылку</p>#}
+{#            <p class="name_task">Утилизировать пластиковую бутылку</p>#}
+{#            <img width="152px" height="166px" src="{% static 'img/task1.png' %}" alt="Bottle">#}
+{#            <p class="desc_task">Любые отходы должны обрабатываться в соответствии с классом опасности — например, перерабатывать ртутные градусники или люминенсцентные лампы могут только предприятия, имеющие в распоряжении нужное оборудование; бытовая утилизация мусора такого типа не допускается.</p>#}
+            <div class="task_buttons">
+                <a href="{% url 'tasks' %}"><button type="submit" class="task_btn1">Назад</button></a>
+                <a href="{% url 'task_accept' %}"><button type="submit" class="task_btn2">Начать!</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

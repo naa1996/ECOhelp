@@ -1,17 +1,24 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
 </head>
 <body>
-<a class="a" href={% url 'reg' %}>Регистрация</a>
-<a class="a" href={% url 'auth' %}>Авторизация</a>
-<a class="a" href={% url 'recovery_pass' %}>Востановление</a>
-<a class="a" href={% url 'user_profile' %}>Профиль</a>
-<a class="a" href={% url 'user_setting' %}>Настройки Профиля</a>
-
-
+<p><a class="a" href={% url 'reg' %}>Регистрация+</a> </p>
+<p><a class="a" href={% url 'auth' %}>Авторизация+</a> </p>
+<p><a class="a" href={% url 'recovery_pass' %}>Востановление</a> </p>
+<p><a class="a" href={% url 'user_profile' %}>Профиль+</a> </p>
+<p><a class="a" href={% url 'user_setting' %}>Настройки Профиля+</a> </p>
+<p><a class="a" href={% url 'task' %}>Задание+</a> </p>
+<p><a class="a" href={% url 'tasks' %}>Задания от разработчиков+</a> </p>
+<p><a class="a" href={% url 'task_accept' %}>Страница описания задания разработчика+</a> </p>
+<p><a class="a" href={% url 'user_task_accept' %}>Страница описания задания от пользователя</a> </p>
+<p><a class="a" href={% url 'user_task_complete' %}>Статус задания</a> </p>
+<p><a class="a" href={% url 'user_create_task' %}>Создание задания пользователем+ </a> </p>
+<p><a class="a" href={% url 'user_task_completed' %}>Мои отклики</a> </p>
+<p><a class="a" href={% url 'user_task_list' %}>Список задний от пользователя</a> </p>
+<p><a class="a" href={% url 'user_task_photo' %}>Страница о выполнении задания</a> </p>
 <div class="begin" style="justify-content: center">
     <div class="col">
         {% if request.user.is_authenticated %}

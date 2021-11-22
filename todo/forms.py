@@ -27,7 +27,7 @@ def clean_password(self):
     return cd['password']
 
 
-class UserProfile(forms.Form):
+class UserProfile(forms.ModelForm):
     """
     Форма редактирования профиля
     """
@@ -39,5 +39,9 @@ class UserProfile(forms.Form):
     password2 = forms.CharField(label='Повторный пароль', widget=forms.PasswordInput)
 
 
-class Meta:
-    model = User
+class UserRegProf(forms.Form):
+    phone = forms.ImageField(label='Фотография')
+
+
+# class TaskPhoto(forms.Form):
+#     photo = forms.ImageField()

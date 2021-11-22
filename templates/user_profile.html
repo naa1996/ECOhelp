@@ -1,5 +1,126 @@
 {% extends 'template.html' %}
 
-{% block content %}
+{% block page_name %}Профиль{% endblock %}
 
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="profile">
+            <div class="profile_icon">
+                <img src="{% static 'img/Avatar.png' %}" alt="Avatar">
+            </div>
+            <div class="p-info">
+                <div class="profile_info">
+{#                    <p class="profile_info__name mb-1">{{ request.user.username }}</p>#}
+                    <p class="profile_info__name mb-1">{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                    <p class="profile_info__mail mb-1">{{ request.user.email }}</p>
+                </div>
+                <div class="profile_info__editbtn">
+                    <a href="{% url 'user_setting' %}" style="text-decoration: none;">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 16.6667H17.5" stroke="black" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="M13.75 2.91666C14.0815 2.58514 14.5312 2.3989 15 2.3989C15.2321 2.3989 15.462 2.44462 15.6765 2.53346C15.891 2.6223 16.0858 2.75251 16.25 2.91666C16.4142 3.08081 16.5444 3.27569 16.6332 3.49017C16.722 3.70464 16.7678 3.93452 16.7678 4.16666C16.7678 4.39881 16.722 4.62868 16.6332 4.84316C16.5444 5.05763 16.4142 5.25251 16.25 5.41666L5.83333 15.8333L2.5 16.6667L3.33333 13.3333L13.75 2.91666Z"
+                              stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="coints">
+            <ul></ul>
+            {% for points in user_profile_points %}
+                <p>Баланс: {{ points.points}} бонусов</p>
+            {% endfor %}
+        </div>
+        {% if request.user.is_superuser %}
+            <p>Выполненные задания</p>
+            <div>
+                <table>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Задание</th>
+                    <th>Фото</th>
+                    <th>Статус</th>
+                    <th>Принятие</th>
+                    <th>Создатель</th>
+                </tr>
+                {% for todo in user_task_dones %}
+                <tr>
+                    <td><p>{{ todo.id }}</p></td>
+                    <td><p>{{ todo.user }}</p></td>
+                    <td><p>{{ todo.task.name }}</p></td>
+                    <td><p><img src="{{ todo.photo }}"/></p></td>
+                    <td><p>{{ todo.task.status }}</p></td>
+{#                    <td><p><img src="{%static 'img/task1.png' %}"/></p></td>#}
+                    <form action="adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
+                        <td>
+                        {% csrf_token %}
+                            <select name="status">
+                                <option value="{{ 1 }}">Выполнено</option>
+                                <option value="{{ 4 }}">Доработать</option>
+                            </select>
+                            <input type="`text`" name="id_task_done" value="{{ todo.id }}" disable hidden>
+                            <input type="`text`" name="username" value="{{ todo.user }}" disable hidden>
+                            <input type="`text`" name="id_task" value="{{ todo.task.id }}" disable hidden>
+                            <input type="`text`" name="status2" id="status2" value="{{ 2 }}" disable hidden>
+                            <input type="submit" name="delete" value="Подтердить">
+                    </form>
+                    <form action="delete_adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+                            <input type="`text`" name="id_del" value="{{ todo.id }}" disable hidden>
+                            <input type="submit" name="delete" value="Удалить запись">
+                    </form>
+                    </td>
+                    <td><p>{{ todo.task.creator_user }}</p></td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+        {% else %}
+            <div class="achievement">
+                <p>Мои достижения</p>
+            </div>
+            <div class="achievements">
+                <div class="achiev mb-2">
+                    <ul></ul>
+                    {% for todo in user_achievement %}
+                        <div class="achiev mb-2">
+                            <p>{{ todo.task.achievement }}</p>
+                            {#                    <p>Молодец! Ты сохранил еще одно дерево! +500 баллов</p>#}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row" style="justify-content: center">
+                    {% for massage in messages %}
+                        <ul class="{{ massage.tags }}">
+                            {% if 'safeUP' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="mytask">
+            <p>Мои отклики</p>
+        </div>
+    </div>
+{#    <div class="responses">#}
+{#            <div class="response">#}
+{#                <p class="response_title">#}
+{#                    Помогите разобрать гору мусора :(#}
+{#                </p>#}
+{#                <p class="response_content">#}
+{#                    На улице Чехова образовалась свалка, предлагаю собраться 20.09.21 в 19:00 там и разобрать это.#}
+{#                </p>#}
+{#                <div class="response_progress">#}
+{#                    <svg class="response_progress_icon" width="25" height="25" viewBox="0 0 30 24" fill="none"#}
+{#                         xmlns="http://www.w3.org/2000/svg">#}
+{#                        <path d="M1.66666 12L11.6667 22L28.3333 2" stroke="#81C3F7" stroke-width="3.33333"#}
+{#                              stroke-linecap="round" stroke-linejoin="round"/>#}
+{#                    </svg>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
 {% endblock %}

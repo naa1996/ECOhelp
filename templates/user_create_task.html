@@ -1,0 +1,74 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Добавить задание{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="user_create_task">
+        {% if request.user.is_authenticated %}
+{#            {{ request.user.id }}#}
+            {{ request.status.id }}
+        {% else %}
+            {{request.user.id }}
+        {% endif %}
+        <form class="form-create" method="post" action="{% url 'u_create_task' %}">
+            {% csrf_token %}
+                        <label class="mb-2">Название</label>
+                        <div class="mb-3">
+                            <input type="text" name="name" id="name" placeholder="Опишите суть проблемы">
+                        </div>
+                        <label class="mb-2">Описание</label>
+                        <div class="mb-3">
+                            <input type="text" name="desc" id="desc" placeholder="Расскажите подробнее о проблеме">
+                        </div>
+                        <label class="mb-2">Местоположение</label>
+                        <div class="locate_usert mb-2">
+                            <a href="#"><img width="20px" height="30px" style="margin-right:5px" src="{% static 'img/locate_black.png' %}"></a>
+                            <input type="text" name="location" id="location" placeholder="Укажите местоположение" style="border: none">
+                        </div>
+                        <label class="mb-2">Количество баллов</label>
+                        <div class="change_costs mb-2" name="cost" id="cost">
+                            <div class="form_radio_btn">
+                                <input id="radio-1" type="radio" name="radio" value="100" checked>
+                                <label for="radio-1">+100</label>
+                            </div>
+                            <div class="form_radio_btn">
+                                <input id="radio-2" type="radio" name="radio" value="200">
+                                <label for="radio-2">+200</label>
+                            </div>
+                            <div class="form_radio_btn">
+                                <input id="radio-3" type="radio" name="radio" value="300">
+                                <label for="radio-3">+300</label>
+                            </div>
+                            <div class="form_radio_btn">
+                                <input id="radio-4" type="radio" name="radio" value="400">
+                                <label for="radio-4">+400</label>
+                            </div>
+                            <div class="form_radio_btn">
+                                <input id="radio-5" type="radio" name="radio" value="500">
+                                <label for="radio-5">+500</label>
+                            </div>
+                            </div>
+                        <label class="mb-2">Фото</label>
+                        <div class="user_task_photo mb-2">
+                                <img src="{% static 'img/ic_round-add-a-photo.png' %}" width="120px" height="100px" alt="Bottle">
+                                <input type="file" name="foto" id="foto" placeholder="">
+                            </div>
+                        <div class="text-center">
+                            <input type="`text`" name="id_post" id="id_post" value="{{ user.id }}" disable hidden>
+                            <input type="`email`" name="email" id="email" value="{{ user.email }}" disable hidden>
+                            <input type="`text`" name="status" id="status" value="{{ 2 }}" disable hidden>
+                            <input type="`text`" name="achievement" id="achievement" value="{{ 'Молодец! Ты помог природе! Ей стало полегче' }}" disable hidden>
+                            <button type="submit" class="main_button">Добавить задание</button>
+                            <input type="hidden" name="next" value="{{ next }}" />
+                        </div>
+        </form>
+        <div class="row" style="justify-content: center">
+            {% for massage in messages %}
+                <ul class="{{ massage.tags }}">
+                    {% if 'safeCT' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

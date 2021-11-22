@@ -1,0 +1,37 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Задания{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="tasks">
+            {% for todo in task_photo %}
+                <form method="post" action="{% url 'task_form' %}">
+                    {% csrf_token %}
+{#                        <div class="photo"><a href=#><img src="{{ todo.photo }}"/><div class="text-center">#}
+{#                    <img src="{{ todo.photo.url }}">#}
+                        <div class="photo"><button type="submit" class="set_button"><img src="{%static 'img/task1.png' %}"/></button><div class="text-center">
+                            <input type="`id`" name="id_user" id="id_user" value="{{ user.id}}" disable hidden />
+                            <input type="`id`" name="id_task" id="id_task" value="{{ todo.id}}" disable hidden />
+{#                            <button type="submit" class="set_button">Выбрать</button>#}
+                            <input type="hidden" name="next" value="{{ next }}" />
+                            </div>
+                        </div>
+                </form>
+{#                <div class="two"><a href=#><img src="{% static 'img/task3.png' %}" alt="task3"></a></div>#}
+{#                <div class="three"><a href=#><img src="{% static 'img/task4.png' %}" alt="task4"></a></div>#}
+{#                <div class="four"><a href=#><img src="{% static 'img/task5.png' %}" alt="task5"></a></div>#}
+{#                <div class="five"><a href=#><img src="{% static 'img/task6.png' %}" alt="task6"></a></div>#}
+{#                <div class="six"><a href="{% url 'task' %}"><img src="{% static 'img/task1.png' %}" alt="task1"></a></div>#}
+{#                <div class="seven"><a href=#><img src="{% static 'img/task7.png' %}" alt="task7"></a></div>#}
+{#                <div class="eight"><a href=#><img src="{% static 'img/task8.png' %}" alt="task8"></a></div>#}
+{#                <div class="nine"><a href=#><img src="{% static 'img/task9.png' %}" alt="task9"></a></div>#}
+{#                <div class="ten"><a href=#><img src="{% static 'img/task10.png' %}" alt="task10"></a></div>#}
+{#                <div class="eleven"><a href=#><img src="{% static 'img/task11.png' %}" alt="task11"></a></div>#}
+{#                <div class="twelve"><a href=><img src="{% static 'img/task12.png' %}" alt="task12"></a></div>#}
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

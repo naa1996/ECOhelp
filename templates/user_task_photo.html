@@ -1,0 +1,23 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Выполнение задания{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="task_accept">
+            <div class="user_task_list" id="t1">
+                    <div class="name_tasklist">Помогите разобрать гору мусора</div>
+                        <div class="desc_tasklist">На улице Чехова образовалась свалка, предлагаю собраться 20.09.21 в 19:00 там и разобрать это.</div>
+                    </div>
+            <div class="task_photo">
+                    <img src="{% static 'img/ic_round-add-a-photo.png' %}" alt="Bottle">
+                </div>
+            <div class="main_btn">
+                <a href="{% url 'user_task_complete' %}">
+                    <button type="submit" class="main_button">Отправить</button>
+                </a>
+                </div>
+        </div>
+    </div>
+{% endblock %}

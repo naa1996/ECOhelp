@@ -1,0 +1,30 @@
+{% extends 'template.html' %}
+
+{% block page_name %}Задания{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="text-center">
+        <div class="user_task_accept">
+            <div class="user_taskinfo">
+                <div class="name_tasklist">Помогите разобрать гору мусора</div>
+                <div class="desc_tasklist">На улице Чехова образовалась свалка, предлагаю собраться 20.09.21 в 19:00 там и разобрать это.</div>
+                <div class="cost_usertask">Количество баллов за задание</div>
+                <div class="costs"><p>+500</p></div>
+                <div class="locate_usertask">
+                    <img width="20px" height="30px" src="{% static 'img/locate_red.png' %}">
+                    <a href="#">Показать местоположение</a>
+                </div>
+                <div class="photos_usertask">
+                    <img width=120px" height="100px" style="border-radius: 10px;" src="{% static 'img/musor1.png' %}">
+                    <img width="120px" height="100px" style="border-radius: 10px;" src="{% static 'img/musor2.png' %}">
+                </div>
+                <div class="timer_task">10 min</div>
+            </div>
+            <div class="main_btn">
+            <a href="{% url 'user_task_photo' %}">
+            <button type="submit" class="main_button">Откликнуться!</button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
