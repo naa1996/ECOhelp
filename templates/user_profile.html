@@ -36,7 +36,7 @@
         {% if request.user.is_superuser %}
            <div class="mytask">
             <p>Мои отклики</p>
-        </div>
+            </div>
             <div class="task_cont overflow-auto">
                 <div class="responses">
                 {% for todo in user_task_dones %}
@@ -45,19 +45,19 @@
                     <p class="response_content">{{ todo.task.name }}</p>
                     <p class="response_progress">{{ todo.task.status }}</p>
 {#                    <td><p><img src="{%static 'img/task1.png' %}"/></p></td>#}
-                    <form action="adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
+                    <form action="adoption_task" class="form-control" style="border: none" enctype="multipart/form-data" method="POST">
                         {% csrf_token %}
                             <select name="status">
                                 <option value="{{ 1 }}">Выполнено</option>
                                 <option value="{{ 4 }}">Доработать</option>
                             </select>
-                            <input type="`text`" name="id_task_done" value="{{ todo.id }}" disable hidden>
-                            <input type="`text`" name="username" value="{{ todo.user }}" disable hidden>
-                            <input type="`text`" name="id_task" value="{{ todo.task.id }}" disable hidden>
-                            <input type="`text`" name="status2" id="status2" value="{{ 2 }}" disable hidden>
+                            <input type="text" name="id_task_done" value="{{ todo.id }}" disable hidden>
+                            <input type="text" name="username" value="{{ todo.user }}" disable hidden>
+                            <input type="text" name="id_task" value="{{ todo.task.id }}" disable hidden>
+                            <input type="text" name="status2" id="status2" value="{{ 2 }}" disable hidden>
                             <input class="inp" type="submit" name="delete" value="Подтердить">
                     </form>
-                    <form action="delete_adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
+                    <form action="delete_adoption_task" class="form-control" style="border: none" enctype="multipart/form-data" method="POST">
                         {% csrf_token %}
                             <input type="`text`" name="id_del" value="{{ todo.id }}" disable hidden>
                             <input class="inp" type="submit" name="delete" value="Удалить запись">
