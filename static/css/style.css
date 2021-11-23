@@ -3,6 +3,10 @@
 /* ------------- */
 /* Template page */
 /* ------------- */
+p{
+    margin: 0;
+    padding: 0;
+}
 * {
     margin: 0px;
     padding: 0px;
@@ -175,7 +179,7 @@ input {
     font-size: 14px;
 }
 .achievement p{
-    margin-top: 15px;
+    margin-bottom: 0px;
     font-size: 18px;
     color: #000000;
 }
@@ -190,15 +194,12 @@ input {
     background: #81C3F7;
     border-radius: 40px;
     font-size: 16px;
-    height: 50px;
-
-    padding: 0px 15px 0 15px;
+    padding: 15px;
     color: #000000;
 }
 .coints p{
     font-size: 14px;
-
-    margin-bottom: 5px;
+    margin: 0px;
 }
 .mytask p {
     margin-top: 0;
@@ -206,19 +207,33 @@ input {
     color: #000000;
 
 }
+.task_cont {
+    height: 350px;
+}
 .responses {
+    display: flex;
+    flex-direction: column;
     background: #FFFFFF;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
+
+}
+.response{
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin-top: 10px;
 }
 .response_title{
-    padding-left: 15px;
+
     padding-top: 10px;
     font-size: 16px;
     margin-bottom: 5px;
 }
 .response_content{
-    padding-left: 15px;
+
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.005em;
@@ -228,11 +243,10 @@ input {
 }
 .response_progress{
     text-align: center;
-    padding-bottom: 10px;
 }
-
-
-
+.inp{
+    width: 150px;
+}
 /* -------------------------------------------------- */
 /* -------------------------------------------------- */
 /* -------------------------------------------------- */
@@ -295,7 +309,27 @@ input {
     height: 500px;
 }
 .desc_task {
-    margin-top: 16px;
+    margin-top: auto;
+    font-size: 14px;
+    line-height: 20px;
+    /* or 129% */
+    letter-spacing: -0.165px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+}
+.desc_costs {
+    margin-top: auto;
+    font-size: 14px;
+    line-height: 20px;
+    /* or 129% */
+    letter-spacing: -0.165px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+}
+.desc_local{
+    margin-top: auto;
     font-size: 14px;
     line-height: 20px;
     /* or 129% */
