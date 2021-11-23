@@ -7,13 +7,16 @@
     <div class="text-center">
         <div class="task_accept">
             <div class="user_task_list" id="t1">
-                    <div class="name_tasklist">Помогите разобрать гору мусора</div>
+{#                {% for task in task_complete %}#}
+{#                    <div class="name_tasklist">Помогите разобрать гору мусора</div>#}
+{#                    <div class="name_tasklist">{{ task. }}</div>#}
                         <div class="desc_tasklist">На улице Чехова образовалась свалка, предлагаю собраться 20.09.21 в 19:00 там и разобрать это.</div>
                     </div>
             <div class="task_photo">
                     <img width="200px" height="200px" style="border-radius: 10px;" src="{% static 'img/musor1.png' %}">
                 </div>
                     <button type="submit" class="compl_button">Задание выполнено!</button>
+{#                {% endfor %}#}
         </div>
     </div>
 {% endblock %}

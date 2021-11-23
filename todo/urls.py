@@ -22,6 +22,8 @@ urlpatterns = [
     path('user_setting', views.user_setting, name='user_setting'),
     # роут для изменения данных о пользователе
     path('user_form', views.user_form, name='user_form'),
+    # роут для отправки статуса
+    path('id_task', views.id_task, name='id_task'),
     # роут для изменения статуса выполненного задания
     path('adoption_task', views.adoption_task, name='adoption_task'),
     # роут для удаления записи о выполненном задании
