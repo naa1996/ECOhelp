@@ -1,0 +1,73 @@
+   {% if request.user.is_superuser %}
+            <p>Выполненные задания</p>
+            <div>
+                <table>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Задание</th>
+                    <th>Фото</th>
+                    <th>Статус</th>
+                    <th>Принятие</th>
+                    <th>Создатель</th>
+                </tr>
+                {% for todo in user_task_dones %}
+                <tr>
+                    <td><p>{{ todo.id }}</p></td>
+                    <td><p>{{ todo.user }}</p></td>
+                    <td><p>{{ todo.task.name }}</p></td>
+                    <td><p><img src="{{ todo.photo }}"/></p></td>
+                    <td><p>{{ todo.task.status }}</p></td>
+{#                    <td><p><img src="{%static 'img/task1.png' %}"/></p></td>#}
+                    <form action="adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
+                        <td>
+                        {% csrf_token %}
+                            <select name="status">
+                                <option value="{{ 1 }}">Выполнено</option>
+                                <option value="{{ 4 }}">Доработать</option>
+                            </select>
+                            <input type="`text`" name="id_task_done" value="{{ todo.id }}" disable hidden>
+                            <input type="`text`" name="username" value="{{ todo.user }}" disable hidden>
+                            <input type="`text`" name="id_task" value="{{ todo.task.id }}" disable hidden>
+                            <input type="`text`" name="status2" id="status2" value="{{ 2 }}" disable hidden>
+                            <input type="submit" name="delete" value="Подтердить">
+                    </form>
+                    <form action="delete_adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
+                        {% csrf_token %}
+                            <input type="`text`" name="id_del" value="{{ todo.id }}" disable hidden>
+                            <input type="submit" name="delete" value="Удалить запись">
+                    </form>
+                    </td>
+                    <td><p>{{ todo.task.creator_user }}</p></td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+        {% else %}
+            <div class="achievement">
+                <p>Мои достижения</p>
+            </div>
+            <div class="achievements">
+                <div class="mb-2">
+                    <ul></ul>
+                    {% for todo in user_achievement %}
+                        <div class="achiev mb-2">
+                            {{ todo.task.achievement }}
+                            {#                    <p>Молодец! Ты сохранил еще одно дерево! +500 баллов</p>#}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row" style="justify-content: center">
+                    {% for massage in messages %}
+                        <ul class="{{ massage.tags }}">
+                            {% if 'safeUP' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="mytask">
+          <p>Мои отклики</p>
+        </div>
+    </div>
