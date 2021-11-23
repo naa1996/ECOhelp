@@ -55,14 +55,14 @@
                             <input type="`text`" name="username" value="{{ todo.user }}" disable hidden>
                             <input type="`text`" name="id_task" value="{{ todo.task.id }}" disable hidden>
                             <input type="`text`" name="status2" id="status2" value="{{ 2 }}" disable hidden>
-                            <input type="submit" name="delete" value="Подтердить">
+                            <input class="inp" type="submit" name="delete" value="Подтердить">
                     </form>
                     <form action="delete_adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
                         {% csrf_token %}
                             <input type="`text`" name="id_del" value="{{ todo.id }}" disable hidden>
-                            <input type="submit" name="delete" value="Удалить запись">
+                            <input class="inp" type="submit" name="delete" value="Удалить запись">
                     </form>
-                    <p>{{ todo.task.creator_user }}</p>
+                    <p disable hidden>{{ todo.task.creator_user }}</p>
                     </div>
                 {% endfor %}
             </div>
