@@ -207,6 +207,9 @@ input {
     color: #000000;
 
 }
+.task_cont {
+    height: 350px;
+}
 .responses {
     background: #FFFFFF;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);

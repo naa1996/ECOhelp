@@ -4,7 +4,7 @@
 
 {% block content %}
     {% load static %}
-    <div class="text-center">
+    <div class="text-center ">
         <div class="profile">
             <div class="profile_icon">
                 <img src="{% static 'img/Avatar.png' %}" alt="Avatar">
@@ -34,28 +34,18 @@
             {% endfor %}
         </div>
         {% if request.user.is_superuser %}
-            <p>Выполненные задания</p>
-            <div>
-                <table>
-                <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Задание</th>
-                    <th>Фото</th>
-                    <th>Статус</th>
-                    <th>Принятие</th>
-                    <th>Создатель</th>
-                </tr>
+           <div class="mytask">
+            <p>Мои отклики</p>
+        </div>
+            <div class="task_cont overflow-auto">
+                <div class="responses">
                 {% for todo in user_task_dones %}
-                <tr>
-                    <td><p>{{ todo.id }}</p></td>
-                    <td><p>{{ todo.user }}</p></td>
-                    <td><p>{{ todo.task.name }}</p></td>
-                    <td><p><img src="{{ todo.photo }}"/></p></td>
-                    <td><p>{{ todo.task.status }}</p></td>
+                    <div class="response">
+                    <p class="response_title">{{ todo.user }}</p>
+                    <p class="response_content">{{ todo.task.name }}</p>
+                    <p class="response_progress">{{ todo.task.status }}</p>
 {#                    <td><p><img src="{%static 'img/task1.png' %}"/></p></td>#}
                     <form action="adoption_task" class="form-control" enctype="multipart/form-data" method="POST">
-                        <td>
                         {% csrf_token %}
                             <select name="status">
                                 <option value="{{ 1 }}">Выполнено</option>
@@ -72,11 +62,10 @@
                             <input type="`text`" name="id_del" value="{{ todo.id }}" disable hidden>
                             <input type="submit" name="delete" value="Удалить запись">
                     </form>
-                    </td>
-                    <td><p>{{ todo.task.creator_user }}</p></td>
-                </tr>
+                    <p>{{ todo.task.creator_user }}</p>
+                    </div>
                 {% endfor %}
-                </table>
+            </div>
             </div>
         {% else %}
             <div class="achievement">
@@ -101,6 +90,7 @@
                 </div>
             </div>
         {% endif %}
+
 
 {#        <div class="mytask">#}
 {#            <p>Мои отклики</p>#}
