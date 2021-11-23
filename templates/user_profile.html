@@ -83,11 +83,11 @@
                 <p>Мои достижения</p>
             </div>
             <div class="achievements">
-                <div class="achiev mb-2">
+                <div class="mb-2">
                     <ul></ul>
                     {% for todo in user_achievement %}
                         <div class="achiev mb-2">
-                            <p>{{ todo.task.achievement }}</p>
+                            {{ todo.task.achievement }}
                             {#                    <p>Молодец! Ты сохранил еще одно дерево! +500 баллов</p>#}
                         </div>
                     {% endfor %}
