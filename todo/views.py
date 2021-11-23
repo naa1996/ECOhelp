@@ -185,6 +185,16 @@ def user_setting(request):
     })
 
 
+def id_task(request):
+    id_user = request.POST['id_user']
+    id_task = request.POST['id_task']
+    print(id_user)
+    print(id_task)
+    request.session['id_task'] = id_task
+    request.session['id_user'] = id_user
+    return redirect(user_task_completed)
+
+
 def adoption_task(request):
     # изменение статуса выполненного задания
     if request.method == "POST":
@@ -194,6 +204,8 @@ def adoption_task(request):
         # print(status_o)
         id_task = request.POST['id_task']
         print(id_task)
+        #отправка id статуса
+        request.session['id_task'] = id_task
         username = request.POST['username']
         user = User.objects.get(username=username).id
         print('username', username)
@@ -257,6 +269,11 @@ def user_profile(request):
     # отображение страницы профиля
     id_user = request.session['id_user']
     print('id_user', id_user)
+    request.session['id_user'] = id_user
+    # id_task = request.POST['id_task']
+    # print(id_task)
+    #отправка id статуса
+    # request.session['id_task'] = id_task
     #отображение количества баллов пользователя
     user_profile_points = Profile.objects.filter(user=id_user).all()
     #отображение достижений пользователя
@@ -267,6 +284,8 @@ def user_profile(request):
     # print('Задания на которые откликнулся пользователь TaskDone', user)
     #отображение таблицы с заданиями
     user_task_dones = TaskDone.objects.all()
+    user_task_complete = TaskDone.objects.filter(user=id_user).all()
+    print('user_task_complete', user_task_complete)
     print(user_task_dones)
     if user:
         print(11)
@@ -275,6 +294,7 @@ def user_profile(request):
             'user_profile_points': user_profile_points,
             'user_achievement': user_achievement,
             'user_task_dones': user_task_dones,
+            'user_task_complete': user_task_complete,
         })
     else:
         print('Вы не откликались на задания')
@@ -282,7 +302,8 @@ def user_profile(request):
         return render(request, 'user_profile.html', {
             'title': 'Профиль',
             'user_profile_points': user_profile_points,
-            # 'user_achievement': user_achievement,
+            'user_achievement': user_achievement,
+            # 'user_task_complete': user_task_complete,
             # 'user_task_dones': user_task_dones,
         })
 
@@ -561,15 +582,28 @@ def user_task_accept(request):
 
 def user_task_complete(request):
     # отображение выполнения задания от пользователя
+    id_task = request.POST['id_task']
+    print('id_t', id_task)
+    id_user = request.POST['id_user']
+    print('id_u', id_user)
+    task = TaskDone.objects.filter(id=id_task).all()
     return render(request, 'user_task_complete.html', {
-        'title': 'Статус задания'
+        'title': 'Статус задания',
+        'task_complete': task,
     })
 
 
 def user_task_completed(request):
     # отображение страницу откликов пользователя
+    id_task = request.session['id_task']
+    print('id_tasks', id_task)
+    id_user = request.session['id_user']
+    print('id_users', id_user)
+    user_task_completed = TaskDone.objects.filter(user=id_user).all()
     return render(request, 'user_task_completed.html', {
-        'title': 'Мои отклики'
+        'title': 'Мои отклики',
+        'user_task_completed': user_task_completed,
+
     })
 
 
