@@ -3,6 +3,10 @@
 /* ------------- */
 /* Template page */
 /* ------------- */
+p{
+    margin: 0;
+    padding: 0;
+}
 * {
     margin: 0px;
     padding: 0px;
@@ -292,7 +296,27 @@ input {
     height: 500px;
 }
 .desc_task {
-    margin-top: 16px;
+    margin-top: auto;
+    font-size: 14px;
+    line-height: 20px;
+    /* or 129% */
+    letter-spacing: -0.165px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+}
+.desc_costs {
+    margin-top: auto;
+    font-size: 14px;
+    line-height: 20px;
+    /* or 129% */
+    letter-spacing: -0.165px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+}
+.desc_local{
+    margin-top: auto;
     font-size: 14px;
     line-height: 20px;
     /* or 129% */
