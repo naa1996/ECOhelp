@@ -586,11 +586,24 @@ def user_task_complete(request):
     print('id_t', id_task)
     id_user = request.POST['id_user']
     print('id_u', id_user)
-    task = TaskDone.objects.filter(id=id_task).all()
-    return render(request, 'user_task_complete.html', {
-        'title': 'Статус задания',
-        'task_complete': task,
-    })
+    task = Task.objects.filter(id=id_task).all()
+    print('task', task)
+    task_status = Task.objects.get(id=id_task).status
+    print('task_status', task_status)
+    task_s_admin = Task.objects.filter(id=id_task).filter(status='2')
+    print('task_s_admin', task_s_admin)
+    if TaskDone.objects.filter(user = id_user).filter(task=id_task):
+        return render(request, 'user_task_complete.html', {
+            'title': 'Статус задания',
+            'task_complete': task,
+        })
+    else:
+        print(2)
+        return render(request, 'user_task_complete.html', {
+            'title': 'Статус задания',
+            'task_complete': task,
+
+        })
 
 
 def user_task_completed(request):
