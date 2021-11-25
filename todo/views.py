@@ -277,7 +277,6 @@ def user_profile(request):
     #отображение количества баллов пользователя
     user_profile_points = Profile.objects.filter(user=id_user).all()
     #отображение достижений пользователя
-    #user_achievement = Task.objects.all()
     user_achievement = TaskDone.objects.filter(user=id_user).all()
     print('Все задания Task', user_achievement)
     user = TaskDone.objects.filter(user=id_user)
@@ -298,7 +297,7 @@ def user_profile(request):
         })
     else:
         print('Вы не откликались на задания')
-        messages.error(request, 'Вы не откликались на задания. Достижений пока нет', extra_tags='safeUP'),
+        messages.error(request, 'Вы не откликались на задания. Достижений пока нет', extra_tags='UP')
         return render(request, 'user_profile.html', {
             'title': 'Профиль',
             'user_profile_points': user_profile_points,

@@ -85,7 +85,7 @@
                 <div class="row" style="justify-content: center">
                     {% for massage in messages %}
                         <ul class="{{ massage.tags }}">
-                            {% if 'safeUP' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+                            {% if 'UP' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
                         </ul>
                     {% endfor %}
                 </div>
@@ -126,12 +126,10 @@
             </div>
             </div>
         {% endif %}
-
-
 {#        <div class="mytask">#}
 {#            <p>Мои отклики</p>#}
 {#        </div>#}
-    </div>
+{#    </div>#}
 {#    <div class="responses">#}
 {#            <div class="response">#}
 {#                <p class="response_title">#}
