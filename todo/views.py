@@ -283,8 +283,8 @@ def user_profile(request):
     # print('Задания на которые откликнулся пользователь TaskDone', user)
     #отображение таблицы с заданиями
     user_task_dones = TaskDone.objects.all()
-    # user_task_complete = TaskDone.objects.filter(user=id_user).all()
-    user_task_complete = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
+    user_task_complete = TaskDone.objects.filter(user=id_user).all()
+    # user_task_complete = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
     print('user_task_complete', user_task_complete)
     print(user_task_dones)
     if user:
