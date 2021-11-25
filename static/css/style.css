@@ -261,6 +261,10 @@ input {
 .response_progress{
     text-align: center;
 }
+.set_button#check{
+    width: 30px;
+    filter: none;
+}
 .inp{
     width: 150px;
 }
@@ -679,5 +683,11 @@ input {
     height: 55px;
     background: #81C3F7;
     border-radius: 40px;
+}
+.completed{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
 }
 

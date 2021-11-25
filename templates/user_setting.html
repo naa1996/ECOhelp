@@ -9,9 +9,14 @@
             <div class="profile_icon">
                 <img src="{% static 'img/Avatar.png' %}" alt="Avatar">
             </div>
-        </div>
+            <div class="row" style="justify-content: center">
+        {% for massage in messages %}
+            <ul class="{{ massage.tags }}">
+                {% if 'safePR' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+            </ul>
+        {% endfor %}
     </div>
-    <div class="regform mb-3">
+            <div class="regform mb-3">
 {#        {% if request.user.is_authenticated %}#}
 {#            {{ request.user.id }}#}
 {#            {{ request.profile.id }}#}
@@ -52,11 +57,6 @@
             </div>
         </form>
     </div>
-    <div class="row" style="justify-content: center">
-        {% for massage in messages %}
-            <ul class="{{ massage.tags }}">
-                {% if 'safePR' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
-            </ul>
-        {% endfor %}
+        </div>
     </div>
 {% endblock %}

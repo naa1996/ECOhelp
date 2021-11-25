@@ -4,13 +4,13 @@
 
 {% block content %}
     {% load static %}
-    <div class="text-center">
-        <div class="responses">
-            <div class="response">
-
-                <p class="response_title">
+        <div class="completed">
+        <div class="task_cont overflow-auto" style="max-height: 100%">
+            <div class="responses">
+                <div class="response">
                     {% for complete in user_task_completed %}
                         <form action="user_task_complete" class="form-control" enctype="multipart/form-data" method="POST">
+                            <p class="response_title text-center">
                             {% csrf_token %}
                             {{ complete.task.name }}
                             {#                        <a href="{% url 'user_task_complete' %}" style="text-decoration: none;"/>#}
@@ -22,20 +22,18 @@
                                 {#                        На улице Чехова образовалась свалка, предлагаю собраться 20.09.21 в 19:00 там и разобрать это.#}
                             </p>
                             <div class="response_progress">
-                                <svg class="response_progress_icon" width="25" height="25" viewBox="0 0 30 24" fill="none"
+<input type="`text`" name="id_user" value="{{ request.user.id }}" disable hidden>
+                                <input type="`text`" name="id_task" value="{{ complete.task.id }}" disable hidden>
+                                <button type="submit" id="check" class="set_button"><svg class="response_progress_icon" width="25" height="25" viewBox="0 0 30 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M1.66666 12L11.6667 22L28.3333 2" stroke="#81C3F7" stroke-width="3.33333"
                                           stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <input type="`text`" name="id_user" value="{{ request.user.id }}" disable hidden>
-                                <input type="`text`" name="id_task" value="{{ complete.task.id }}" disable hidden>
-                                <button type="submit" class="set_button">Выбрать</button>
+                                </svg></button>
                                 <input type="hidden" name="next" value="{{ next }}" />
                             </div>
                         </form>
                     {% endfor %}
+            </div>
             </div>
         </div>
     </div>
