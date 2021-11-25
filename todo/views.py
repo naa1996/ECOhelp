@@ -218,7 +218,6 @@ def adoption_task(request):
         profile = Profile.objects.get(user=authorized_user)
         profile.points += cost
         profile.save()
-
         id_task_done = request.POST['id_task_done']
         print('id_task_done', id_task_done)
         #изменение статуса
@@ -277,13 +276,15 @@ def user_profile(request):
     #отображение количества баллов пользователя
     user_profile_points = Profile.objects.filter(user=id_user).all()
     #отображение достижений пользователя
-    user_achievement = TaskDone.objects.filter(user=id_user).all()
+    # user_achievement = TaskDone.objects.filter(user=id_user).all()
+    user_achievement = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
     print('Все задания Task', user_achievement)
     user = TaskDone.objects.filter(user=id_user)
     # print('Задания на которые откликнулся пользователь TaskDone', user)
     #отображение таблицы с заданиями
     user_task_dones = TaskDone.objects.all()
-    user_task_complete = TaskDone.objects.filter(user=id_user).all()
+    # user_task_complete = TaskDone.objects.filter(user=id_user).all()
+    user_task_complete = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
     print('user_task_complete', user_task_complete)
     print(user_task_dones)
     if user:
