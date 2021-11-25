@@ -4,8 +4,9 @@
 
 {% block content %}
     {% load static %}
-    <div class="text-center ">
-        <div class="profile">
+    <div class="text-center">
+    <div class="profile">
+        <div class="profileinfo">
             <div class="profile_icon">
                 <img src="{% static 'img/Avatar.png' %}" alt="Avatar">
             </div>
@@ -28,16 +29,15 @@
             </div>
         </div>
         <div class="coints">
-            <ul></ul>
             {% for points in user_profile_points %}
-                <p>Баланс: {{ points.points}} бонусов</p>
+                Баланс: {{ points.points}} бонусов
             {% endfor %}
         </div>
         {% if request.user.is_superuser %}
            <div class="mytask">
             <p>Мои отклики</p>
             </div>
-            <div class="task_cont overflow-auto">
+            <div class="task_cont overflow-auto" style="max-height: 100%">
                 <div class="responses">
                 {% for todo in user_task_dones %}
                     <div class="response">
@@ -69,20 +69,17 @@
             </div>
         {% else %}
             <div class="achievement">
-                <p>Мои достижения</p>
+                Мои достижения
             </div>
-            <div class="task_cont overflow-auto" style="height: 170px">
-            <div class="achievements">
-                <div class="mb-2">
-                    <ul></ul>
+            <div class="task_achievment">
+            <div class="achievements ">
                     {% for todo in user_achievement %}
                         <div class="achiev mb-2">
                             {{ todo.task.achievement }}
                             {#                    <p>Молодец! Ты сохранил еще одно дерево! +500 баллов</p>#}
                         </div>
                     {% endfor %}
-                </div>
-                <div class="row" style="justify-content: center">
+                <div>
                     {% for massage in messages %}
                         <ul class="{{ massage.tags }}">
                             {% if 'UP' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
@@ -91,12 +88,13 @@
                 </div>
             </div>
             </div>
-            <div class="task_cont overflow-auto" style="height: 170px; margin-top: 10px" >
+            <div class="task_cont overflow-auto ">
              <div class="responses">
                 <div class="response">
-                    <p class="response_title">
                         {% for complete in user_task_complete %}
-                            <form action="id_task" class="form-control" enctype="multipart/form-data" method="POST">
+                            <form action="id_task" class="form-control" enctype="multipart/form-data" method="POST" style="border-radius: 20px;background: #FFFFFF;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);">
+                                <p class="response_title">
                                 {% csrf_token %}
                                 {{ complete.task.name }}
                                 {#                        <a href="{% url 'user_task_complete' %}" style="text-decoration: none;"/>#}
@@ -126,6 +124,8 @@
             </div>
             </div>
         {% endif %}
+    </div>
+    </div>
 {#        <div class="mytask">#}
 {#            <p>Мои отклики</p>#}
 {#        </div>#}
