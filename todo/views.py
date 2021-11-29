@@ -705,8 +705,8 @@ def user_task_list(request):
             print(12)
             user_task_table = Task.objects.exclude(creator_user = id_user).filter(status=2).all()
             request.session['id_user'] = id_user
-            id_task_done = request.POST['id_task_done']
-            print('id_task_done', id_task_done)
+            #id_task_done = request.POST['id_task_done']
+            print('id_task_done', id_user)
             return render(request, 'user_task_list.html', {
                     'title': 'Список задний от пользователей',
                     'user_task_list': user_task_table,
