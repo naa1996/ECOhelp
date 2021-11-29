@@ -14,12 +14,14 @@ p{
    }
 .cont {
     height: 500px;
+    max-width: 331px;
+    margin: auto;
 }
 input {
     outline: none;
 }
 section {
-    padding: 0 calc(50% - 165.5px);
+    /*padding: 0 calc(50% - 165.5px);*/
 }
 .vector {
     position: static;
