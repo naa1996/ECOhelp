@@ -49,3 +49,4 @@ class TaskDone(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Пользователь')
     task = models.ForeignKey(Task, on_delete=models.DO_NOTHING, verbose_name='Задание')
     photo = models.ImageField(blank=False, verbose_name='Фото')
+    status = models.ForeignKey(Status, on_delete=models.DO_NOTHING, default=2, verbose_name='Статус')

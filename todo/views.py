@@ -188,10 +188,13 @@ def user_setting(request):
 def id_task(request):
     id_user = request.POST['id_user']
     id_task = request.POST['id_task']
+    # id_task_done = request.POST['id_task_done']
     print(id_user)
     print(id_task)
+    # print(id_task_done)
     request.session['id_task'] = id_task
     request.session['id_user'] = id_user
+    # request.session['id_task_done'] = id_task_done
     return redirect(user_task_completed)
 
 
@@ -224,34 +227,63 @@ def adoption_task(request):
         admin = Task.objects.filter(id=id_task).filter(creator_user=1)
         prov = TaskDone.objects.filter(task=id_task).filter(user=user)
         print(admin)
+        #изменение статуса задания при проверке всех заданий
         if prov:
             if not admin:
+                #+++
                 #если задание  НЕ от разработчиков
+                #статус - выполнено/доработать
                 print('статус1')
-                status2 = request.POST['status']
+                status2 = request.POST['status2']
                 print(status2)
                 Task.objects.filter(id=id_task).update(
                     status = status,
                 )
-                return redirect(user_profile)
-
-            elif(int(request.POST['status']) == 4):
-                    print('статус2')
-                    status = request.POST['status']
-                    print(status)
-                    Task.objects.filter(id=id_task).update(
-                        status = status,
-                    )
-                    return redirect(user_profile)
-            else:
-                #если задание от разработчиков выполнено
-                print('статус3')
-                status = request.POST['status2']
-                print(status)
-                Task.objects.filter(id=id_task).update(
+                TaskDone.objects.filter(id=id_task_done).update(
                     status = status,
                 )
                 return redirect(user_profile)
+            # else:
+            #         #если задание  НЕ от разработчиков
+            #         #статус - доработать
+            #         print('статус2')
+            #         status = request.POST['status']
+            #         print(status)
+            #         TaskDone.objects.filter(id=id_task_done).update(
+            #             status = status,
+            #         )
+            #         Task.objects.filter(id=id_task).update(
+            #             status =
+            #         )
+            #         return redirect(user_profile)
+            else:
+                id_status = int(request.POST['status'])
+                if id_status != 4:
+                    #если задание от разработчиков выполнено
+                    print('статус3')
+                    status2 = request.POST['status2']
+                    print('l2', status2)
+                    status = request.POST['status']
+                    print('k', status)
+                    Task.objects.filter(id=id_task).update(
+                        status = status2,
+                    )
+                    TaskDone.objects.filter(id=id_task_done).update(
+                        status = status,
+                    )
+                    return redirect(user_profile)
+                else:
+                    #если задание от разработчиков отправлено на доработку
+                    print('статус11')
+                    status2 = request.POST['status2']
+                    print(status)
+                    Task.objects.filter(id=id_task).update(
+                        status = status2,
+                    )
+                    TaskDone.objects.filter(id=id_task_done).update(
+                        status = status,
+                    )
+                    return redirect(user_profile)
         return redirect(user_profile)
 
 
@@ -287,6 +319,10 @@ def user_profile(request):
     # user_task_complete = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
     print('user_task_complete', user_task_complete)
     print(user_task_dones)
+    admin = User.objects.filter(username='admin')
+    admin_2 = User.objects.get(username='admin').username
+    print('admin', admin)
+    print('admin', admin_2)
     if user:
         print(11)
         return render(request, 'user_profile.html', {
@@ -297,15 +333,24 @@ def user_profile(request):
             'user_task_complete': user_task_complete,
         })
     else:
-        print('Вы не откликались на задания')
-        messages.error(request, 'Вы не откликались на задания. Достижений пока нет', extra_tags='UP')
-        return render(request, 'user_profile.html', {
-            'title': 'Профиль',
-            'user_profile_points': user_profile_points,
-            'user_achievement': user_achievement,
-            # 'user_task_complete': user_task_complete,
-            # 'user_task_dones': user_task_dones,
-        })
+        if admin:
+            return render(request, 'user_profile.html', {
+                'title': 'Профиль',
+                'user_profile_points': user_profile_points,
+                'user_achievement': user_achievement,
+                'user_task_dones': user_task_dones,
+                'user_task_complete': user_task_complete,
+            })
+        else:
+            print('Вы не откликались на задания')
+            messages.error(request, 'Вы не откликались на задания. Достижений пока нет', extra_tags='UP')
+            return render(request, 'user_profile.html', {
+                'title': 'Профиль',
+                'user_profile_points': user_profile_points,
+                'user_achievement': user_achievement,
+                # 'user_task_complete': user_task_complete,
+                # 'user_task_dones': user_task_dones,
+            })
 
 
 
@@ -436,11 +481,7 @@ def task_form_save(request):
 
 
 def task_accept_user(request):
-    # отображение страницы описания задания от разработчика
-    #     id_task = request.session['id_task']
-    #     print('id_task', id_task)
-    #     id_user = request.session['id_user']
-        # print('id_user', id_user)
+    # отправка фотографии о выполнении
     if request.method == 'POST':
         foto = request.POST['foto']
         print(foto)
@@ -454,22 +495,47 @@ def task_accept_user(request):
         authorized_user = User.objects.get(id=user)
         task0 = Task.objects.get(id=task)
         status = Status.objects.get(id=request.POST['status'])
-        print(request.POST['status'])
-        TaskDone.objects.create(
-            user = authorized_user,
-            task = task0,
-            photo = foto,
-        )
-        print('ok')
-        print('Запись добавлена')
-        messages.error(request, 'Ответ принят', extra_tags='safeTA')
-        Task.objects.filter(id=task).update(
-            status = status,
-        )
-        print('Status ok')
+        status0 = Status.objects.get(id=request.POST['status0'])
+        status_int = int(task)
+        print(status_int, status_int)
+        print(status)
+        print(status0)
+        if status_int < 13:
+            print(11)
+            TaskDone.objects.create(
+                user = authorized_user,
+                task = task0,
+                photo = foto,
+                status = status,
+            )
+            print('ok')
+            print('Запись добавлена')
+            messages.error(request, 'Ответ принят', extra_tags='safeTA')
+            Task.objects.filter(id=task).update(
+                status = status0,
+            )
+            print('Status ok')
 
-        messages.error(request, 'Статус изменен', extra_tags='safeTA')
-        return redirect('task_accept')
+            messages.error(request, 'Статус изменен', extra_tags='safeTA')
+            return redirect('task_accept')
+        else:
+            print(22)
+            TaskDone.objects.create(
+                user = authorized_user,
+                task = task0,
+                photo = foto,
+                status = status,
+            )
+            print('ok')
+            print('Запись добавлена')
+            messages.error(request, 'Ответ принят', extra_tags='safeTA')
+            Task.objects.filter(id=task).update(
+                status = status,
+            )
+            print('Status ok')
+
+            messages.error(request, 'Статус изменен', extra_tags='safeTA')
+            return redirect('task_accept')
     print('exit')
     return redirect('task_accept')
 
@@ -586,24 +652,17 @@ def user_task_complete(request):
     print('id_t', id_task)
     id_user = request.POST['id_user']
     print('id_u', id_user)
+    id_task_done = request.POST['id_task_done']
+    print('id_task_done', id_task_done)
     task = Task.objects.filter(id=id_task).all()
+    task_done = TaskDone.objects.filter(id=id_task_done).all()
     print('task', task)
-    task_status = Task.objects.get(id=id_task).status
-    print('task_status', task_status)
-    task_s_admin = Task.objects.filter(id=id_task).filter(status='2')
-    print('task_s_admin', task_s_admin)
-    if TaskDone.objects.filter(user = id_user).filter(task=id_task):
-        return render(request, 'user_task_complete.html', {
+    return render(request, 'user_task_complete.html', {
             'title': 'Статус задания',
             'task_complete': task,
-        })
-    else:
-        print(2)
-        return render(request, 'user_task_complete.html', {
-            'title': 'Статус задания',
-            'task_complete': task,
+            'task_done_status': task_done,
 
-        })
+    })
 
 
 def user_task_completed(request):
@@ -646,6 +705,8 @@ def user_task_list(request):
             print(12)
             user_task_table = Task.objects.exclude(creator_user = id_user).filter(status=2).all()
             request.session['id_user'] = id_user
+            id_task_done = request.POST['id_task_done']
+            print('id_task_done', id_task_done)
             return render(request, 'user_task_list.html', {
                     'title': 'Список задний от пользователей',
                     'user_task_list': user_task_table,

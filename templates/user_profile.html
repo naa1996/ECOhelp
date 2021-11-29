@@ -33,6 +33,7 @@
                 Баланс: {{ points.points}} бонусов
             {% endfor %}
         </div>
+
         {% if request.user.is_superuser %}
            <div class="mytask">
             <p>Мои отклики</p>
@@ -41,9 +42,10 @@
                 <div class="responses">
                 {% for todo in user_task_dones %}
                     <div class="response">
-                    <p class="response_title">{{ todo.user }}</p>
-                    <p class="response_content">{{ todo.task.name }}</p>
-                    <p class="response_progress">{{ todo.task.status }}</p>
+                    <p class="response_title">Пользователь выполнил: {{ todo.user }}</p>
+                    <p class="response_content"> Задание: {{ todo.task.name }}</p>
+                    <p class="response_progress">Task, {{ todo.task.status }}</p>
+                    <p class="response_progress">TaskDone, {{ todo.status }}</p>
 {#                    <td><p><img src="{%static 'img/task1.png' %}"/></p></td>#}
                     <form action="adoption_task" class="form-control" style="border: none" enctype="multipart/form-data" method="POST">
                         {% csrf_token %}
@@ -115,6 +117,7 @@
                                 <div>
                                     <input type="`text`" name="id_user" value="{{ request.user.id }}" disable hidden>
                                     <input type="`text`" name="id_task" value="{{ complete.task.id }}" disable hidden>
+                                    <input type="'text'" name="id_task_done" value="{{ request.todo.id }}" disable hidden>
                                     <button type="submit" class="set_button">Выбрать</button>
                                     <input type="hidden" name="next" value="{{ next }}" />
                                 </div>
