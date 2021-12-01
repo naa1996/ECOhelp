@@ -11,7 +11,7 @@
                     {% csrf_token %}
 {#                        <div class="photo"><a href=#><img src="{{ todo.photo }}"/><div class="text-center">#}
 {#                    <img src="{{ todo.photo.url }}">#}
-                        <div class="photo"><button type="submit" class="set_button" style="width: 90px;height: 110px;filter: none;background: #81C3F7;"><img style="padding: 10px" src="{%static 'img/task1.png' %}"/></button><div class="text-center">
+                        <div class="photo"><button type="submit" class="set_button" style="width: 90px;height: 110px;filter: none;background: #81C3F7;"><img src="{{ todo.photo.url }}"/></button><div class="text-center">
                             <input type="`id`" name="id_user" id="id_user" value="{{ user.id}}" disable hidden />
                             <input type="`id`" name="id_task" id="id_task" value="{{ todo.id}}" disable hidden />
 {#                            <button type="submit" class="set_button">Выбрать</button>#}

@@ -5,7 +5,9 @@ from .forms import UReg
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from .models import User, Profile, Task, Status, TaskDone
-
+from os.path import  basename
+from django.core.files import File
+from django.core.files.storage import FileSystemStorage
 
 def index(request):
     # отображение главной страницы
@@ -374,7 +376,7 @@ def createUser(request):
         # print(password2)
         f = User.objects.filter(username=username1)
         ff = User.objects.filter(email=email1)
-        # new_user = ''
+        # new_user = '' это что ? :D
         if not f:
             if not ff:
                 if password1 == password2:
@@ -460,13 +462,17 @@ def task(request):
     print('id_user', id_user)
     # task_table = Task.objects.get(id=id_task)
     # task_table = Task.objects.get(id=id_task)
-    task_table = Task.objects.filter(id=id_task)
+    task_table = Task.objects.filter(id=id_task).all()
+    task_photo = Task.objects.filter(id=id_task).all()
     print('task_table', task_table)
+    print('PHOTO: ', task_photo[0].photo)
     request.session['id_task'] = id_task
     request.session['id_user'] = id_user
     return render(request, 'task.html', {
         'title': 'Задание',
         'task': task_table,
+        'task_photo': task_photo,
+        # 'media_url': settings.MEDIA_URL,
     })
 
 
@@ -483,8 +489,7 @@ def task_form_save(request):
 def task_accept_user(request):
     # отправка фотографии о выполнении
     if request.method == 'POST':
-        foto = request.POST['foto']
-        print(foto)
+        foto = request.FILES['image']
         user = request.session['id_user']
         print(user)
         task = request.session['id_task']
@@ -516,6 +521,11 @@ def task_accept_user(request):
             )
             print('Status ok')
 
+            #сохранение фотографии
+            fs = FileSystemStorage()
+            fs.save(foto.name, foto)
+
+            messages.error(request, 'Задание успешно добавлено', extra_tags='safeCT')
             messages.error(request, 'Статус изменен', extra_tags='safeTA')
             return redirect('task_accept')
         else:
@@ -564,7 +574,9 @@ def u_create_task(request):
         desc = request.POST['desc']
         location = request.POST['location']
         cost = request.POST['radio']
-        foto = request.POST['foto']
+        # image = request.POST['image']
+        image = request.FILES['image']
+        # up_file = request.FILES['image']
         id = request.POST['id_post']
         email = request.POST['email']
         achievement = request.POST['achievement']
@@ -593,13 +605,13 @@ def u_create_task(request):
         print('pass', password)
         authorized_user = User.objects.get(id=id)
         status = Status.objects.get(id=request.POST['status'])
-        request.session['id_status'] = status
+        # request.session['id_status'] = status
         # user = authenticate(username=nss, password=password)
         if ss:
             if not f:
                 if(name != desc):
-                    des = ' '.join(id)
-                    print(des)
+                    # des = ' '.join(id)
+                    # print(des)
                     # status = 'Ожидание'
                     # achievement = 'Молодец! Ты помог природе! Ей стало по-легче'
                     Task.objects.create(
@@ -607,13 +619,15 @@ def u_create_task(request):
                          desc=desc,
                          cost=cost,
                          location=location,
-                         photo=foto,
+                         photo=image,
                          achievement=achievement,
                          status=status,
                          creator_user=authorized_user,
-
                     )
+
                     print('Задание успешно добавлено')
+                    fs = FileSystemStorage()
+                    fs.save(image.name, image)
                     messages.error(request, 'Задание успешно добавлено', extra_tags='safeCT')
                     return redirect('user_create_task')
                 else:
@@ -629,7 +643,7 @@ def u_create_task(request):
             messages.error(request, 'З33', extra_tags='safeCT')
             return redirect('user_create_task')
     else:
-        return redirect(user_create_task)
+        return redirect('user_create_task')
 
 
 def user_create_task(request):

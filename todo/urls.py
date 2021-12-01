@@ -2,11 +2,13 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     # роут для отображения страницы - Регистрация
     path('reg', views.reg, name='reg'),
-    #роут регистрации пользователя
+    # роут регистрации пользователя
     path(r'createUser', views.createUser, name='createUser'),
     # роут для отображения страницы - Авторизация
     path('auth/', views.auth, name='auth'),
@@ -56,8 +58,16 @@ urlpatterns = [
     path('user_task_list', views.user_task_list, name='user_task_list'),
     # роут для отображения страницы
     path('user_task_photo', views.user_task_photo, name='user_task_photo'),
-
     # роут для отображения страницы - Главная
     path('', views.index, name='index'),
     # path('index1', views.index1, name='index1'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # urlpatterns.append(url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))
+    # urlpatterns += [
+    #     re_path(r'^media/(?P<path>.*)$', serve, {
+    #         'document_root': settings.MEDIA_ROOT,
+    #     }),
+    # ]

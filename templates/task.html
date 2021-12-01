@@ -14,8 +14,12 @@
             {% for todo in task %}
                 <tr></tr>
                 <p class="name_task">{{ todo.name }}</p>
-{#                <p>{{ todo.photo }}</p>#}
-                <img src="{{ todo.photo }}">
+                {% for photo in task_photo %}
+                    <p class="desc_photo"><img style="width: 100px" src="{{ photo.photo.url }}"></p>
+{#                    <img src="{{ media_url}}{{ photo.photo }}" />#}
+                {% endfor %}
+{#                <p class="task_photo"><img src="{{ todo.photo }}"/></p>#}
+{#                <img style="padding: 10px" src="{{ todo.photo }}"/>#}
                 <p class="desc_task">{{ todo.desc }}</p>
                 <p class="desc_costs">Стоимость: {{ todo.cost }} баллов</p>
                 <p class="desc_local">Местонахождение: {{ todo.location }}</p>

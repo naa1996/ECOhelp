@@ -42,10 +42,11 @@
                 <div class="responses">
                 {% for todo in user_task_dones %}
                     <div class="response">
+                    <p class="desc_photo"><img style="width: 100px" src="{{ todo.photo.url }}"></p>
                     <p class="response_title">Пользователь выполнил: {{ todo.user }}</p>
                     <p class="response_content"> Задание: {{ todo.task.name }}</p>
-                    <p class="response_progress">Task, {{ todo.task.status }}</p>
-                    <p class="response_progress">TaskDone, {{ todo.status }}</p>
+                    <p class="response_progress">Task, {{ todo.task.status.status_name }}</p>
+                    <p class="response_progress">TaskDone, {{ todo.status.status_name }}</p>
 {#                    <td><p><img src="{%static 'img/task1.png' %}"/></p></td>#}
                     <form action="adoption_task" class="form-control" style="border: none" enctype="multipart/form-data" method="POST">
                         {% csrf_token %}

@@ -10,17 +10,18 @@
                 <ul></ul>
                 {% for todo in task_accept %}
                     <tr></tr>
-                    <p><img src="{{ todo.photo }}"></p>
+{#                    <img src="{{ todo.photo.url }}">#}
+                    <p class="desc_photo"><img style="width: 100px" src="{{ todo.photo.url }}"></p>
                     <p>{{ todo.name }}</p>
                 {% endfor %}
 {#                <div class="bottle"><img width="52px" height="63px" src="{% static 'img/task1.png' %}" alt="Bottle"></div>#}
 {#                <p class="name_task_accept">Утилизировать пластиковую бутылку</p>#}
             </div>
-            <form method="post" action="task_accept_user" value="">
+            <form method="post" action="task_accept_user" value="" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="task_photo">
-                    <img src="{% static 'img/ic_round-add-a-photo.png' %}" alt="Bottle">
-                    <input type="file" name="foto" id="foto" placeholder="">
+                    <img src="{% static 'img/ic_round-add-a-photo.png' %}" alt="Bottle" >
+                    <input type="file" name="image" id="image" placeholder="">
                 </div>
                 <div class="text-center">
                     <input type="`text`" name="status" id="status" value="{{ 3 }}" disable hidden>

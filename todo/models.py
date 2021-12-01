@@ -22,7 +22,7 @@ class Task(models.Model):
     cost = models.IntegerField(verbose_name='Стоимость')
     location = models.CharField(max_length=100, verbose_name='Местонахождение')
     # photo = models.BinaryField(verbose_name='Фото')
-    photo = models.ImageField(blank=False, verbose_name='Фото')
+    photo = models.ImageField(upload_to='media/', blank=False, verbose_name='Фото')
     achievement = models.CharField(max_length=500, verbose_name='Достижение')
     # status = models.CharField(max_length=100, verbose_name='Статус')
     status = models.ForeignKey(Status, on_delete=models.DO_NOTHING, default=2, verbose_name='Статус')
@@ -48,5 +48,5 @@ class TaskDone(models.Model):
     """
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Пользователь')
     task = models.ForeignKey(Task, on_delete=models.DO_NOTHING, verbose_name='Задание')
-    photo = models.ImageField(blank=False, verbose_name='Фото')
+    photo = models.ImageField(upload_to='media/', blank=False, verbose_name='Фото')
     status = models.ForeignKey(Status, on_delete=models.DO_NOTHING, default=2, verbose_name='Статус')
