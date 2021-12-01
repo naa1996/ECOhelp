@@ -9,7 +9,7 @@
             <div class="user_task_list" id="t1">
                 {% for task in task_complete %}
                     <div class="name_tasklist">{{ task.name}}</div>
-                        <div class="desc_tasklist">{{ task.desc }}</div>
+                        <div class="desc_tasklist text-break">{{ task.desc }}</div>
                     </div>
             <div class="task_photo">
 {#                    <img width="200px" height="200px" style="border-radius: 10px;" src="{% static 'img/musor1.png' %}">#}
@@ -19,7 +19,7 @@
                         {% for task_done_status in task_done_status %}
                             <div class="task_photo">
                                 {#                    <img width="200px" height="200px" style="border-radius: 10px;" src="{% static 'img/musor1.png' %}">#}
-                                <p class="desc_photo"><img style="width: 100px" src="{{ task_done_status.photo.url }}"></p>
+                                <img style="width: 100px" src="{{ task_done_status.photo.url }}">
                             </div>
                             <button type="submit" class="compl_button">{{ task_done_status.status.status_name }}!</button>
 {#                            {{ user.id }}#}

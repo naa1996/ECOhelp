@@ -225,10 +225,11 @@ input {
 .task_achievment {
     max-height: 150px;
     margin-top: auto;
+    margin-bottom: auto;
 }
 .task_cont {
     max-height: 200px;
-    margin-top: auto;
+
 }
 .task_cont::-webkit-scrollbar  {
     width: 0px;
@@ -237,7 +238,7 @@ input {
     display: flex;
     flex-direction: column;
     background: #FFFFFF;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    /*box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);*/
     border-radius: 4px;
 
 }
@@ -245,7 +246,7 @@ input {
     display: flex;
     flex-direction: column;
     background: #FFFFFF;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
+    /*box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);*/
 
 }
 .response_title{
@@ -254,8 +255,6 @@ input {
 }
 .form-control{
     border-radius: 30px;
-    background: #FFFFFF;
-    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
 }
 .response_content{
 
@@ -331,7 +330,6 @@ input {
 .task {
     display: flex;
     flex-direction: column;
-    align-items: center;
     background: #81C3F7;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -339,6 +337,7 @@ input {
 }
 .desc_task {
     margin-top: auto;
+    margin-bottom: auto;
     font-size: 14px;
     line-height: 20px;
     /* or 129% */
@@ -349,6 +348,7 @@ input {
 }
 .desc_costs {
     margin-top: auto;
+    margin-bottom: auto;
     font-size: 14px;
     line-height: 20px;
     /* or 129% */
@@ -359,6 +359,7 @@ input {
 }
 .desc_local{
     margin-top: auto;
+    margin-bottom: auto;
     font-size: 14px;
     line-height: 20px;
     /* or 129% */
@@ -368,19 +369,22 @@ input {
     text-align: left;
 }
 .task_buttons {
+    margin-bottom: 10px;
     display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
 }
 .name_task {
     color:white;
     font-size: 18px;
-    padding-top: 5px;
     padding-left: 15px;
     padding-right: 15px;
+    margin-bottom: auto;
+    margin-top: 10px;
 }
 .task_buttons button
 {
-    margin-bottom: 10px;
-    margin-top: 0px;
     width: 101px;
     height: 34px;
     font-size: 14px;
@@ -391,10 +395,10 @@ input {
     border: 1px rgba(0, 0, 0, 0.83);
 }
 .task_btn1 {
-    margin-right: 45px;
+ margin-right: 45px;
 }
 .task_btn2 {
-    margin-left: 45px;
+ margin-left: 45px;
 }
 
 
@@ -471,6 +475,7 @@ input {
     margin-top: auto;
     margin-bottom: auto;
 }
+
 .task_accept button{
     margin-top: auto;
 }
