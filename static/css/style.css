@@ -219,12 +219,13 @@ input {
 .task_achievment {
     max-height: 150px;
     margin-top: auto;
+    margin-bottom: auto;
 }
 .task_cont {
     max-height: 200px;
-    margin-top: auto;
+
 }
-.task_cont::-webkit-scrollbar  {
+*::-webkit-scrollbar  {
     width: 0px;
 }
 .responses {
@@ -488,6 +489,9 @@ input {
     display: flex;
     flex-direction: column;
     height: 400px;
+    width: 329px;
+    margin-right: auto;
+    margin-left: auto;
 }
 .user_task_list {
     display: flex;

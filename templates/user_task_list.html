@@ -6,14 +6,12 @@
     {% load static %}
     <div class="text-center">
         <div class="contutlp">
-            <div class="user_tasks_list">
+            <div class="user_tasks_list overflow-auto" style="max-height: 100%">
                     {% for todo in user_task_list %}
                         <form method="post" action="{% url 'user_task_form' %}">
                             {% csrf_token %}
-                            <tr></tr>
                             <div class="user_task_list">
-                                <ul></ul>
-                                <div class="name_tasklist d-inline-block text-truncate" style="max-width: 290px;"><p>{{ todo.name }}</p></div>
+                                <div class="name_tasklist d-inline-block text-truncate" style="max-width: 290px;">{{ todo.name }}</div>
                                 <div class="desc_tasklist d-inline-block text-truncate" style="max-width: 290px;">{{ todo.desc }}</div>
                                 <div class="desc_tasklist d-inline-block text-truncate" style="max-width: 290px;">{{ todo.status.status_name }}</div>
     {#                        </div>#}
