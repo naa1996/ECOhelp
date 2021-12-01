@@ -106,6 +106,12 @@ input {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 }
+.main_button_list{
+    font-family: 'Inter';
+    border: none;
+    width: 100%;
+    height: 50px;
+}
 
 .auth_link {
     font-family: 'Inter';
@@ -219,13 +225,12 @@ input {
 .task_achievment {
     max-height: 150px;
     margin-top: auto;
-    margin-bottom: auto;
 }
 .task_cont {
     max-height: 200px;
-
+    margin-top: auto;
 }
-*::-webkit-scrollbar  {
+.task_cont::-webkit-scrollbar  {
     width: 0px;
 }
 .responses {
@@ -489,9 +494,6 @@ input {
     display: flex;
     flex-direction: column;
     height: 400px;
-    width: 329px;
-    margin-right: auto;
-    margin-left: auto;
 }
 .user_task_list {
     display: flex;
@@ -500,6 +502,9 @@ input {
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 1px 12px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
     margin-top: 10px;
+    width: 329px;
+    margin-right: auto;
+    margin-left: auto;
 }
 #t1.user_task_list{
     display: flex;
@@ -511,7 +516,7 @@ input {
 }
 .name_tasklist{
     font-size: 16px;
-    margin: 10px 10px 0px 10px;
+    margin: 10px 10px 10px 10px;
     text-align: left;
 }
 .desc_tasklist {
