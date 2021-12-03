@@ -441,7 +441,7 @@ def task_form(request):
 def tasks(request):
     # отображение страницы заданий
     # form = forms.TaskPhoto()
-    d = Task.objects.filter(creator_user=1).all()
+    d = Task.objects.filter(creator_user=4).all()
     return render(request, 'tasks.html', {
         'title': 'Задания',
         'task_photo': d
