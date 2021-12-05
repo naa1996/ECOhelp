@@ -13,7 +13,7 @@ urlpatterns = [
     # роут для отображения страницы - Авторизация
     path('auth/', views.auth, name='auth'),
     # роут для авторизации
-    path(r'^accounts/login/', views.loginn, name='login'),
+    path('accounts/login/', views.loginn, name='login'),
     # роут для выхода
     # path(r'^accounts/logout/$', views.logout, name='logout'),
     # роут восстановления пароля
