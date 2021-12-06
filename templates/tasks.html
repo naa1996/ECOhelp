@@ -7,7 +7,7 @@
     <div class="text-center">
         <div class="tasks">
             {% for todo in task_photo %}
-                <form style="height: 100px;width: 100px" method="post" action="{% url 'task_form' %}">
+                <form method="post" action="{% url 'task_form' %}">
                     {% csrf_token %}
 {#                        <div class="photo"><a href=#><img src="{{ todo.photo }}"/><div class="text-center">#}
 {#                    <img src="{{ todo.photo.url }}">#}
