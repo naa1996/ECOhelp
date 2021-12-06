@@ -51,8 +51,7 @@
                             </div>
                         <label class="mb-2">Фото</label>
                         <div class="user_task_photo mb-2">
-                            <img src="{% static 'img/ic_round-add-a-photo.png' %}" width="120px" height="100px" alt="Bottle">
-                            <input type="file" name="image" id="foto" placeholder="">
+                            <input type="file" name="image" id="foto" placeholder="{% static 'img/ic_round-add-a-photo.png' %}">
                         </div>
                         <div class="text-center">
                             <input type="`text`" name="id_post" id="id_post" value="{{ user.id }}" disable hidden>
@@ -63,12 +62,12 @@
                             <input type="hidden" name="next" value="{{ next }}" />
                         </div>
         </form>
-        <div class="row" style="justify-content: center">
-            {% for massage in messages %}
-                <ul class="{{ massage.tags }}">
-                    {% if 'safeCT' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
-                </ul>
-            {% endfor %}
-        </div>
+{#        <div class="row" style="justify-content: center">#}
+{#            {% for massage in messages %}#}
+{#                <ul class="{{ massage.tags }}">#}
+{#                    {% if 'safeCT' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}#}
+{#                </ul>#}
+{#            {% endfor %}#}
+{#        </div>#}
     </div>
 {% endblock %}

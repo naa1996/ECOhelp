@@ -12,9 +12,20 @@ p{
     padding: 0px;
     font-family: 'Inter';
    }
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main {
+    flex-grow: 1;
+}
+footer {
+    flex-shrink: 0;
+}
 .cont {
-    height: 500px;
-    width: 331px;
+    width: 380px;
     margin: auto;
 }
 input {
@@ -37,10 +48,10 @@ section {
 }
 
 .footer {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
     width: 100%;
     height: 80px;
     background: #81C3F7;
@@ -105,6 +116,7 @@ input {
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    margin-top: auto;
 }
 .main_button_list{
     font-family: 'Inter';
@@ -151,7 +163,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
+    /*height: 500px;*/
 }
 .profileinfo{
     display: flex;
@@ -228,11 +240,15 @@ input {
     margin-bottom: auto;
 }
 .task_cont {
-    max-height: 200px;
+    /*max-height: 200px;*/
+    max-height: 600px;
 
 }
 .task_cont::-webkit-scrollbar  {
     width: 0px;
+}
+.user_tasks_list::-webkit-scrollbar {
+   width: 0px;
 }
 .responses {
     display: flex;
@@ -449,7 +465,7 @@ input {
 .task_accept{
     display: flex;
     flex-direction: column;
-    height: 500px;
+    /*height: 500px;*/
 }
 .task_name {
     display: flex;
@@ -493,12 +509,13 @@ input {
 .contutlp{
     display: flex;
     flex-direction: column;
-    height: 500px;
+    /*height: 500px;*/
 }
 .user_tasks_list {
     display: flex;
     flex-direction: column;
-    height: 400px;
+    height: 800px;
+    /*height: 400px;*/
 }
 .user_task_list {
     display: flex;
@@ -558,7 +575,7 @@ input {
 .user_task_accept{
     display: flex;
     flex-direction: column;
-    height: 500px;
+    /*height: 500px;*/
 }
 .user_taskinfo{
     display: flex;
@@ -622,7 +639,7 @@ input {
 {
     display: flex;
     flex-direction: column;
-    height: 500px;
+    /*height: 500px;*/
 }
 .user_create_task button
 {
@@ -704,6 +721,23 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
+    /*height: 500px;*/
 }
+@media only screen and (max-height: 900px) {
+    .task_cont {
+        height: 420px;
+    }
+    .user_tasks_list {
+        height: 650px;
+    }
+}
+@media only screen and (max-height: 768px) {
+    .task_cont {
+        height: 280px;
+    }
+    .user_tasks_list {
+        height: 500px;
+    }
+}
+
 

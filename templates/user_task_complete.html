@@ -11,15 +11,11 @@
                     <div class="name_tasklist">{{ task.name}}</div>
                         <div class="desc_tasklist text-break">{{ task.desc }}</div>
                     </div>
-            <div class="task_photo">
-{#                    <img width="200px" height="200px" style="border-radius: 10px;" src="{% static 'img/musor1.png' %}">#}
-                    <img width="200px" height="200px" style="border-radius: 10px;" src="{{ task.photo }}">
-                </div>
 {#                    <button type="submit" class="compl_button">Задание выполнено!</button>#}
                         {% for task_done_status in task_done_status %}
                             <div class="task_photo">
                                 {#                    <img width="200px" height="200px" style="border-radius: 10px;" src="{% static 'img/musor1.png' %}">#}
-                                <img style="width: 100px" src="{{ task_done_status.photo.url }}">
+                                <img style="width: 250px; height: 250px;" src="{{ task_done_status.photo.url }}">
                             </div>
                             <button type="submit" class="compl_button">{{ task_done_status.status.status_name }}!</button>
 {#                            {{ user.id }}#}
