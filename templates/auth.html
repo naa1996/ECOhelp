@@ -23,7 +23,7 @@
                     <a class="forgot_pass_link" href='{% url 'recovery_pass' %}'>Забыли пароль?</a>
                 </div>
                 <input type="`text`" name="idd" id="idd" value="{{ user.id }}" disable hidden>
-                <button type="submit" class="main_button">Войти</button>
+                <button type="submit" class="main_button" id="main_button">Войти</button>
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
         </div>
@@ -34,7 +34,7 @@
             </a>
         </div>
 
-    <div class="row" style="justify-content: center">
+    <div class="row" style="justify-content: center" id="error">
         {% for massage in messages %}
             <ul class="{{ massage.tags }}">
                 {% if 'safe' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}

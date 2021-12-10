@@ -34,7 +34,7 @@
                     <a class="useful_link" href="#">Условия использования</a>
                 </div>
                 <input type="`text`" name="id_post" id="id_post" value="{{ user.id }}" disable hidden>
-                <button type="submit" class="main_button">Создать аккаунт</button>
+                <button type="submit" class="main_button" id="main_button">Создать аккаунт</button>
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
         </div>
@@ -44,7 +44,7 @@
                 Войти
             </a>
         </div>
-        <div class="row" style="justify-content: center">
+        <div class="row" style="justify-content: center" id="error">
             {% for massage in messages %}
                 <ul class="{{ massage.tags }}">
                     {% if 'safe' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
