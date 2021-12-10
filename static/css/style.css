@@ -250,6 +250,9 @@ input {
 .user_tasks_list::-webkit-scrollbar {
    width: 0px;
 }
+.task_ready::-webkit-scrollbar {
+    width: 0px;
+}
 .responses {
     display: flex;
     flex-direction: column;
@@ -465,7 +468,7 @@ input {
 .task_accept{
     display: flex;
     flex-direction: column;
-    /*height: 500px;*/
+    height: 550px;
 }
 .task_name {
     display: flex;
@@ -730,6 +733,9 @@ input {
     .user_tasks_list {
         height: 650px;
     }
+    .task_ready {
+        height: 700px;
+    }
 }
 @media only screen and (max-height: 768px) {
     .task_cont {
@@ -737,6 +743,9 @@ input {
     }
     .user_tasks_list {
         height: 500px;
+    }
+    .task_ready {
+        height: 550px;
     }
 }
 
