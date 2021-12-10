@@ -489,62 +489,77 @@ def task_form_save(request):
 def task_accept_user(request):
     # отправка фотографии о выполнении
     if request.method == 'POST':
-        foto = request.FILES['image']
-        user = request.session['id_user']
-        print(user)
-        task = request.session['id_task']
-        print(task)
-        status = request.POST['status']
-        print(status)
-        print('ok')
-        authorized_user = User.objects.get(id=user)
-        task0 = Task.objects.get(id=task)
-        status = Status.objects.get(id=request.POST['status'])
-        status0 = Status.objects.get(id=request.POST['status0'])
-        status_int = int(task)
-        print(status_int, status_int)
-        print(status)
-        print(status0)
-        if status_int < 13:
-            print(11)
-            TaskDone.objects.create(
-                user = authorized_user,
-                task = task0,
-                photo = foto,
-                status = status,
-            )
-            print('ok')
-            print('Запись добавлена')
-            messages.error(request, 'Ответ принят', extra_tags='safeTA')
-            Task.objects.filter(id=task).update(
-                status = status0,
-            )
-            print('Status ok')
+        #проверка загрузки
+        if request.FILES.get('image'):
+            # image = request.FILES['image']
+            # print(image)
+            # exit()
+            #проверка загрузки фотографии
+            if 'image' in request.FILES['image'].content_type:
+                foto = request.FILES['image']
+                user = request.session['id_user']
+                print(user)
+                task = request.session['id_task']
+                print(task)
+                status = request.POST['status']
+                print(status)
+                print('ok')
+                authorized_user = User.objects.get(id=user)
+                task0 = Task.objects.get(id=task)
+                status = Status.objects.get(id=request.POST['status'])
+                status0 = Status.objects.get(id=request.POST['status0'])
+                status_int = int(task)
+                print(status_int, status_int)
+                print(status)
+                print(status0)
+                if status_int < 13:
+                    print(11)
+                    TaskDone.objects.create(
+                        user = authorized_user,
+                        task = task0,
+                        photo = foto,
+                        status = status,
+                    )
+                    print('ok')
+                    print('Запись добавлена')
+                    messages.error(request, 'Ответ принят', extra_tags='safeTA')
+                    Task.objects.filter(id=task).update(
+                        status = status0,
+                    )
+                    print('Status ok')
 
-            #сохранение фотографии
-            fs = FileSystemStorage()
-            fs.save(foto.name, foto)
+                    #сохранение фотографии
+                    fs = FileSystemStorage()
+                    fs.save(foto.name, foto)
 
-            messages.error(request, 'Задание успешно добавлено', extra_tags='safeCT')
-            messages.error(request, 'Статус изменен', extra_tags='safeTA')
-            return redirect('task_accept')
+                    messages.error(request, 'Задание успешно добавлено', extra_tags='safeCT')
+                    messages.error(request, 'Статус изменен', extra_tags='safeTA')
+                    return redirect('task_accept')
+                else:
+                    print(22)
+                    TaskDone.objects.create(
+                        user = authorized_user,
+                        task = task0,
+                        photo = foto,
+                        status = status,
+                    )
+                    print('ok')
+                    print('Запись добавлена')
+                    messages.error(request, 'Ответ принят', extra_tags='safeTA')
+                    Task.objects.filter(id=task).update(
+                        status = status,
+                    )
+                    print('Status ok')
+
+                    messages.error(request, 'Статус изменен', extra_tags='safeTA')
+                    return redirect('task_accept')
+            else:
+                print('Загружена не фотография!')
+                messages.error(request, 'Загружена не фотография', extra_tags='safeTA')
+                return redirect('task_accept')
         else:
-            print(22)
-            TaskDone.objects.create(
-                user = authorized_user,
-                task = task0,
-                photo = foto,
-                status = status,
-            )
-            print('ok')
-            print('Запись добавлена')
-            messages.error(request, 'Ответ принят', extra_tags='safeTA')
-            Task.objects.filter(id=task).update(
-                status = status,
-            )
-            print('Status ok')
-
-            messages.error(request, 'Статус изменен', extra_tags='safeTA')
+            print('Фотография не загружена!')
+            messages.error(request, 'Неверный тип файла', extra_tags='safeTA')
             return redirect('task_accept')
     print('exit')
     return redirect('task_accept')
@@ -574,74 +589,95 @@ def u_create_task(request):
         desc = request.POST['desc']
         location = request.POST['location']
         cost = request.POST['radio']
-        # image = request.POST['image']
-        image = request.FILES['image']
-        # up_file = request.FILES['image']
-        id = request.POST['id_post']
-        email = request.POST['email']
-        achievement = request.POST['achievement']
-        # password = request.POST['password']
-        # status = request.POST['
-        id_status = int(request.POST['id_post'])
-        #отправка данных статуса
-        request.session['id_status'] = id_status
-        print(name)
-        print(desc)
-        print(location)
-        print(cost)
-        print(id)
-        print(email)
-        print(achievement)
-        # print(password)
-        # print(status)
-        f = Task.objects.filter(name=name)
-        ss = User.objects.filter(id = int(request.POST['id_post']))
-        print(ss)
-        n = User.objects.get(email=email)
-        print(n)
-        nss = User.objects.get(email=email).username
-        print('user', nss)
-        password = User.objects.get(email=email).password
-        print('pass', password)
-        authorized_user = User.objects.get(id=id)
-        status = Status.objects.get(id=request.POST['status'])
-        # request.session['id_status'] = status
-        # user = authenticate(username=nss, password=password)
-        if ss:
-            if not f:
-                if(name != desc):
-                    # des = ' '.join(id)
-                    # print(des)
-                    # status = 'Ожидание'
-                    # achievement = 'Молодец! Ты помог природе! Ей стало по-легче'
-                    Task.objects.create(
-                         name=name,
-                         desc=desc,
-                         cost=cost,
-                         location=location,
-                         photo=image,
-                         achievement=achievement,
-                         status=status,
-                         creator_user=authorized_user,
-                    )
+        #проверка загрузки
+        if request.FILES.get('image'):
+            # image = request.FILES['image']
+            # print(image)
+            # exit()
+            #проверка загрузки фотографии
+            if 'image' in request.FILES['image'].content_type:
+                image = request.FILES['image']
+                # up_file = request.FILES['image']
+                id = request.POST['id_post']
+                email = request.POST['email']
+                achievement = request.POST['achievement']
+                # password = request.POST['password']
+                # status = request.POST['
+                id_status = int(request.POST['id_post'])
+                #отправка данных статуса
+                request.session['id_status'] = id_status
+                print(name)
+                print(desc)
+                print(location)
+                print(cost)
+                print(id)
+                print(email)
+                print(achievement)
+                # print(password)
+                # print(status)
+                f = Task.objects.filter(name=name)
+                ss = User.objects.filter(id = int(request.POST['id_post']))
+                print(ss)
+                n = User.objects.get(email=email)
+                print(n)
+                nss = User.objects.get(email=email).username
+                print('user', nss)
+                password = User.objects.get(email=email).password
+                print('pass', password)
+                authorized_user = User.objects.get(id=id)
+                status = Status.objects.get(id=request.POST['status'])
+                # request.session['id_status'] = status
+                # user = authenticate(username=nss, password=password)
+                if ss:
+                    if not f:
+                        if(name != desc):
+                            if 'image' in request.FILES['image'].content_type:
+                                # exit()
+                                # des = ' '.join(id)
+                                # print(des)
+                                # status = 'Ожидание'
+                                # achievement = 'Молодец! Ты помог природе! Ей стало по-легче'
+                                Task.objects.create(
+                                     name=name,
+                                     desc=desc,
+                                     cost=cost,
+                                     location=location,
+                                     photo=image,
+                                     achievement=achievement,
+                                     status=status,
+                                     creator_user=authorized_user,
+                                )
 
-                    print('Задание успешно добавлено')
-                    fs = FileSystemStorage()
-                    fs.save(image.name, image)
-                    messages.error(request, 'Задание успешно добавлено', extra_tags='safeCT')
-                    return redirect('user_create_task')
+                                print('Задание успешно добавлено')
+                                fs = FileSystemStorage()
+                                fs.save(image.name, image)
+                                messages.error(request, 'Задание успешно добавлено', extra_tags='safeCT')
+                                return redirect('user_create_task')
+                            else:
+                                print('Загружена не фотография')
+                                messages.error(request, 'Загружена не фотография', extra_tags='safeCT')
+                                return redirect('user_create_task')
+                        else:
+                            print('Описание такое же как название! Опишите по подробнее')
+                            messages.error(request, 'Описание такое же как название! Опишите по подробнее', extra_tags='safeCT')
+                            return redirect('user_create_task')
+                    else:
+                        print('Задание с таким названием уже существует')
+                        messages.error(request, 'Задание с таким названием уже существует', extra_tags='safeCT')
+                        return redirect('user_create_task')
                 else:
-                    print('Описание такое же как название! Опишите по подробнее')
-                    messages.error(request, 'Описание такое же как название! Опишите по подробнее', extra_tags='safeCT')
+                    print('З33')
+                    messages.error(request, 'З33', extra_tags='safeCT')
                     return redirect('user_create_task')
             else:
-                print('Задание с таким названием уже существует')
-                messages.error(request, 'Задание с таким названием уже существует', extra_tags='safeCT')
+                print('Загружена не фотография!')
+                messages.error(request, 'Загружена не фотография', extra_tags='safeCT')
                 return redirect('user_create_task')
         else:
-            print('З33')
-            messages.error(request, 'З33', extra_tags='safeCT')
+            print('Фотография не загружена!')
+            messages.error(request, 'Неверный тип файла', extra_tags='safeCT')
             return redirect('user_create_task')
+
     else:
         return redirect('user_create_task')
 

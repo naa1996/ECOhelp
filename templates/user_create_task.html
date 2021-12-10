@@ -62,12 +62,12 @@
                             <input type="hidden" name="next" value="{{ next }}" />
                         </div>
         </form>
-{#        <div class="row" style="justify-content: center">#}
-{#            {% for massage in messages %}#}
-{#                <ul class="{{ massage.tags }}">#}
-{#                    {% if 'safeCT' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}#}
-{#                </ul>#}
-{#            {% endfor %}#}
-{#        </div>#}
+        <div class="row" style="justify-content: center">
+            {% for massage in messages %}
+                <ul class="{{ massage.tags }}">
+                    {% if 'safeCT' in massage.tags %}{{ massage|safe }}{% else %}{{ massage }}{% endif %}
+                </ul>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
