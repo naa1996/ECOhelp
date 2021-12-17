@@ -15,7 +15,7 @@
                         {% for task_done_status in task_done_status %}
                             <div class="task_photo">
                                 {#                    <img width="200px" height="200px" style="border-radius: 10px;" src="{% static 'img/musor1.png' %}">#}
-                                <img style="width: 200px; height: 200px;" src="{{ task_done_status.photo.url }}">
+                                <img style="width: 200px; height: 200px; border-radius: 20px" src="{{ task_done_status.photo.url }}">
                             </div>
                             <button type="submit" class="compl_button">{{ task_done_status.status.status_name }}!</button>
 {#                            {{ user.id }}#}
