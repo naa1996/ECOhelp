@@ -83,14 +83,27 @@ WSGI_APPLICATION = 'ecohelp.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'ecohelp',
+#         'USER': 'root',
+#         'PASSWORD': 'z1x2c3Q1W2_',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecohelp',
-        'USER': 'root',
+        'USER': 'user1',
         'PASSWORD': 'z1x2c3Q1W2_',
-        'HOST': 'localhost',
+        'HOST': 'rc1b-nn4ue8f86bcgwaae.mdb.yandexcloud.net',
         'PORT': '3306',
+        'OPTIONS': {'ssl': {'ca': 'root.crt'}},
+
 
     }
 }
