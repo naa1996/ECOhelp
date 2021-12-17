@@ -38,7 +38,7 @@
                             </div>
                             <div class="form_radio_btn">
                                 <input id="radio-3" type="radio" name="radio" value="300">
-                                <label for="radio-3">+300</label>
+                                <label for="radio-3" id="300">+300</label>
                             </div>
                             <div class="form_radio_btn">
                                 <input id="radio-4" type="radio" name="radio" value="400">
@@ -51,14 +51,14 @@
                             </div>
                         <label class="mb-2">Фото</label>
                         <div class="user_task_photo mb-2">
-                            <input type="file" name="image" id="foto" placeholder="{% static 'img/ic_round-add-a-photo.png' %}">
+                            <input type="file" name="image" id="file_upload_button" placeholder="{% static 'img/ic_round-add-a-photo.png' %}">
                         </div>
                         <div class="text-center">
                             <input type="`text`" name="id_post" id="id_post" value="{{ user.id }}" disable hidden>
                             <input type="`email`" name="email" id="email" value="{{ user.email }}" disable hidden>
                             <input type="`text`" name="status" id="status" value="{{ 2 }}" disable hidden>
                             <input type="`text`" name="achievement" id="achievement" value="{{ 'Молодец! Ты помог природе! Ей стало полегче' }}" disable hidden>
-                            <button type="submit" class="main_button">Добавить задание</button>
+                            <button type="submit" class="main_button" id="btncreate">Добавить задание</button>
                             <input type="hidden" name="next" value="{{ next }}" />
                         </div>
         </form>

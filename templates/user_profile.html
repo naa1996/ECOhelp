@@ -93,7 +93,7 @@
              <div class="responses">
                 <div class="response">
                         {% for complete in user_task_complete %}
-                            <form action="id_task" class="form-control" enctype="multipart/form-data" method="POST"; style="width: 299px">
+                            <form action="id_task" class="form-control" enctype="multipart/form-data" method="POST"; style="width: 299px; margin: 5px 0px;">
                                 <p class="response_title">
                                 {% csrf_token %}
                                 {{ complete.task.name }}

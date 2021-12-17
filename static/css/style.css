@@ -205,6 +205,7 @@ input {
 }
 .achievement{
     margin-top: 5px;
+    margin-bottom: 5px;
     font-size: 18px;
     color: #000000;
 
@@ -221,7 +222,7 @@ input {
     background: #81C3F7;
     border-radius: 50px;
     font-size: 14px;
-    padding: 5px;
+    padding: 5px 15px 5px 15px;
     color: #000000;
 }
 .coints{
@@ -496,7 +497,7 @@ input {
 }
 
 .task_accept button{
-    margin-top: auto;
+
 }
 
 
