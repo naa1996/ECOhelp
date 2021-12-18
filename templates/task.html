@@ -41,10 +41,19 @@
 {#            <p class="name_task">Утилизировать пластиковую бутылку</p>#}
 {#            <img width="152px" height="166px" src="{% static 'img/task1.png' %}" alt="Bottle">#}
 {#            <p class="desc_task">Любые отходы должны обрабатываться в соответствии с классом опасности — например, перерабатывать ртутные градусники или люминенсцентные лампы могут только предприятия, имеющие в распоряжении нужное оборудование; бытовая утилизация мусора такого типа не допускается.</p>#}
-            <div class="task_buttons ">
-                <a href="{% url 'tasks' %}"><button type="submit" class="task_btn1">Назад</button></a>
-                <a href="{% url 'task_accept' %}"><button type="submit" class="task_btn2">Начать!</button></a>
-            </div>
+            {% for todo in task %}
+            {% if todo.creator_user.username == 'admin' %}
+                <div class="task_buttons ">
+                    <a href="{% url 'tasks' %}"><button type="submit" class="task_btn1">Назад</button></a>
+                    <a href="{% url 'task_accept' %}"><button type="submit" class="task_btn2">Начать!</button></a>
+                </div>
+            {% else %}
+                <div class="task_buttons ">
+                    <a href="{% url 'user_task_list' %}"><button type="submit" class="task_btn1">Назад</button></a>
+                    <a href="{% url 'task_accept' %}"><button type="submit" class="task_btn2">Начать!</button></a>
+                </div>
+            {% endif %}
+            {% endfor %}
         </div>
 
 {% endblock %}
