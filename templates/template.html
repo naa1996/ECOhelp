@@ -49,11 +49,13 @@
 </div>
 </div>
 <footer class="footer">
+        {% if request.user.is_authenticated %}
         <div class="navigat">
             <div class="maptasks"><a href="{% url 'user_task_list' %}"><img src="{% static 'img/maptasks.png' %}" alt="map"></a></div>
             <div class="userpage"><a href="{% url 'user_profile' %}"><img width="30px" height="40px" src="{% static 'img/userpage.png' %}" alt="user"></a></div>
             <div class="taskspage"><a href="{% url 'tasks' %}"><img src="{% static 'img/taskspage.png' %}" alt="tasks"></a></div>
         </div>
+        {% endif %}
 </footer>
 </body>
 </html>

@@ -99,7 +99,6 @@ DATABASES = {
         'PORT': '3306',
         'OPTIONS': {'ssl': {'ca': 'root.crt'}},
 
-
     }
 }
 

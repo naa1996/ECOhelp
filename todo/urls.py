@@ -11,11 +11,11 @@ urlpatterns = [
     # роут регистрации пользователя
     path(r'createUser', views.createUser, name='createUser'),
     # роут для отображения страницы - Авторизация
-    path('auth/', views.auth, name='auth'),
+    # path('auth/', views.auth, name='auth'),
     # роут для авторизации
     path('accounts/login/', views.loginn, name='login'),
     # роут для выхода
-    # path(r'^accounts/logout/$', views.logout, name='logout'),
+    path('logout/', views.logout, name='logout'),
     # роут восстановления пароля
     path('recovery_password', views.recovery_password, name='recovery_password'),
     # роут для отображения страницы - Восстановление пароля
@@ -59,8 +59,8 @@ urlpatterns = [
     # роут для отображения страницы
     path('user_task_photo', views.user_task_photo, name='user_task_photo'),
     # роут для отображения страницы - Главная
-    path('', views.index, name='index'),
-    # path('index1', views.index1, name='index1'),
+    # path('', views.index, name='index'),
+    path('', views.auth, name='auth'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -72,7 +72,7 @@ class MyTestCase(unittest.TestCase):
         browser.find_element_by_id("main_button").click()
         password_falird = browser.find_element_by_class_name("error")
         assert password_falird.text == "Неверный пароль"
-        time.sleep(5)
+        time.sleep(50000)
 
 
     def test_auth_email_failed(self):

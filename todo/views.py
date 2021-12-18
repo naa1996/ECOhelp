@@ -8,6 +8,8 @@ from .models import User, Profile, Task, Status, TaskDone
 from os.path import  basename
 from django.core.files import File
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     # отображение главной страницы
@@ -70,17 +72,19 @@ def loginn(request):
         return redirect(auth)
 
 
-# def logout(request):
-#     print('ss')
-#     # return redirect(auth)
-#     return render(request, 'auth.html', {'title': 'Выход'})
+def logout(request):
+    request.session.clear()
+    return redirect(auth)
 
 
 def auth(request):
     # отображение страницы авторизации
-    return render(request, 'auth.html', {
-        'title': 'Авторизация',
-    })
+    if not request.user.is_authenticated:
+        return render(request, 'auth.html', {
+            'title': 'Авторизация',
+        })
+    else:
+        return redirect(user_profile)
 
 
 def recovery_password(request):
@@ -175,16 +179,19 @@ def user_form(request):
 
 
 def user_setting(request):
-    # отображение страницы личной информации ползователя
-    id_user = request.session['id_user']
-    print('id_user', id_user)
-    form = forms.UserProfile
-    user_profile_phone = Profile.objects.filter(user=id_user).all()
-    return render(request, 'user_setting.html', {
-        'title': 'Личная информация',
-        'user_form': form,
-        'user_profile_phone': user_profile_phone,
-    })
+    if request.user.is_authenticated:
+        # отображение страницы личной информации ползователя
+        id_user = request.session['id_user']
+        print('id_user', id_user)
+        form = forms.UserProfile
+        user_profile_phone = Profile.objects.filter(user=id_user).all()
+        return render(request, 'user_setting.html', {
+            'title': 'Личная информация',
+            'user_form': form,
+            'user_profile_phone': user_profile_phone,
+        })
+    else:
+        return redirect(auth)
 
 
 def id_task(request):
@@ -300,42 +307,34 @@ def delete_adoption_task(request):
 
 def user_profile(request):
     # отображение страницы профиля
-    id_user = request.session['id_user']
-    print('id_user', id_user)
-    request.session['id_user'] = id_user
-    # id_task = request.POST['id_task']
-    # print(id_task)
-    #отправка id статуса
-    # request.session['id_task'] = id_task
-    #отображение количества баллов пользователя
-    user_profile_points = Profile.objects.filter(user=id_user).all()
-    #отображение достижений пользователя
-    # user_achievement = TaskDone.objects.filter(user=id_user).all()
-    user_achievement = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
-    print('Все задания Task', user_achievement)
-    user = TaskDone.objects.filter(user=id_user)
-    # print('Задания на которые откликнулся пользователь TaskDone', user)
-    #отображение таблицы с заданиями
-    user_task_dones = TaskDone.objects.all()
-    user_task_complete = TaskDone.objects.filter(user=id_user).all()
-    # user_task_complete = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
-    print('user_task_complete', user_task_complete)
-    print(user_task_dones)
-    admin = User.objects.filter(username='admin')
-    admin_2 = User.objects.get(username='admin').username
-    print('admin', admin)
-    print('admin', admin_2)
-    if user:
-        print(11)
-        return render(request, 'user_profile.html', {
-            'title': 'Профиль',
-            'user_profile_points': user_profile_points,
-            'user_achievement': user_achievement,
-            'user_task_dones': user_task_dones,
-            'user_task_complete': user_task_complete,
-        })
-    else:
-        if admin:
+    if request.user.is_authenticated:
+        id_user = request.session['id_user']
+        print('id_user', id_user)
+        request.session['id_user'] = id_user
+        # id_task = request.POST['id_task']
+        # print(id_task)
+        #отправка id статуса
+        # request.session['id_task'] = id_task
+        #отображение количества баллов пользователя
+        user_profile_points = Profile.objects.filter(user=id_user).all()
+        #отображение достижений пользователя
+        # user_achievement = TaskDone.objects.filter(user=id_user).all()
+        user_achievement = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
+        print('Все задания Task', user_achievement)
+        user = TaskDone.objects.filter(user=id_user)
+        # print('Задания на которые откликнулся пользователь TaskDone', user)
+        #отображение таблицы с заданиями
+        user_task_dones = TaskDone.objects.all()
+        user_task_complete = TaskDone.objects.filter(user=id_user).all()
+        # user_task_complete = TaskDone.objects.filter(user=id_user).order_by('-id')[:2]
+        print('user_task_complete', user_task_complete)
+        print(user_task_dones)
+        admin = User.objects.filter(username='admin')
+        admin_2 = User.objects.get(username='admin').username
+        print('admin', admin)
+        print('admin', admin_2)
+        if user:
+            print(11)
             return render(request, 'user_profile.html', {
                 'title': 'Профиль',
                 'user_profile_points': user_profile_points,
@@ -344,15 +343,26 @@ def user_profile(request):
                 'user_task_complete': user_task_complete,
             })
         else:
-            print('Вы не откликались на задания')
-            messages.error(request, 'Вы не откликались на задания. Достижений пока нет', extra_tags='UP')
-            return render(request, 'user_profile.html', {
-                'title': 'Профиль',
-                'user_profile_points': user_profile_points,
-                'user_achievement': user_achievement,
-                # 'user_task_complete': user_task_complete,
-                # 'user_task_dones': user_task_dones,
-            })
+            if admin:
+                return render(request, 'user_profile.html', {
+                    'title': 'Профиль',
+                    'user_profile_points': user_profile_points,
+                    'user_achievement': user_achievement,
+                    'user_task_dones': user_task_dones,
+                    'user_task_complete': user_task_complete,
+                })
+            else:
+                print('Вы не откликались на задания')
+                messages.error(request, 'Вы не откликались на задания. Достижений пока нет', extra_tags='UP')
+                return render(request, 'user_profile.html', {
+                    'title': 'Профиль',
+                    'user_profile_points': user_profile_points,
+                    'user_achievement': user_achievement,
+                    # 'user_task_complete': user_task_complete,
+                    # 'user_task_dones': user_task_dones,
+                })
+    else:
+        return redirect(auth)
 
 
 
@@ -440,12 +450,14 @@ def task_form(request):
 
 def tasks(request):
     # отображение страницы заданий
-    # form = forms.TaskPhoto()
-    d = Task.objects.filter(creator_user=4).all()
-    return render(request, 'tasks.html', {
-        'title': 'Задания',
-        'task_photo': d
-    })
+    if request.user.is_authenticated:
+        d = Task.objects.filter(creator_user=4).all()
+        return render(request, 'tasks.html', {
+            'title': 'Задания',
+            'task_photo': d
+        })
+    else:
+        return redirect(auth)
 
 
 def task_watch(request):
@@ -456,24 +468,27 @@ def task_watch(request):
 
 def task(request):
     # отображение страницы задания
-    id_task = request.session['id_task']
-    print('id_task', id_task)
-    id_user = request.session['id_user']
-    print('id_user', id_user)
-    # task_table = Task.objects.get(id=id_task)
-    # task_table = Task.objects.get(id=id_task)
-    task_table = Task.objects.filter(id=id_task).all()
-    task_photo = Task.objects.filter(id=id_task).all()
-    print('task_table', task_table)
-    print('PHOTO: ', task_photo[0].photo)
-    request.session['id_task'] = id_task
-    request.session['id_user'] = id_user
-    return render(request, 'task.html', {
-        'title': 'Задание',
-        'task': task_table,
-        'task_photo': task_photo,
-        # 'media_url': settings.MEDIA_URL,
-    })
+    if request.user.is_authenticated:
+        id_task = request.session['id_task']
+        print('id_task', id_task)
+        id_user = request.session['id_user']
+        print('id_user', id_user)
+        # task_table = Task.objects.get(id=id_task)
+        # task_table = Task.objects.get(id=id_task)
+        task_table = Task.objects.filter(id=id_task).all()
+        task_photo = Task.objects.filter(id=id_task).all()
+        print('task_table', task_table)
+        print('PHOTO: ', task_photo[0].photo)
+        request.session['id_task'] = id_task
+        request.session['id_user'] = id_user
+        return render(request, 'task.html', {
+            'title': 'Задание',
+            'task': task_table,
+            'task_photo': task_photo,
+            # 'media_url': settings.MEDIA_URL,
+        })
+    else:
+        return redirect(auth)
 
 
 def task_form_save(request):
@@ -567,19 +582,22 @@ def task_accept_user(request):
 
 def task_accept(request):
     # отображение страницы описания задания от разработчика
-    id_task = request.session['id_task']
-    print('id_task', id_task)
-    id_user = request.session['id_user']
-    print('id_user', id_user)
-    task_table_accept = Task.objects.filter(id=id_task)
-    print('task_table', task_table_accept)
-    #передача на страницу task_accept_user
-    request.session['id_task'] = id_task
-    request.session['id_user'] = id_user
-    return render(request, 'task_accept.html', {
-        'title': 'Описание задания разработчика',
-        'task_accept': task_table_accept,
-    })
+    if request.user.is_authenticated:
+        id_task = request.session['id_task']
+        print('id_task', id_task)
+        id_user = request.session['id_user']
+        print('id_user', id_user)
+        task_table_accept = Task.objects.filter(id=id_task)
+        print('task_table', task_table_accept)
+        #передача на страницу task_accept_user
+        request.session['id_task'] = id_task
+        request.session['id_user'] = id_user
+        return render(request, 'task_accept.html', {
+            'title': 'Описание задания разработчика',
+            'task_accept': task_table_accept,
+        })
+    else:
+        return redirect(auth)
 
 
 def u_create_task(request):
@@ -684,49 +702,61 @@ def u_create_task(request):
 
 def user_create_task(request):
     # отображение страницы создания задания пользователем
-    return render(request, 'user_create_task.html', {
-        'title': 'Добавить задание',
-    })
+    if request.user.is_authenticated:
+        return render(request, 'user_create_task.html', {
+            'title': 'Добавить задание',
+        })
+    else:
+        return redirect(auth)
 
 
 def user_task_accept(request):
     # отображение страницы описания задания от пользователя
-    return render(request, 'user_task_accept.html', {
-        'title': 'Страница описания задания'
-    })
+    if request.user.is_authenticated:
+        return render(request, 'user_task_accept.html', {
+            'title': 'Страница описания задания'
+        })
+    else:
+        return redirect(auth)
 
 
 def user_task_complete(request):
     # отображение выполнения задания от пользователя
-    id_task = request.POST['id_task']
-    print('id_t', id_task)
-    id_user = request.POST['id_user']
-    print('id_u', id_user)
-    id_task_done = request.POST['id_task_done']
-    print('id_task_done', id_task_done)
-    task = Task.objects.filter(id=id_task).all()
-    task_done = TaskDone.objects.filter(id=id_task_done).all()
-    print('task', task)
-    return render(request, 'user_task_complete.html', {
-            'title': 'Статус задания',
-            'task_complete': task,
-            'task_done_status': task_done,
+    if request.user.is_authenticated:
+        id_task = request.POST['id_task']
+        print('id_t', id_task)
+        id_user = request.POST['id_user']
+        print('id_u', id_user)
+        id_task_done = request.POST['id_task_done']
+        print('id_task_done', id_task_done)
+        task = Task.objects.filter(id=id_task).all()
+        task_done = TaskDone.objects.filter(id=id_task_done).all()
+        print('task', task)
+        return render(request, 'user_task_complete.html', {
+                'title': 'Статус задания',
+                'task_complete': task,
+                'task_done_status': task_done,
 
-    })
+        })
+    else:
+        return redirect(auth)
 
 
 def user_task_completed(request):
     # отображение страницу откликов пользователя
-    id_task = request.session['id_task']
-    print('id_tasks', id_task)
-    id_user = request.session['id_user']
-    print('id_users', id_user)
-    user_task_completed = TaskDone.objects.filter(user=id_user).all()
-    return render(request, 'user_task_completed.html', {
-        'title': 'Мои отклики',
-        'user_task_completed': user_task_completed,
+    if request.user.is_authenticated:
+        id_task = request.session['id_task']
+        print('id_tasks', id_task)
+        id_user = request.session['id_user']
+        print('id_users', id_user)
+        user_task_completed = TaskDone.objects.filter(user=id_user).all()
+        return render(request, 'user_task_completed.html', {
+            'title': 'Мои отклики',
+            'user_task_completed': user_task_completed,
 
-    })
+        })
+    else:
+        return redirect(auth)
 
 
 def user_task_form(request):
@@ -741,45 +771,44 @@ def user_task_form(request):
 
 def user_task_list(request):
     # отображение страницы списка заданий пользователя
-    #приём id пользователя
-    id_user = request.session['id_user']
-    print('id_user', id_user)
-    # id_status = request.session['id_status']
-    # print('id_status', id_status)
-    u = User.objects.filter(username = 'admin')
-    us = User.objects.get(username = 'admin').id
-    print('sdh', u)
-    print('hds', us)
-    # if not Task.objects.filter(status=2):
-    if id_user == 1:
-            print(12)
-            user_task_table = Task.objects.exclude(creator_user = id_user).filter(status=2).all()
-            request.session['id_user'] = id_user
-            #id_task_done = request.POST['id_task_done']
-            print('id_task_done', id_user)
-            return render(request, 'user_task_list.html', {
-                    'title': 'Список задний от пользователей',
-                    'user_task_list': user_task_table,
-            })
+    if request.user.is_authenticated:
+        #приём id пользователя
+        id_user = request.session['id_user']
+        print('id_user', id_user)
+        # id_status = request.session['id_status']
+        # print('id_status', id_status)
+        u = User.objects.filter(username = 'admin')
+        us = User.objects.get(username = 'admin').id
+        print('sdh', u)
+        print('hds', us)
+        # if not Task.objects.filter(status=2):
+        if id_user == 1:
+                print(12)
+                user_task_table = Task.objects.exclude(creator_user = id_user).filter(status=2).all()
+                request.session['id_user'] = id_user
+                #id_task_done = request.POST['id_task_done']
+                print('id_task_done', id_user)
+                return render(request, 'user_task_list.html', {
+                        'title': 'Список задний от пользователей',
+                        'user_task_list': user_task_table,
+                })
+        else:
+                print(21)
+                user_task_table = Task.objects.exclude(creator_user= us).filter(status=2).all()
+                request.session['id_user'] = id_user
+                return render(request, 'user_task_list.html', {
+                        'title': 'Список задний от пользователей',
+                        'user_task_list': user_task_table,
+                })
     else:
-            print(21)
-            user_task_table = Task.objects.exclude(creator_user= us).filter(status=2).all()
-            request.session['id_user'] = id_user
-            return render(request, 'user_task_list.html', {
-                    'title': 'Список задний от пользователей',
-                    'user_task_list': user_task_table,
-            })
-    # else:
-    #     print('Заданий нет')
-    #     messages.error(request, 'Заданий нет', extra_tags='safeUL')
-    #     return render(request, 'user_task_list.html', {
-    #         'title': 'Список задний от пользователей',
-    #
-    #     })
+        return redirect(auth)
 
 
 def user_task_photo(request):
     # отображение странциы  о выполнения задания
-    return render(request, 'user_task_photo.html', {
-        'title': 'Страница о выполнении задания'
-    })
+    if request.user.is_authenticated:
+        return render(request, 'user_task_photo.html', {
+            'title': 'Страница о выполнении задания'
+        })
+    else:
+        return redirect(auth)

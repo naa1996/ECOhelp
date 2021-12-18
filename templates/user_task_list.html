@@ -13,14 +13,13 @@
                             <div class="user_task_list">
                                 <div class="name_tasklist d-inline-block text-truncate" style="max-width: 290px;">{{ todo.name }}</div>
                                 <div class="desc_tasklist d-inline-block text-truncate" style="max-width: 290px;">{{ todo.desc }}</div>
-                                <div class="desc_tasklist d-inline-block text-truncate" style="max-width: 290px;">{{ todo.status.status_name }}</div>
     {#                        </div>#}
     {#                    {% endfor %}#}
     {#                    <div class="text-center">#}
                                 <input type="`id`" name="id_user" id="id_user" value="{{ user.id}}" disable hidden />
                                 <input type="`id`" name="id_task" id="id_task" value="{{ todo.id}}" disable hidden />
 
-                                <button type="submit" class="main_button_list">Откликнуться</button>
+                                <button type="submit" class="main_button_list">Посмотреть</button>
                                 <input type="hidden" name="next" value="{{ next }}" />
                             </div>
                         </form>
