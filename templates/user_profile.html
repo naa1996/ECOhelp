@@ -35,7 +35,7 @@
         </div>
         <div class="coints">
             {% for points in user_profile_points %}
-                Баланс: {{ points.points}} бонусов
+                <a href="{% url 'rating' %}" style="text-decoration: none;color: #000000; font-family: 'Inter';">Баланс {{ points.points}} бонусов</a>Баланс: {{ points.points}} бонусов
             {% endfor %}
         </div>
 

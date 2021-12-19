@@ -365,6 +365,18 @@ def user_profile(request):
         return redirect(auth)
 
 
+def rating(request):
+    if request.user.is_authenticated:
+        # отображение страницы рейтинга пользователей
+        id_user = request.session['id_user']
+        print('id_user', id_user)
+        user_rating = Profile.objects.filter(user=id_user).all()
+        return render(request, 'rating.html', {
+            'title': 'Рейтинг',
+            'user_rating': user_rating,
+        })
+    else:
+        return redirect(rating)
 
 
 def createUser(request):
