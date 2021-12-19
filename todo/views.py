@@ -378,7 +378,7 @@ def rating(request):
             'user_rating': user_rating,
         })
     else:
-        return redirect(rating)
+        return redirect(auth)
 
 
 def createUser(request):
