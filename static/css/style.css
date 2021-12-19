@@ -699,7 +699,15 @@ input {
 .form_radio_btn label:hover {
 	color: #666;
 }
-
+.user_rating {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #81C3F7;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
 
 /* -------------------------------------------------- */
 /* -------------------------------------------------- */
