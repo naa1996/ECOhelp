@@ -6,7 +6,9 @@
     {% load static %}
     <div class="text-center">
         {% for rating in user_rating %}
-            {{rating.rating}}
+            {{ rating.user.last_name }}
+            {{ rating.user.first_name }}
+            {{ rating.points }}
         {% endfor %}
     </div>
 {% endblock %}

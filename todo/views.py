@@ -370,7 +370,9 @@ def rating(request):
         # отображение страницы рейтинга пользователей
         id_user = request.session['id_user']
         print('id_user', id_user)
-        user_rating = Profile.objects.filter(user=id_user).all()
+        us = User.objects.get(username = 'admin').id
+        user_rating = Profile.objects.exclude(user_id= us).all().order_by('-points')
+        # user_task_table = Task.objects.exclude(creator_user = id_user).filter(status=2).all()
         return render(request, 'rating.html', {
             'title': 'Рейтинг',
             'user_rating': user_rating,
