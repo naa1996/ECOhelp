@@ -13,8 +13,8 @@
             <div class="p-info">
                 <div class="profile_info">
 {#                    <p class="profile_info__name mb-1">{{ request.user.username }}</p>#}
-                    <p class="profile_info__name mb-1">{{ request.user.first_name }} {{ request.user.last_name }}</p>
-                    <p class="profile_info__mail mb-1">{{ request.user.email }}</p>
+                    <p class="profile_info__name mb-1 " >{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                    <p class="profile_info__mail mb-1 " >{{ request.user.email }}</p>
                 </div>
                 <div class="profile_info__editbtn">
                     <a href="{% url 'user_setting' %}" style="text-decoration: none;">

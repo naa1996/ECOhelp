@@ -171,14 +171,15 @@ input {
 
 }
 .profile_info {
-    padding: 5px;
+    padding: 0 0 0 15px;
     margin-left: auto;
     margin-top: auto;
     margin-bottom: auto;
 }
 .p-info {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    width: 215px;
+    max-width: 270px;
+    min-width: 215px;
     height: 80px;
     background: #FFFFFF;
     border: 1px solid rgba(20, 20, 20, 0.38);
@@ -188,11 +189,20 @@ input {
     flex-direction: row;
 }
 .profile_info__editbtn {
-    padding-right: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
     margin-left: auto;
+    margin-right: 5px;
     margin-top: auto;
     margin-bottom: auto;
     opacity: 0.5;
+}
+.profile_info__exitbtn {
+    padding-right: 5px;
+    margin-right: 1px;
+    margin-top: auto;
+    margin-bottom: auto;
+    opacity: 0.6;
 }
 .profile_info__name{
     font-family: Inter;
